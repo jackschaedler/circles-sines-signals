@@ -1,0 +1,186 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+		<div class="littleheader"> WHAT ARE SIGNALS?
+			<div class="subheader" style="font-size: 14px"> CONTINUOUS VS. DISCRETE </div>
+		</div>
+
+		<table class="figureTable">
+			<tr>
+				<td style="vertical-align: top;">
+					<div class="text" style="margin-left: 0px">
+						<p>
+						<i>Signals</i> often describe the behavior of physical phenomena. When a signal describes the change in some phenomenon over time, we refer to it as a <i> time-domain </i> signal<sup>1</sup>. We can think of real-world phenomena like the altitude of a plane, the temperature in a city, or the speed of an automobile as examples of time-domain signals.
+						</p>
+						
+						<br/>
+
+						<table>
+							<tr class="figureCaption">
+								<td width="100%">
+								<b>Figure 1a.</b>&nbsp; Altitude of a Plane as it Travels from Paris to Berlin<br/><br/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<svg id="plane" class="svgWithText" width="700" height="190" style="padding-top: 20px; margin-left: 20px;"></svg>
+	  							<script type="text/javascript" src="js/plane.js"></script>
+	  							</td>
+							</tr>
+							<tr class="figureCaption">
+								<td width="100%">
+									<br/><br/>
+								<b>Figure 1b.</b>&nbsp; Mean Temperature in Berlin, Germany, 2001.<br/><br/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<svg id="fish" class="svgWithText" width="700" height="190" style="padding-top: 20px; margin-left: 20px;"></svg>
+	  							<script type="text/javascript" src="js/temperature.js"></script>
+	  							</td>
+							</tr>
+							<tr class="figureCaption">
+								<td width="100%">
+									<br/><br/>
+								<b>Figure 1c.</b>&nbsp; Speed of an Automobile Traveling Down Main St.<br/><br/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<svg id="pressure" class="svgWithText" width="700" height="190" style="padding-top: 20px; margin-left: 20px;"></svg>
+	  							<script type="text/javascript" src="js/speed.js"></script>
+	  							</td>
+							</tr>
+	  					</table>
+					</div>
+				</td>
+				<td class="figureExplanation" style="">
+					<b>1.</b>
+						Don't let the "domain" terminology throw you. Recall that the domain of a function generally corresponds to the x-axis, and the "range" of a function corresponds to the y-axis. A time-domain signal simply has some unit of time running along its x-axis.<br/><br/>
+				</td>
+			</tr>
+		</table>
+
+		<table class="figureTable">
+			<tr>
+				<td style="vertical-align: top;">
+					<div class="text" style="margin-left: 0px">
+						<p>
+	  					The field of <i>digital signal processing</i> is concerned with measuring, recording, processing, and analyzing these sorts of real-world signals using computers. Computers are exceptionally fast and exceptionally dumb<sup>2</sup>. Their only real competency is the rapid reading, writing, and comparison of individual numbers. If you’re into jargon, you might say that computers are only capable of operating on <i>discrete</i> values. When all of these discrete values happen to be represented by ones and zeros, we refer to them as <i>digital</i> values. Digital signal processing is therefore all about processing signals which are encoded as lists of ones and zeros.
+	  					</p>
+	  					<p>
+	  					By contrast, real-world phenomena are <i>continuous</i> signals. Before you can process a continuous signal using a computer, it must be translated into a digital - and thus discrete - representation. I'd like to quickly argue via a visual thought experiment<sup>3</sup> that a discrete signal will always be an <i>approximation</i> of its continuous counterpart.
+	  					The following animation depicts the impossible task of "covering" a continuous curve using discrete points. Whenever the curve appears to be completely and thoroughly covered, we can simply zoom-in a bit further to reveal sections of the continuous curve which are not occluded.
+	  					</p>
+
+	  					<br/><br/>
+
+						<table>
+							<tr class="figureCaption">
+								<td width="100%">
+								<b>Figure 2.</b>&nbsp; Attempting to "Cover" a Continuous Signal Using Discrete Points<br/><br/><br/><br/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<div id="animatedWrapper" class="animation" style="position: relative;">
+									<svg id="continuum" class="svgWithText" width="650" height="190" style="padding-top: 20px; margin-left: 30px;"></svg>
+	  								<script type="text/javascript" src="js/continuum.js"></script>
+	  							</div>
+	  							</td>
+							</tr>
+	  					</table>
+
+	  					
+	  					<br/>
+
+	  					<p>Your intuition might lead you to think that our inability to <i>cover</i> a continuous signal using discrete points implies that it is impossible to represent continuous signals using discrete values. As it turns out, this is not true. Given the right conditions, it's possible to perfectly represent a continuous signal using discrete points.<sup>4</sup> In the next few sections, we'll re-train our intuition through the study of <i> sampling theory </i> and learn how to perfectly encode a continuous signal using discrete values.
+	  					</p><br/>
+
+					</div>
+				</td>
+				<td class="figureExplanation" style="">
+					<b>2.</b>
+						It's worth watching <a href="http://youtu.be/EKWGGDXe5MA">this video</a> from 1985 where Richard Feynman describes the fundamentally simplistic nature of computers by analogy with human file clerks.<br/><br/>
+					<br/><br/><br/>
+					<b>3.</b>
+						If you find this sort of thought experiment interesting, it's worth reading up on the 5th century philosopher Zeno and his famous paradox of <i>Achilles and the Tortoise</i>. Zeno is sort of the grandfather of investigation into continuous vs. discrete time and space. Zeno was trying to make a point about the impossibility of motion, but we're more interested in his method for demonstrating that there are an infinite number of points between any two arbitrary points on a continuous line.<br/><br/>
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+					<b>4.</b>
+						The best explanation of sampling is still Morty Montgomery's brilliant <a href="http://youtu.be/cIQ9IXSUzuM">video</a>.
+				</td>
+			</tr>
+		</table>
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

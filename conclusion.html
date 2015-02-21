@@ -1,0 +1,131 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+		<div class="littleheader"> A STOPPING POINT
+			<div class="subheader" style="font-size: 14px"> CONCLUSIONS, THOUGHTS, AND FUTURE WORK </div>
+		</div>
+
+	  	<table class="figureTable">
+			<tr>
+				<td style="vertical-align: top;">
+					<div class="text" style="margin-left: 0px">
+
+					<p>
+					About four months ago, a multi-week binge on papers, talks, books, and videos involving Seymour Papert, Alan Kay, Bret Victor, Mike Bostock, and Ken Perlin left me feeling really inspired about education.<sup>1</sup> This website is the result of my well-meaning and naive zeal.
+					</p>
+					<p>
+					My hope is that the method of <i>visual</i> explication employed in this primer has made some difficult concepts a little less difficult for you to learn and think about. My great fear is that I'm spreading disinformation, that I'm a charlatan hiding in SVG tags. In part, I’m relying on enthusiastic readers, students, and educators to set me straight if there are aspects of this text which are misleading. 
+					</p>
+
+					<p>
+					If you’ve made it this far, I’d love to hear about your experience with this text.<a href="http://www.twitter.com/jackschaedler"> Contact me</a> on twitter if you have questions, comments, recommendations, or complaints about the content.
+					</p>
+
+					<p>
+					There's so much more to signal processing than is covered in this primer. In the future I'd like to attempt some visual explication of topics like convolution, autocorrelation, filtering, resampling, and the phase vocoder. If you have other ideas or specific wishes, feel free to contact me.
+					</p>
+
+					<br/><br/>
+					<div class="quote">
+					"The aim is to discuss these achievements in such a way that they're vivid and comprehensible to readers who do not have pro-grade technical backgrounds and expertise. To make the math beautiful - or at least to get the reader to see how someone might find it so."<br/><br/>
+					<b> - David Foster Wallace, <i>Everything and More</i>
+					</div>
+
+					<br/><br/>
+					<table>
+							<tr class="figureCaption">
+								<td width="100%">
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<svg id="signalWithSineBases" class="svgWithText" width="600" height="200" style="margin: 10px; margin-left: 40px; padding: 5px; padding: 10px"></svg>
+								<script type="text/javascript" src="js/cool_sines.js"></script>
+	  							</td>
+							</tr>
+	  				</table>
+	  						</td>
+				<td class="figureExplanation" style="">
+					<b>1.</b>
+						You can find a particularly nice talk by Alan Kay on education <a href="http://www.ted.com/talks/alan_kay_shares_a_powerful_idea_about_ideas?language=en"> here </a>.<br/><br/> I really, really recommend Mike Bostock’s<a href="http://vimeo.com/112319901"> Visualizing Algorithms</a>.<br/><br/>
+						Seymour Papert's <a href="http://books.google.de/books/about/Mindstorms.html?id=AP8WBQAAQBAJ&redir_esc=y">Mindstorms</a> is fantastic, and should be required reading for software developers who are interested in education.<br/><br/>
+						Bret Victor's <a href="http://worrydream.com/LearnableProgramming/">Learnable Programming</a> is as good as an online essay can get.
+						<br/><br/>
+						<a href="http://youtu.be/O9b-rtrcPEA">This talk</a> by Ken Perlin is just great.
+				</td>
+			</tr>
+		</table><br/>
+
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

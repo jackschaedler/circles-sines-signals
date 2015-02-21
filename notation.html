@@ -1,0 +1,160 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+	
+	<div class="littleheader"> THE DISCRETE FOURIER TRANSFORM
+		<div class="subheader" style="font-size: 14px"> CLASSICAL NOTATION </div>
+	</div>
+
+
+  	<table class="figureTable">
+		<tr>
+			<td style="vertical-align: top;">
+				<div class="text" style="margin-left: 0px">
+					<table>
+				  		<tr>
+				  			<td>
+				  				<img src="fourier.png"></img>
+				  			</td>
+				  			<td>
+							  	<div class='fourierEquation' style="font-size: 110%">
+									$$ \mathrm{DFT}[k] = \sum_{n=0}^{N-1} \mathrm{x}[n] \cdot
+									e^{\mathrm{j} \varphi} \\
+									where \quad \varphi = k \frac{n}{N} 2\pi
+									$$
+								</div>
+							</td>
+						</tr>
+						<tr class="figureCaption">
+							<td>
+								<b>Illustration 1.</b> Caricature of Joseph Fourier by Julien-Léopold Boilly<br/><sub>Note the Pythagorean doodle in the upper left and the Phasor doodle to the right.</sub>
+							</td>
+							<td width="50%">
+								<b>Equation 1.</b> The Discrete Fourier Transform<sup>1</sup><br/>
+								<sub>Don't panic.</sub>
+							</td>
+						</tr>
+					</table>
+
+				<br/><br/>
+				<p>
+				Although the classical notation of the Discrete Fourier Transform isn’t terribly approachable for learning purposes, it is a beautifully compact representation. It contains everything you need to know in order to implement and encode the transform. I personally think that it’s important to feel comfortable with the classical notation because you’ll continually encounter it when reading any paper or book related to signal processing. Most practicing scientists and engineers communicate with one another using these funny glyphs and symbols, so if you want to join in on the discussion you must be able to interpret the symbolic notation and relate it to your own mental models.<sup>2</sup>
+				In the next two sections we'll spend some time unpacking the classical notation and relating it to the concepts that we’ve already learned.
+				</p>
+
+				<div style="font-size: 20px">
+					$$\mathrm{DFT[k]}$$ 
+				</div>
+
+				<b> DFT </b> is a list of <b>N</b> <i>complex numbers</i>. It’s the <i>output</i> of the Discrete Fourier Transform. A complex number is composed of a <i>real</i> and <i>imaginary</i> number. Each complex number in the <b>DFT</b> list encodes the amplitude and phase of a single phasor. More on complex numbers in the next section.
+
+				<div style="font-size: 20px">
+					$$\mathrm{x}[n]$$ 
+				</div>
+
+				<b>x[n]</b> Is an arbitrary time-domain signal with a length of <b>N</b> samples. It’s the <i>input</i> to the Discrete Fourier Transform. It's written as <b>x</b> and not <b>signal</b> or <b>input</b> because mathematicans are enamored with abstraction and brevity.
+
+				<div style="font-size: 25px">
+					$$e^{\mathrm{j} \varphi}$$ 
+				</div>
+
+				<span class="inlineexample"><b>e<sup>jφ</sup></b></span> Is a compact way of describing a pair of sine and cosine waves. Beyond being succinct, this representation is exceptionally fascinating, and relates to Euler’s formula. More on <i>that</i> later.
+
+				<div style="font-size: 20px">
+					$$\sum_{n=0}^{N-1} x[n] \cdot y[n]$$
+				</div>
+
+				Is a <i>dot-product</i>. The dot product lies at the the heart of the Discrete Fourier Transform, and we’ll spend a fair amount of time with it after learning about complex numbers.
+
+
+				<div style="font-size: 20px">
+				$$\varphi = k \frac{n}{N} 2\pi$$
+				</div>
+
+				Is just a way of describing the phase and frequency of a sine wave. There’s really no need to get hung up on this. This construction should become clear once we begin to see the transform in action.
+  						</td>
+			<td class="figureExplanation" style="">
+				<b>1.</b>
+					you’ll often see this written with the phi term inline. I find that a bit hard to read (it's just too smushed up and crowded), so I've extraced the phi term from the exponent. Don't get thrown if you see a slightly different formulation when you look into the literature.<br/><br/>
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<br/><br/><br/><br/><br/><br/><br/><br/>
+				<b>2.</b>
+					If you're like me, you might wonder if Mathematicians <i>themselves</i> actually use these sorts of representations to do their work. Do most mathematicians really get this stuff at a deep, intuitive level? What sort of mental models and representations do mathematicians use for thinking? Jacques Hadamard asked these very sorts of questions, and it's worth watching <a href="http://youtu.be/kzDpfk8YhlE?t=32m57s">this video</a> of Alan Kay discussing the topic of symbolic representation and Hadamard's work. <a href="http://www.pitt.edu/~jdnorton/Goodies/Einstein_think/index.html">This article</a> is also interesting. It's called, "How Did Einstein Think?".
+
+			</td>
+		</tr>
+	</table><br/><br/><br/><br/>
+
+
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

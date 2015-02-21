@@ -1,0 +1,242 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+	<div class="littleheader"> A PEP TALK 
+		<div class="subheader" style="font-size: 14px"> IMAGINARY, COMPLEX, NATURAL LOGARITHMS, OH MY!</div>
+	</div>
+
+	<table class="figureTable">
+		<tr>
+			<td style="vertical-align: top;">
+
+				<div class="text" style="margin-left: 0px">
+				<p>
+				You only need a cursory<sup>1</sup> understanding of <i>imaginary</i> and <i>complex</i> numbers to be able to understand the Discrete Fourier Transform. While it is true that the output of the DFT is always given in <i>complex</i> numbers, and the formula itself contains a particularly abstruse bit involving the imaginary number <span class="inlineexample">i</span>,
+				</p>
+
+				<div style="font-size: 25px">
+				$$e^{\varphi \mathrm{i}}$$ 
+				</div><br/>
+
+				my advice is to not let the presence of <span class="inlineexample">i</span>, <span class="inlineexample">e</span>, and the complex numbers discourage you. In the next two sections we’ll reacquaint ourselves with imaginary and complex numbers, and see that the exponentiated <span class="inlineexample">e</span> is simply an interesting mathematical shorthand for referring to our two familiar friends, the sine and cosine wave. <span style="color: #666">I’m not trying to say that Euler's formula is just some wacky bit of syntactic sugar. However, for someone that wants to simply understand how to think about the DFT, it’s really not crucially important to totally understand Euler’s formula.</span>
+
+			<td class="figureExplanation" style="">
+				<b>1.</b>
+					We're only scratching the surface here. If you need a complete refresher, I somewhat weirdly suggest reading <a href="http://mathforum.org/mbower/johnandbetty/index.htm">John and Betty’s Journey into Complex Numbers</a>. Don't let the illustrations dissuade you. It’s a far better piece of mathematical explication than I could hope to write.<br/><br/>
+
+					After that, I suggest listening to <a href="https://soundcloud.com/marcusdusautoy/in-our-time-imaginary-numbers">this broadcast</a> of <i>In Our Time</i> where an enthusiastic Marcus Du Sautoy will guide you through the history of imaginary numbers. You'll learn all about Gauss, and the two-dimensional representation of complex numbers that was discovered by Gauss and Argand. It's really fun!
+			</td>
+		</tr>
+	</table>
+
+
+	<div class="littleheader"> THE NUMBER i
+		<div class="subheader" style="font-size: 14px"> IMAGINARY NUMBERS </div>
+	</div>
+
+	<table class="figureTable">
+		<tr>
+			<td style="vertical-align: top;">
+
+				<div class="text" style="margin-left: 0px">
+				<p>
+				There are different <i>types</i> of numbers. Most people are accustomed to two common types: positive and negative numbers. We can convert a positive number into its negative counterpart by multiplying it by <span class="inlineexample">-1</span>. You can choose to think of this as a horizontal "flip" or rotation of 180° around a pivot which lies at zero. Multiplying a negative number by <span class="inlineexample">-1</span> performs yet another rotation of 180°, flipping the number back onto the positive axis.
+				</p>
+				
+
+				<table width="750px">
+						<tr>
+							<td>
+								<svg id="complexintro" class="svgWithText" width="255" height="200" style="cursor: pointer; padding: 10px; margin-left: 230px"></svg>
+								<script type="text/javascript" src="js/complex_intro.js"></script>
+  							</td>
+						</tr>
+  				</table><br/>
+
+  				<p>
+  				Given this geometric interpretation, you might wonder if it’s possible to perform a rotation of <i>less</i> than 180°. At first glance, this notion seems absurd.<sup>2</sup> Numbers which lie off the horizontal axis have no apparent meaning. What exactly does it mean to rotate a number <i>off</i> of the number line? What happens to the number when it leaves the number line? More confounding is the fact that it’ entirely unclear how we would perform this rotation. What number would we multiply by to perform a rotation of say, 90°?
+  				</p>
+
+  				<p>
+				If you’re thinking of using zero to perform the rotation, that's a good idea but it wont work. We need to ensure that the number we use to rotate by 90° can also be used to rotate by 180°. In other words, we should be able to rotate 180° by first rotating 90°, and then rotating by 90° again. If we use zero, we cannot perform multiple rotations. Once we multiply once by zero, we can never recover the original number. After ruling out zero, you can try a zillion other "normal" numbers but you’ll never find one that performs this special rotation of 90°. The number simply doesn't exist.
+  				This is where the number <span class="inlineexample">i</span> comes in. The number <span class="inlineexample">i</span> is an <i>invention</i>. It’s specially constructed to perform this 90° rotation and is defined as,<sup>2</sup>
+  				</p>
+  				<div style="font-family: lato; color: #333; padding-left: 20px; text-align: center; font-size: 19px; font-weight: bold">
+  				i<sup>2</sup> = -1
+  				</div>
+  				
+  				<p>
+  				Since this number is an invention, we call it an <i>imaginary</i> number. If we multiply any <i>real</i> number by an imaginary number, we rotate it by 90° and append an <span class="inlineexample">i</span> to the symbolic name. After the multiplication by <span class="inlineexample">i</span> it lies on the imaginary axis and becomes an imaginary number. Let’s see what happens when we rotate the real number <span class="inlineexample">5</span> four times via multiplication with <span class="inlineexample">i</span>.
+  				</p>
+  				
+  				<div style="font-family: lato; color: #333; padding-left: 20px; text-align: center; font-size: 19px; font-weight: normal">
+  				<sup style="font-weight: normal; font-size: 12px"> Rotate by 90° </sup><br/>
+  				5 × i&nbsp; =&nbsp; <b>5i</b><br/><br/>
+  				<sup style="font-weight: normal; font-size: 12px"> Rotate <i>again</i> by 90° </sup><br/>
+  				5i × i&nbsp; = &nbsp;5 × i<sup>2</sup>&nbsp; = &nbsp;5 × -1&nbsp; = &nbsp;<b>-5</b><br/><br/>
+  				<sup style="font-weight: normal; font-size: 12px"> Rotate <i>again</i> by 90° </sup><br/>
+  				-5 × i&nbsp; = &nbsp;<b>-5i</b><br/><br/>
+  				<sup style="font-weight: normal; font-size: 12px"> Rotate <i>again</i> by 90° </sup><br/>
+  				-5i × i&nbsp; = &nbsp;-5 × i<sup>2</sup> &nbsp; = -5 × -1 &nbsp; = &nbsp; <b>5</b><br/>
+  				</div>
+ 
+  				
+  				<br/><br/>
+
+  				<table width="750">
+						<tr class="figureCaption">
+							<td>
+								Visually Describing Rotation Using <b><i>i</i></b><br/><br/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<svg id="complexintro2" class="svgWithText" width="255" height="250" style="cursor: pointer; padding: 10px; margin-left: 230px"></svg>
+								<script type="text/javascript" src="js/complex_intro2.js"></script>
+  							</td>
+						</tr>
+  				</table>
+
+  				</div>
+
+			</td>
+			<td class="figureExplanation" style="">
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<b>2.</b>
+					The Greek mathematician Diophantus found the notion of negative numbers as solutions to algebraic equations absurd. You too would probably find the idea of negative numbers absurd if our society wasn’t so accustomed to the notion of debt.<br/><br/>
+
+					I think people have such a hard time with imaginary numbers because of their invented nature. Most of us are taught mathematics as a series of truths, not as a toolkit for thought. The idea of adding things to the toolkit or building your own tools is so foreign to most people that the idea induces some strange mixture of mental pain, anxiety, and confusion.<br/><br/>
+			</td>
+		</tr>
+	</table>
+
+
+	<div class="littleheader"> COMPLEX NUMBERS
+		<div class="subheader" style="font-size: 14px"> AND THE COMPLEX PLANE </div>
+	</div>
+
+	<table class="figureTable">
+		<tr>
+			<td style="vertical-align: top;">
+
+				<table width="255px">
+						<tr class="figureCaption">
+							<td>
+								<b>Figure 1.</b>&nbsp; The Complex Plane<br/>
+								<sub>Click and Drag to Move the Point</sub><br/><br/><br/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<svg id="complexPlane" class="svgWithText" width="255" height="250" style="cursor: pointer;"></svg>
+								<script type="text/javascript" src="js/complex_plane.js"></script>
+  							</td>
+						</tr>
+  				</table>
+
+			</td>
+			<td class="math" width="600" style="padding: 10px; padding-left: 20px;" style=>
+				A <i>complex number</i> is a number which has both a real and an imaginary part.
+				Complex numbers are represented a bit oddly. They look like a sum, where the real part is the first number, and the imaginary part is the second. Click and drag in the visualization to the left to see how different points on the complex plane are represented.<br/><br/>
+				<span id="xsign" style="font-size: 18; font-family: Lato; font-weight: normal; color: #333; display: inline-block; width: 10px;" > + </span>
+				<span id="xcomp" style="font-size: 18; font-family: Lato; font-weight: bold; color: red; opacity: 0.8"> </span>
+				<span id="ysign" style="font-size: 18; font-family: Lato; font-weight: normal; color: #333; display: inline-block; width: 17px;"> + </span>
+				<span id="ycomp" style="font-size: 18; font-family: Lato; font-weight: bold; color: green; opacity: 0.8">  </span>
+				<br/><br/>
+				The <i>magnitude</i> of a complex number is the length of a line which runs from the origin to the point. If you view the whole thing as a right triangle, the magnitude corresponds to the length of the hypotenuse of the triangle. Its length can be calculated using the Pythagorean theorem<sup>1</sup>.
+				<br/>
+				<br/>
+				<span id="" style="font-size: 18; font-family: Lato; color: steelblue; font-weight: normal; opacity: 0.8">Magnitude<sup>2</sup> </span> 
+				<span id="" style="font-size: 18; font-family: Lato; color: #333; font-weight: normal"> = </span> 
+				<span id="" style="font-size: 18; font-family: Lato; color: red; font-weight: normal; opacity: 0.8">Real<sup>2</sup> </span>
+				<span id="" style="font-size: 18; font-family: Lato; color: #333; font-weight: normal"> + </span>
+				<span id="" style="font-size: 18; font-family: Lato; color: green; font-weight: normal; opacity: 0.8">Imag<sup>2</sup> </span> 
+				<p id="mag" style="font-size: 18; font-family: Lato; color: steelblue; font-weight: bold"></p>
+
+				The phase of a complex number is usually given in radians. Note that the phase flips to a negative measure when crossing over <b>π</b> <span class="inlineexample"> (3.14)</span> radians. 
+				<br/>
+				<p id="phase" style="font-size: 18; font-family: Lato; color: orange; font-weight: bold"></p>
+			</td>
+			<td class="figureExplanation" style="">
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<b>1.</b>
+					Recall, A<sup>2</sup> + B<sup>2</sup> = B<sup>2</sup>, where C is the length of the hypotenuse and A and B are the lengths of the other two sides of a right triangle.
+			</td>
+		</tr>
+	</table> <br/><br/><br/><br/><br/>
+
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

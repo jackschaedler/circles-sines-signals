@@ -1,0 +1,34 @@
+body {
+  font-family: sans-serif;
+}
+
+canvas {
+  background-color: #eee;
+}
+
+div.panel {
+  float: left;
+  width: 312px;
+  height: 312px;
+  border: 1px solid #ccc;
+  margin: 1%;
+}
+
+div.panel div.example {
+  width: 256px;
+  height: 128px;
+  left: 28px;
+  position: relative;
+}
+
+div.explanation {
+  left: 0;
+  right: 0;
+  height: 50%;
+  padding: 20px 10px 0 10px;
+  overflow: scroll;
+}
+
+pre, code {
+  font-size: 85%;
+}

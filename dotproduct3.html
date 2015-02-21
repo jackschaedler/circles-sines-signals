@@ -1,0 +1,165 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+
+	<div class="littleheader"> CORRELATION AND CONTRIBUTION
+		<div class="subheader" style="font-size: 14px"> COMPOUND WAVEFORMS AND THEIR CONSTITUENTS </div>
+	</div>
+
+  	<table class="figureTable">
+		<tr>
+			<td style="vertical-align: top;">
+				<div class="text" style="margin-left: 0px">
+				<p>
+				Recall from the <a href="sound2.html">section on timbre</a> that a square wave is created by summing together a sequence of <i>odd</i> harmonics. <i>Figure 1</i> shows the generation of a square wave by summing together three harmonically related phasors. The large blue phasor corresponds to the first harmonic, the smaller green phasor to the third harmonic, and the purple phasor to the fifth harmonic.
+				</p>
+				<br/>
+
+				<table style="">
+						<tr class="figureCaption">
+							<td width="100%">
+							<b>Figure 1.</b>&nbsp; Creating a Square Wave Using Three Phasors
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<svg id="phasorSumSquare" class="svgWithText" width="700" height="220" style="padding: 20px; margin-left: 0px;"></svg>
+								<script type="text/javascript" src="js/square_wave_phasors.js"></script>
+  							</td>
+						</tr>
+  				</table>
+
+  				<p>
+  				The square wave in Figure 1 can be thought of as a <i>compound</i> waveform since it’s composed of three sinusoidal components. In fact, <i>any</i> waveform can be thought of as an aggregation of one or more sine waves. In this section we’ll utilize the dot product to construct a "detector" which is capable of measuring the presence or absense of a given sine wave within a compound waveform.
+  				</p>
+
+  				<p>
+  				The "detector" is actually quite simple. It works by computing the dot product of the compound waveform with a pure sinusoid. If the resulting dot product is non-zero (the two signals are correlated), we know that the sinusoid is present in the compound waveform. The magnitude of the dot product tells us <i>how much</i> of that sinusoid is present. We can derive the "formula" or "recipe" for the compound waveform by running it through the detector over and over again while adjusting the  frequency of the sine wave. Whenever the dot product is non-zero, we know that that frequency is present in the "recipe". A basic schematic for this detector is shown in <i>Figure 2</i>. Use the Frequency slider to adjust the target frequency of the detector.
+  				</p>
+
+  				<br/>
+
+				<table>
+						<tr class="figureCaption">
+							<td width="100%">
+							<b>Figure 2.</b>&nbsp; Calculating the Dot Product of a Square Wave and Sines of Varying Frequency.<br/>
+							<sub>A Component Sine Wave "Detector"<br/>
+							</td>
+						</tr>
+						<tr>
+							<td><br/>
+								<svg id="sigCorrelationInteractive" class="svgWithText" width="600" height="350" style="padding: 20px; margin-left: 70px;"></svg>
+								<script type="text/javascript" src="js/square_correlation.js"></script>
+
+								<script>
+									var SIMPLE_CORRELATION_OFFSET = 0.0;
+									function updateSimpleCorrelationOffset(value) {
+										SIMPLE_CORRELATION_OFFSET = Math.PI * 2 * (value / 100);
+									}
+
+									var SIMPLE_CORRELATION_FREQ = 1.0;
+									function updateSimpleCorrelationFreq(value) {
+										SIMPLE_CORRELATION_FREQ = value;
+									}
+								</script>
+
+								<div class="controls" width="180">
+									<label for=simpleCorrelationFreq>Frequency</label><br/>
+									<input type=range min=1 max=5 value=1 id=simpleCorrelationOffset step=1 oninput="updateSimpleCorrelationFreq(value);"
+									onMouseDown="" onMouseUp="" style="width: 150px"><br/>
+
+									<label for=simpleCorrelationOffset>Phase Shift</label><br/>
+									<input type=range min=0 max=100 value=0 id=simpleCorrelationOffset step=0.5 oninput="updateSimpleCorrelationOffset(value);"
+									onMouseDown="" onMouseUp="" style="width: 150px"><br/>
+								</div>
+  							</td>
+						</tr>
+  				</table><br/>
+
+  			<p>
+  			As you play with the frequency control, you’ll notice that the detector will register the presence of sinusoidal components at <span class="inlineexample">2</span>, <span class="inlineexample">6</span>, and <span class="inlineexample">10 hertz</span> (the 1<sup>st</sup>, 3<sup>rd</sup>, and 5<sup>th</sup> harmonics of <span class="inlineexample">2 hertz</span>). In addition, the magnitude of the dot product at these frequencies corresponds perfectly with the relative sizes of the phasors in <i>Figure 1</i>. It seems like our detector is working. Using this construction we’re able to specify the frequency and radius of the three phasors which generate our square wave using only the time-domain representation of our square wave. In actuality, we’ve just performed a very simple Fourier Transform!
+  			</p>
+
+  			<p>
+  			Unfortunately, our detector is flawed. you’ll notice that the detector will completely miss frequency components if the square wave is phase shifted 90 degrees in relation to the sinusoid (adjust the phase slider until the dot product is zero for all target frequencies). Our detector <i>should</i> be robust enough to handle inputs with arbitrary phase shifts. We’ll address this problem in the next section, and fix our detector through the clever use of sine and cosine.
+  			</p> <br/>
+  			</td>
+
+			<td class="figureExplanation" style="">
+<!-- 				<b>1.</b> You've also just performed your first <i>autocorrelation</i>. An autocorrelation is the correlation of a <br/><br/> -->
+			</td>
+		</tr>
+	</table><br/>
+
+  	<div class="footer" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

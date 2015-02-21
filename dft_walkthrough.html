@@ -1,0 +1,148 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+	<div class="littleheader"> A WALKTHROUGH OF THE DFT
+		<div class="subheader" style="font-size: 14px"> STEP BY STEP </div>
+	</div>
+
+  	<table class="figureTable">
+		<tr>
+			<td style="vertical-align: top;">
+				<div class="text" style="margin-left: 0px">
+				<p>
+				In this section we’ll present an animation that <i>literally</i> shows you every single arithmetic operation required to perform an 8-point DFT as described by the equation for the Discrete Fourier Transform,
+				</p>
+
+				<div class='fourierEquation'>
+					$$ \mathrm{DFT}[k] = \sum_{n=0}^{N-1} \mathrm{x}[n] \cdot
+					(cos(\varphi) - sin(\varphi)i) \\
+					where \quad \varphi = k \frac{n}{N} 2\pi
+					$$
+				</div>
+
+				<p>
+				I don’t expect you to scrutinize every bit of this animation. It’s not necessary to read, check, and understand every single term in the multiplication and summation sequences. Instead, it’s far more important to be able to relate what’s happening in the animation to the symbolic representation shown in the formula. My desire that you simply appreciate that while the theory and notation surrounding the DFT may be abstract and challenging, actually <i>implementing</i> the DFT is relatively straightforward. Hopefully, walking through every step of the process will serve to demystify the topic.
+				</p>
+
+				<p>
+				The animation in <i>Figure 1</i> allows you to choose between three input signals: a sine wave, a square wave, and a saw wave. <i>These all have a fundamental frequency of 1Hz</i>, which implies that the sampling rate of of the signals is <i>8 Hz</i>. I suggest that you watch the animation for each signal before moving on to the next section. Click the Play button when you’re ready to view the animation. Don't worry if it moves too quickly, In the next two sections you’ll be able to freely explore the output and intermediate stages of the transform at your leisure.
+				</p>
+
+				<br/>
+				<table>
+						<tr class="figureCaption">
+							<td width="100%">
+							<b>Figure 1.</b>&nbsp; Animated Walkthrough of the Discrete Fourier Transform<br/><br/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id="animatedDftWrapper" class="animation" style="width:750px; margin-left: auto; margin-right: auto; position: relative; ">
+
+									<table>
+										<tr style="">
+											<td>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div id="fourierEquations" style="width: 50%; margin-right: 0px; margin-left: auto; display: inline;">
+												</div>
+											</td>
+										</tr>
+									</table>
+									<br/><br/>
+									<svg id="dftAnimated" class="svgWithText" width="705" height="490" style="margin-top:30px; padding-left: 10px; padding-bottom: 10px;"></svg>
+									<script type="text/javascript" src="js/dft_animated.js"></script>
+								</div>
+  							</td>
+						</tr>
+  				</table>
+
+  				<br/><br/>
+  			</td>
+
+
+			<td class="figureExplanation" style="">
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				The Input Signal corresponds to the <b>x[n]</b> term in the equation.
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				This little row of complex numbers corresponds to the <b>DFT</b> term in the equation. It's the output of the DFT.
+			</td>
+		</tr>
+	</table><br/>
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

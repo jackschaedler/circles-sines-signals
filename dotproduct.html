@@ -1,0 +1,157 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+	
+	<div class="littleheader"> THE DOT PRODUCT
+		<div class="subheader" style="font-size: 14px"> DEFINITION AND 2D INTERPRETATION </div>
+	</div>
+
+  	<table class="figureTable">
+		<tr>
+			<td style="vertical-align: top;">
+				<div class="text" style="margin-left: 0px">
+
+				<p>
+				The main operation of the Discrete Fourier Transform is the <i>dot product</i><sup>1</sup>. Actually performing the dot product is straightforward. We take two signals of equal length, multiply their elements together one-by-one, and then sum up the products.
+				</p>
+
+				<br/>
+				<table width="700">
+					<tr class="figureCaption">
+						<td width="50%">
+						<b>Equation 1.</b>&nbsp; Classical Notation for the Dot Product
+						</td>
+						<td width="50%">
+						<b>Example 1.</b>&nbsp; Example Calculation of the Dot Product
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div style="font-size: 18px">
+							$$\sum_{n=0}^{N-1} a[n] \cdot b[n]$$
+							</div>
+						</td>
+						<td style="font-family: lato; color: #333; padding-left: 20px; text-align: center">
+							<br/><br/>
+							Given two signals <b>a</b> and <b>b</b>,<br/><br/>
+							<b>a[n]</b> = [3, 5, 7, 9, 4]<br/>
+							<b>b[n]</b> = [8, 2, 5, 3, 1]
+
+							<br/><br/>
+							We compute their <i>dot product</i> as,<br/><br/>
+
+							(3 × 8) + (5 × 2) + (7 × 5) + (9 × 3) + (4 × 1)<br/><br/>
+
+							Which leaves us with,<br/><br/>
+							24 + 10 + 35 + 27 + 4 = <b>100</b><br/><br/>
+
+						</td>
+					</tr>
+  				</table>
+
+  				<p>
+  				At first glance this operation may seem uninteresting, but there is a nice geometric interpretation of that dot product that we can leverage.
+				As it turns out, we can use the dot product to measure the degree to which two vectors or signals are <i>pointing</i> or <i>heading</i> in the same direction. When two vectors are perpindicular to one another, they point in completely different directions and their dot product will be <i>zero</i>. The dot product is at its maximum when two vectors run parallel to one another. Note that the dot product may be negative, indicating the the two vectors have a similar but <i>opposite</i> heading. Play around with the following figure to see how the value of the dot product changes as the orientation between the two vectors changes.
+				</p>
+
+				<br/>
+				<table>
+						<tr class="figureCaption">
+							<td width="100%">
+							<b>Figure 1.</b>&nbsp; Geometric Interpretation of the Dot Product<br/><sub>Click and drag to change the endpoint of the pink vector</sub>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id="wrapper" class="animation" style="position: relative; ">
+									<svg id="dotproductgeo" class="svgWithText" width="500" height="250" style="margin: 10px; margin-left: 180px; padding: 20px; cursor: pointer"></svg>
+									<script type="text/javascript" src="js/dot_product_2d.js"></script>
+								</div>
+  							</td>
+						</tr>
+  				</table><br/><br/>
+
+  				<p>
+  				I’d like you to think of the dot product as a measure of <i>similarity</i>. In the next section we’ll see how the dot product can be used to measure the similarity between something a bit more complicated than two dimensional vectors - signals of arbitrary length.
+  				</p>
+  			</td>
+			<td class="figureExplanation" style="">
+				<b>1.</b> If you've forgotten what it looked like in the context of the Discrete Fourier Transform, I've repeated it here so you don't have to tab back and forth.
+					$$\sum_{n=0}^{N-1} \mathrm{x}[n] \cdot
+									e^{\mathrm{j} \varphi}$$ <br/><br/>
+			</td>
+		</tr>
+	</table>
+	<br/><br/><br/>
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

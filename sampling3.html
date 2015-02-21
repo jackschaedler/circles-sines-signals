@@ -1,0 +1,133 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+		<div class="littleheader"> SINE WAVE ALIASING
+			<div class="subheader" style="font-size: 14px"> MULTIPLES OF THE SAMPLING RATE </div>
+		</div>
+
+	  	<table class="figureTable">
+			<tr>
+				<td style="vertical-align: top;">
+					<div class="text" style="margin-left: 0px">
+
+					If you aren’t already convinced that sampling is a tricky business, take a look at the following theorem.<sup>1</sup><br/><br/>
+
+					<p class="quote" style="text-align: center">
+						<b> The Sampled Sine Wave Theorem</b><br/><br/>
+
+						Given a sampling rate of <b>SR</b> hertz,
+						and an integer <b>k</b>, </br><br/>
+
+						A sine wave at a frequency of <b>F</b> is indistinguishable from a sine wave at a frequency of <b>F + (k × SR)</b> after sampling.
+				  	</p>
+					<br/>
+					<p>
+					If we’re sampling at a rate of <span class="inlineexample"> 6 Hz </span>, this theorem tells us that a sine wave with a frequency of <span class="inlineexample"> 1 Hz </span> is indistinguishable from sine waves at <span class="inlineexample">7 Hz</span>, <span class="inlineexample">13 Hz</span>, <span class="inlineexample">19 Hz</span> and so on after the sampling process.
+					</p>
+
+					<p>
+					<i>Figure 1</i> shows an animation which demonstrates this phenomenon for 8 potential aliases of a <span class="inlineexample">1 Hz</span> sine wave which was sampled at a rate of <span class="inlineexample">6 Hz</span>. I’ve decided to loop the animation after showing 8 aliases, but I assure you that it’s possible to continue playing this game for an infinite number of aliases to the left and right of the original (blue) sine wave. While we wont really deal with negative frequencies in this essay, it’s worth noting that they are a useful construct that you might encounter in the literature.
+					</p>
+
+					<br/>
+					<table>
+							<tr class="figureCaption">
+								<td width="100%">
+								<b>Figure 1.</b>&nbsp; All Sampled Sine Waves Have Aliases<br/>
+								<sub>Aliases of a 1 Hz sine wave sampled at 6 Hz</sub>
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<svg id="sinc" class="svgWithText" width="750" height="390" style=""></svg>
+								<script type="text/javascript" src="js/sine_aliasing.js"></script>
+	  							</td>
+							</tr>
+	  				</table>
+
+	  				<p>
+					This theorem implies a quite impressive conclusion: <i>Every</i> sampled sine wave has an <i>infinite</i> number of aliases. You can easily identify these aliases by adding multiples of the sampling frequency to the frequency of the original sine wave. This theorem tells us that - without context - any sine wave is indistinguishable from an infinite number of other sine waves after sampling.
+					</p>
+					<p>
+					I'm not introducing this theorem to dishearten you, but simply to reinforce the notion that sampling isn’t a trivial thing. We've seen how sampling can go wrong, and we’ve introduced a theorem which allows us to ensure that our sampling is sound. For now, we leave sampling behind and dive into the Discrete Fourier Transform.
+					</p>
+					<br/><br/>
+	  			</td>
+				<td class="figureExplanation" style="">
+					<b>1.</b>
+						I'm actually not sure if this theorem has a name, so I've decided to call it the "Sampled Sine Wave Theorem". To be quite honest, I've taken it directly from Lyon's very good textbook on DSP, <a href="http://www.amazon.com/Understanding-Digital-Signal-Processing-Edition/dp/0137027419"> Understanding Digital Signal Processing </a>. If I haven't completely turned you off of signal processing by now, you should read this book.<br/><br/>
+				</td>
+			</tr>
+		</table><br/>
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

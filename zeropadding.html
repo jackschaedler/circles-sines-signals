@@ -1,0 +1,146 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+	  	<script type="text/javascript" src="third_party/jsfft/lib/complex_array.js"></script>
+	  	<script type="text/javascript" src="third_party/jsfft/lib/fft.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+	<div class="littleheader"> ZERO PADDING
+		<div class="subheader" style="font-size: 14px"> INCREASING DFT RESOLUTION </div>
+	</div>
+
+	<script>
+		var FFT_SIZE = 8;
+		function updateSize(value) {
+			if (value == 1)
+			{
+				FFT_SIZE = 8;
+			}
+			else if (value == 2)
+			{
+				FFT_SIZE = 16;
+			}
+			else if (value == 3)
+			{
+				FFT_SIZE = 32;
+			}
+			else if (value == 4)
+			{
+				FFT_SIZE = 64;
+			}
+			else if (value == 5)
+			{
+				FFT_SIZE = 128;
+			}
+		}
+	</script>
+
+  	<table class="figureTable">
+		<tr>
+			<td style="vertical-align: top;">
+				<div class="text" style="margin-left: 0px">
+
+				<p>
+				There’s a classic trick you need to be aware of when working with the Discrete Fourier Transform. When you need higher resolution in your output - a more fine grained view of the frequency domain - you can choose to append a string of zeroes to the end of your input signal. This doesn't change the frequency content of the input signal, but merely <i>interpolates</i> or "fills in" the output spectrum. You can convince yourself of this fact by increasing the zero-padding <i>factor</i> using the slider underneath <i>Figure 1</i>.
+				</p>
+
+				<p>
+				Often you need to do this sort of zero-padding to ensure that the input you provide to an FFT (Fast Fourier Transform) routine has a length which is equal to a power of two. Rest assured that you are not altering the frequency content of your signal in any undue way. You must simply ensure that you perform any windowing <i>before</i> zero-padding your signal.
+				</p>
+
+				<br/><br/>
+				<table>
+						<tr class="figureCaption">
+							<td width="100%">
+							<b>Figure 1.</b>&nbsp; Zero Padding the Input Interpolates the Output
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<svg id="zeropadding" class="svgWithText" width="740" height="400" style="margin-left: 0px; margin-right: 0px; padding-top: 0px; padding-left: 20px;"></svg>
+								<script type="text/javascript" src="js/zeropadding.js"></script>
+
+								<div class="controls" style="margin-top: 5px">
+										<label for=size>Zero Padding</label><br/>
+										<input type=range min=1 max=5 value=1 id=size step=1 oninput="updateSize(value);"
+										onMouseDown="" onMouseUp="" style="width: 150px"><br/>
+								</div>
+  							</td>
+						</tr>
+  				</table>
+  						</td>
+			<td class="figureExplanation" style="">
+			</td>
+		</tr>
+	</table><br/>
+
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

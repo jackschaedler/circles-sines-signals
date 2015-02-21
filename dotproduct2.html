@@ -1,0 +1,192 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+	<div class="littleheader"> CORRELATION
+		<div class="subheader" style="font-size: 14px"> SIGNAL CORRELATION </div>
+	</div>
+
+
+
+  	<table class="figureTable">
+		<tr>
+			<td style="vertical-align: top;">
+				<div class="text" style="margin-left: 0px">
+
+				<p>
+				When two signals tend to point in the same direction, we say that they are <i>correlated</i>. Signals show a <i>positive</i> correlation if they tend to increase and decrease together. Signals show a <i>negative</i> correlation if one tends to increase when the other decreases, and vice-versa. Signals are <i>decorrelated</i> if there is no discernable relationship between them. Below is an example of two positively correlated signals. The energy produced by a wind turbine is positively correlated with the average wind speed in the region. As the wind speed increases, the turbine produces more energy. As the wind speed decreases, the turbine will produce less energy.
+				</p>
+
+				<br/>
+				<table>
+						<tr class="figureCaption">
+							<td width="100%">
+							<b>Figure 1.</b>&nbsp; Example of Signals with Positive Correlation
+							<br/><sub><b>Blue:</b> Wind Speed </sub>
+							<br/><sub><b>Red:</b> Electrical Output of Turbine </sub>
+							</td>
+						</tr>
+						<tr>
+							<td>
+						  		<svg id="icecream" class="svgWithText" width="700" height="190" style="padding-top: 20px; margin-left: 20px;"></svg>
+							  	<script type="text/javascript" src="js/turbine_correlation_1.js"></script><br/>
+							  	<script type="text/javascript" src="js/turbine_correlation_2.js"></script><br/>
+  							</td>
+						</tr>
+  				</table>
+
+  				<p>
+  				The <i>dot product</i> allows us to measure the amount of correlation between two signals. In the previous section we saw how the dot product allows us to measure the degree to which two 2-D vectors are pointing in the same direction, but it can be hard to mentally extrapolate this concept of directionality to signals with many values (more than two dimensions). Let’s return to sine waves, as they are easier to reason about mathematically, and provide us with a clear visualization of the dot product as applied to signals.
+  				</p>
+  			</td>
+			<td class="figureExplanation" style="">
+			</td>
+		</tr>
+	</table>
+
+
+	<div class="littleheader"> THE DOT PRODUCT
+		<div class="subheader" style="font-size: 14px"> RELATIONSHIP TO CORRELATION </div>
+	</div>
+
+  	<table class="figureTable">
+		<tr>
+			<td style="vertical-align: top;">
+				<div class="text" style="margin-left: 0px">
+  				<p>
+  				<i>Figure 2</i> visualizes the dot product of two signals which we'll call <b><i>A</i></b>  and <b><i>B</i></b>. Signal <b><i>A</i></b> and signal <b><i>B</i></b> are both sine waves. <b><i>A</i></b> is the topmost waveform in the visualization, and <b><i>B</i></b> lies directly beneath it. You can use the slider at the bottom of the figure to shift the phase of signal <b><i>A</i></b>. Below the two sine waves you’ll find another signal which corresponds to the <i>product</i> of the two sines - the result of multiplying <b><i>A</i></b> by <b><i>B</i></b>. The area under this curve is shaded, as it represents the sum of the products.<sup>1</sup> The sum of the products is the <i>dot product</i>. The final value of the dot product is plotted on a number line at the very bottom of the figure.
+  				</p>
+  				<br/>
+
+				<table>
+						<tr class="figureCaption">
+							<td width="100%">
+							<b>Figure 2.</b>&nbsp; Computing the dot product of Two Sines.<br/><br/>
+							</td>
+						</tr>
+						<tr>
+							<td><br/>
+								<svg id="sigCorrelationInteractiveTwoSines" class="svgWithText" width="600" height="350" style="padding: 20px; margin-left: 70px;"></svg>
+								<script type="text/javascript" src="js/sine_correlation.js"></script>
+
+								<script>
+									var SIMPLE_CORRELATION_OFFSET = 0.0;
+									function updateSimpleCorrelationOffset(value) {
+										SIMPLE_CORRELATION_OFFSET = Math.PI * 2 * (value / 100);
+									}
+
+									var SIMPLE_CORRELATION_FREQ = 1.0;
+									function updateSimpleCorrelationFreq(value) {
+										SIMPLE_CORRELATION_FREQ = value;
+									}
+								</script>
+
+								<div class="controls" width="180">
+									<label for=simpleCorrelationOffset>Phase Shift</label><br/>
+									<input type=range min=0 max=100 value=0 id=simpleCorrelationOffset step=1 oninput="updateSimpleCorrelationOffset(value);"
+									onMouseDown="" onMouseUp="" style="width: 150px"><br/>
+								</div>
+  							</td>
+						</tr>
+  				</table>
+  				<br/>
+
+  				<p>
+  				As you adjust the phase of signal <b><i>A</i></b>, notice that the dot product gives a good indication of the correlation between signal <b><i>A</i></b>  and <b><i>B</i></b>. When the two sine waves are perfectly in-sync, their dot product is at a maximum which indicates a positive correlation. When the two waves are 180 degrees out of phase, they have a very large but negative dot product, indicating that they are negatively correlated. you’ll notice something interesting when <b><i>A</i></b> and <b><i>B</i></b> are 90 degrees out of phase. In this configuration, <b><i>A</i></b> turns into a cosine wave, and the dot product of <b><i>A</i></b> and <b><i>B</i></b> assumes a value of zero. This is an important find, and you should keep the following factoid in mind: <i>a sine and cosine wave at the same frequency are actually decorrelated</i>.<sup>2</sup>
+  				</p>
+
+  				<p>
+  				Now that we have an intuition for interpretation of the dot product in relation to <i>signals</i>, we'll move on to calculating correlations between sine waves and more complex waveforms.
+  				</p>
+
+  				<br/>
+
+  			</td>
+			<td class="figureExplanation" style="">
+				<br/><br/><br/><br/><br/><br/><br/>
+				<b>1.</b>
+					So, here I'm being a bit sloppy. The shaded area corresponds to something like the dot product of two continuous signals. However, I find it really helpful to visualize the area, so you can visually balance the bits that are above and below the x-axis.<br/><br/>
+
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<br/><br/><br/><br/><br/>
+				<b>2.</b>
+					Another interesting factoid: The product of a sine and cosine wave at equal frequencies is a sine wave with double the frequency. <br/><br/>
+
+					In the future, I'd like to write up a section on <i>autocorrelation</i>. For the time being, you should note that <i>Figure 2</i> is also a visualization of the process of autocorrelation. Autocorrelation can be used to create interesting things like a simple monophonic pitch-detector. Interestingly, you can  effeciently compute the autocorrelation of a signal using the FFT. <br/><br/>
+			</td>
+		</tr>
+	</table><br/>
+
+  	<div class="footer" id="footer"><script type="text/javascript" src="menu.js"></script></div>
+  	<!-- -->
+  </body>
+</html>

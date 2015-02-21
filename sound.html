@@ -1,0 +1,205 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+  	<div class="littleheader"> SOUND
+		<div class="subheader" style="font-size: 14px"> DEFINITION AND WAVES </div>
+	</div>
+
+ 	  	<table class="figureTable">
+			<tr>
+				<td style="vertical-align: top;">
+					<div class="text" style="margin-left: 0px">
+
+					<p>
+						<i>Sound</i> is a pressure wave conveyed through some medium like air or water. When objects vibrate, they push and pull on the particles in their immediate vicinity. As an object vibrates outward into its surroundings, it pushes on (compresses) the neighboring air particles. When the object retreats away from the surrounding particles it creates a region of low pressure causing the particles to rush back towards the object. This "push and pull" causes a chain reaction of pushing and pulling which allows the vibration of the object to propogate outward through the air.
+					</p>
+					<p>
+						<i>Figure 1</i> depicts some vibrating body generating a sound wave. The large grey rectangle to the left of the figure is the vibrating body, and the small dots are meant to abstractly represent individual particles of air. If you pay close attention to a single particle, you’ll notice that it stays localized in a particular area. It will sway back and forth in response to the changes in pressure, but it does not travel far from the vibrating object. The vibrating object causes the particles around it to mimic its own pattern of vibration - to vibrate sympathetically.
+					</p>
+
+					<script>
+						var WAVE_FREQUENCY = 0.05;
+						var WAVE_AMPLITUDE = 0.50;
+						var TARGET_WAVE_FREQUENCY = 0.05;
+						var TARGET_WAVE_AMPLITUDE = 0.50;
+						var WAVE_INTERPOLATOR = d3.interpolateNumber(WAVE_FREQUENCY, TARGET_WAVE_FREQUENCY);
+						var WAVE_AMP_INTERPOLATOR = d3.interpolateNumber(WAVE_AMPLITUDE, TARGET_WAVE_AMPLITUDE);
+						var WAVE_INTERPOLATION = 1.0;
+						var WAVE_AMP_INTERPOLATION = 1.0;
+						function GET_WAVE_FREQUENCY() {
+							return WAVE_INTERPOLATOR(Math.min(WAVE_INTERPOLATION, 1.0));
+						}
+						function GET_WAVE_AMPLITUDE() {
+							return WAVE_AMP_INTERPOLATOR(Math.min(WAVE_AMP_INTERPOLATION, 1.0));
+						}
+						function updateSpeed(freq) {
+							WAVE_FREQUENCY = GET_WAVE_FREQUENCY();
+							TARGET_WAVE_FREQUENCY = freq / 100;
+							WAVE_INTERPOLATION = 0.0;
+							WAVE_INTERPOLATOR = d3.interpolateNumber(WAVE_FREQUENCY, TARGET_WAVE_FREQUENCY);
+						}
+						function updateAmount(amp) {
+							WAVE_AMPLITUDE = GET_WAVE_AMPLITUDE();
+							TARGET_WAVE_AMPLITUDE = amp / 100;
+							WAVE_AMP_INTERPOLATION = 0.0;
+							WAVE_AMP_INTERPOLATOR = d3.interpolateNumber(WAVE_AMPLITUDE, TARGET_WAVE_AMPLITUDE);
+						}
+					</script>
+
+					<table>
+							<tr class="figureCaption">
+								<td width="100%">
+								<b>Figure 1.</b>&nbsp; A Sound Wave. <br/> <sub> Very much slowed down and very much zoomed in </sub>
+								</td><br/><br/>
+							</tr>
+							<tr>
+								<td>
+								<svg id="physicalWave" class="svgWithText" width="695" height="205" style="margin-left: 55px; padding: 20px"></svg>
+								<script type="text/javascript" src="js/sound_wave.js"></script>
+
+								<div class="controls" style="padding-top: 10px;">
+									<table width="100%">
+										<tr>
+											<td style="text-align: center;" width="50%">
+												<label for=vibSpeedFader style="margin-left: auto; margin-right: auto">Vibration Speed</label><br/>
+												<input type=range min=4 max=10 value=4 id=vibSpeedFader step=1 oninput="updateSpeed(value);">
+											</td>
+
+											<td style="text-align: center;" width="50%">
+												<label for=vibAmountFader style="margin-left: auto; margin-right: auto">Vibration Intensity</label><br/>
+												<input type=range min=0 max=100 value=25 id=vibAmountFader step=1 oninput="updateAmount(value);">
+											</td>
+									</table>
+								</div>
+	  							</td>
+							</tr>
+	  				</table>
+	  				<br/>
+
+	  				<p>
+					The blue curve underneath the physical simulation plots the amount of compression or pressure between air particles. When the curve is above the horizontal axis, the particles are being squeezed together. When the curve is below, this indicates a region of low-pressure. In more terminologically rigorous circles, the squeezing is referred to as <i>compression</i>, and the spaciousness between particles is referred to as <i>rarefaction</i>.
+					The speed of vibration is known as the <i>frequency</i>. Frequency is measured in <i>cycles per second</i>, also known as <i>Hertz</i>. We measure frequency by counting the number of compression/rarefaction cycles that occur in one second. One full compression/rarefaction cycle looks like the curve shown in <i>Figure 1a</i>.
+					</p>
+
+					<table width="750">
+							<tr class="figureCaption">
+								<td width="100%">
+								<b>Figure 1a.</b>&nbsp; One Cycle of Our Pressure Wave<br/>
+								<sub>X-Axis: Time</sub><br/>
+								<sub>Y-Axis: Amplitude</sub><br/>
+								</td><br/><br/>
+							</tr>
+							<tr>
+								<td>
+								<svg id="sinecycle" class="svgWithText" width="170" height="100" style="padding: 5px; margin-left: 280px"></svg>
+								<script type="text/javascript" src="js/sine_cycle.js"></script>
+	  							</td>
+							</tr>
+	  				</table>
+
+	  			</td>
+				<td class="figureExplanation" style="">
+					<!-- <b>1.</b>
+						There's nothing special about discrete signals. Write down an arbitrary list of numbers and you have a discrete signal. Most of the time however, discrete signals are the product of sampling some other signal. <br/><br/> -->
+				</td>
+			</tr>
+		</table>
+
+
+		<div class="littleheader"> LISTEN
+			<div class="subheader" style="font-size: 14px"> SINE WAVES AND SOUND PERCEPTION </div>
+		</div>
+
+	  	<table class="figureTable">
+			<tr>
+				<td style="vertical-align: top;">
+					<div class="text" style="margin-left: 0px">
+
+					<p>
+					Smoothly oscillating objects like the object shown in <i>Figure 1</i> produce pressure waves which our auditory system interprets as <i>pure</i> tones. We refer to low frequency tones as bass, and high frequency tones as treble. People with exceptional hearing can hear tones from about 20 hertz to 20,000 hertz. As you get older, you lose our ability to hear tones at the high and low ends of this range. Play around with <i>Figure 2</i> to acquaint yourself with the sound of a sine wave.<sup>1</sup> You can click and drag on the visualization to change the frequency of the generated tone. You wont hear anything until you click the Play Sound button.
+					</p>
+
+					<br/>
+					<table>
+							<tr class="figureCaption">
+								<td width="100%">
+								<b>Figure 2.</b>&nbsp; Listen to a Sine Wave<br/>
+									<sub>Click and Drag to Change the Frequency</sub><br/>
+									<sub>X-Axis: Frequency in Hz</sub><br/>
+									<sub>Y-Axis: Magnitude</sub><br/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<div id="animatedWrapper" class="animation" style="position: relative;">
+									<svg id="sineListen" class="svgWithText" width="750" height="250" style="cursor:pointer;"></svg>
+									<script type="text/javascript" src="js/sine_listen.js"></script>
+	  							</div>
+	  							</td>
+							</tr>
+	  				</table>
+
+	  				<p>
+					The frequency scale of <i>Figure 2</i> is not linear, but logarithmic. While we are able to hear sounds from 20 Hz to 20,000 Hz, most of the sounds that we are interested in - and the sounds that our ears are most sensitive to - exist in the range from about 20 Hz to 8,000 Hz. Human speech falls within 300 to 3,000 Hz. An 88 key piano produces notes with <i>fundamental</i> frequencies in the range of 22 to 4000 hertz. A piano <i>does</i> produce sound above these frequencies in the form of overtones, and we'll address this phenomenon in the next section.
+					</p>
+
+	  			</td>
+				<td class="figureExplanation" style="">
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+					<b>1.</b>
+						you’ll probably need headphones to hear tones below 150Hz.
+
+						<br/><br/>You'll also need a browser which supports web-audio. If you're not hearing any sound, please file an issue on the <a href="http://www.github.com/jackschaedler/circles-sines-signals">github site.</a><br/><br/>
+				</td>
+			</tr>
+		</table>
+
+
+		<br/><br/><br/>
+
+
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

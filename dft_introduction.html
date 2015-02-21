@@ -1,0 +1,178 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+		<div class="littleheader"> THE FOURIER TRANSFORM
+			<div class="subheader" style="font-size: 14px"> REPRESENTING SIGNALS AS SUMS OF SINES </div>
+		</div>
+
+
+	  	<table class="figureTable">
+			<tr>
+				<td style="vertical-align: top;">
+					<div class="text" style="margin-left: 0px">
+
+					<p>
+					We saw in the previous section that any point on a two-dimensional surface can be expressed using a pair of Cartesian or polar coordinates. We also showed that there are <i>transforms</i> which allow us to switch between these two representations at will. A similar situation exists for signals. We may choose to represent signals using time-based coordinates or frequency-based coordinates. The <i>Fourier Transform</i> is our tool for switching between these two representations.
+					</p>
+
+					<p>
+					I find it helpful to think of the frequency-domain representation as a <i>list of phasors</i>. The Discrete Fourier Transform takes your time-domain signal and produces a list of phasors which, when summed together, will reproduce your signal. In very broad strokes, the two representations can be thought of as looking something like this,
+					</p><br/>
+
+					<table>
+							<tr class="figureCaption">
+								<td width="100%">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<svg id="fourierbasic" class="svgWithText" width="700" height="200" style="margin-left: 0px;"></svg>
+									<script type="text/javascript" src="js/fourier_transform_basic.js"></script>
+	  							</td>
+							</tr>
+	  				</table>
+
+	  				<p>
+	  				We combine or sum phasors by stringing them together into a chain. The center of the first phasor is placed at the origin, and the center of each subsequent phasor is "attached" to the tip of the previous phasor. Once the chain of phasors is constructed, we allow each phasor to begin rotating. We can then reconstruct the time domain signal by tracing the <i>vertical</i> distance from the origin to the tip of the <i>last</i> phasor. The following visualization allows you to play with the relative magnitudes of five phasors which are linked together in a "chain".
+	  				</p>
+
+					<br/>
+					<table>
+							<tr class="figureCaption">
+								<td width="100%">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<svg id="phasorSum2" class="svgWithText" width="650" height="420" style="margin-left: 50px;"></svg>
+									<script>
+										var SUPER_AMP_1 = 0.5;
+										var SUPER_AMP_2 = 0.5;
+										var SUPER_AMP_3 = 0.5;
+										var SUPER_AMP_4 = 0.5;
+										var SUPER_AMP_5 = 0.5;
+									</script>
+									<script type="text/javascript" src="js/inverse_fourier_transform.js"></script>
+									<table style="table-layout: fixed; width: 350px; margin-left: 305px">
+										<tr>
+											<td style="width: 80px; text-align: center;">
+											<div>
+												<!-- <label >Harmonic 1</label><br/> -->
+												<input type=range min=0 max=100 value=100 id=ampFader1 step=1 oninput="SUPER_AMP_1 = value / 200" style="width: 70px">
+											</div>
+											</td>
+											<td style="width: 80px; text-align: center;">
+											<div>
+												<!-- <label >Harmonic 2</label><br/> -->
+												<input type=range min=0 max=100 value=100 id=ampFader1 step=1 oninput="SUPER_AMP_2 = value / 200" style="width: 70px">
+											</div>
+											</td>
+											<td style="width: 80px; text-align: center;">
+											<div>
+												<!-- <label >Harmonic 3</label><br/> -->
+												<input type=range min=0 max=100 value=100 id=ampFader1 step=1 oninput="SUPER_AMP_3 = value / 200" style="width: 70px">
+											</div>
+											</td>
+											<td style="width: 80px; text-align: center;">
+											<div>
+												<!-- <label >Harmonic 4</label><br/> -->
+												<input type=range min=0 max=100 value=100 id=ampFader1 step=1 oninput="SUPER_AMP_4 = value / 200" style="width: 70px">
+											</div>
+											</td>
+											<td style="width: 80px; text-align: center;">
+											<div>
+												<!-- <label >Harmonic 5</label><br/> -->
+												<input type=range min=0 max=100 value=100 id=ampFader1 step=1 oninput="SUPER_AMP_5 = value / 200" style="width: 70px">
+											</div>
+											</td>
+										</tr>
+									</table>
+	  							</td>
+							</tr>
+	  				</table><br/>
+	  				<p>
+					You should find it relatively easy to create different wave shapes like the saw and square. This is because the phasors are <i>harmonically related</i>. In other words, the second phasor spins twice as quickly as the first, the third spins three times as quickly, the fourth four times, and so on. The Fourier Transform always produces a set of phasors which are harmonically related.
+	  				In the next few sections we’ll dig deeply into the inner workings of the Discrete Fourier Transform. We’ll see exactly <i>how</i> this list of phasors is generated from the time domain signal. 
+	  				<br/><br/>
+
+	  						</td>
+				<td class="figureExplanation" style="">
+<!-- 					<b>1.</b>
+						It's also possible to sample a discrete signal. This process is called re-sampling. Discrete signals may also be synthesized or constructed, which is what your digital synthesizer is doing. Just rememebr that a discrete signal is fundamentally just a list of numbers. <br/><br/> -->
+				</td>
+			</tr>
+		</table><br/>
+
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

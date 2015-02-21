@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="../lib/complex_array.js"></script>
+  <script src="../lib/fft.js"></script>
+  <link rel="stylesheet" href="example.css">
+  <title></title>
+</head>
+<body>
+  <div class="panel">
+    <div id="original" class="example"></div>
+    <div class="explanation">
+      Sample data
+      <pre>
+var data = new ComplexArray(128)
+data.map(function(value, i, n) {
+  value.real = (i > n/3 &amp;&amp; i &lt; 2*n/3) ? 1 : 0
+})
+      </pre>
+    </div>
+  </div>
+  <div class="panel">
+    <div id="fft" class="example"></div>
+    <div class="explanation">
+      Transform (in place):<br>
+      <code>
+        data.FFT()
+      </code>
+    </div>
+  </div>
+  <div  class="panel">
+    <div id="fft_filtered" class="example"></div>
+    <div class="explanation">
+      Simple low pass filter:
+      <pre>
+data.map(function(freq, i, n) {
+  if (i > n/5 &amp;&amp; i &lt; 4*n/5) {
+    freq.real = 0
+    freq.imag = 0
+  }
+})
+      </pre>
+    </div>
+  </div>
+  <div class="panel">
+    <div id="original_filtered" class="example"></div>
+    <div class="explanation">
+      Transform back:<br>
+      <code>
+        data.InvFFT()
+      </code>
+    </div>
+  </div>
+  <div class="panel">
+    <div id="all_in_one" class="example"></div>
+    <div class="explanation">
+      ... or all in one step
+      <pre>
+data.frequencyMap(function(freq, i, n) {
+  if (i > n/5 &amp;&amp; i &lt; 4*n/5) {
+    freq.real = 0
+    freq.imag = 0
+  }
+})
+      </pre>
+    </div>
+  </div>
+  <script>
+    !function() {
+      function drawToCanvas(element_id, data) {
+        var
+          element = document.getElementById(element_id)
+          canvas = document.createElement('canvas'),
+          context = canvas.getContext('2d'),
+          width = element.clientWidth,
+          height = element.clientHeight,
+          n = data.length
+
+        canvas.width = width
+        canvas.height = height
+        element.appendChild(canvas)
+
+        context.strokeStyle = 'blue'
+        context.beginPath()
+        data.forEach(function(c_value, i) {
+          context.lineTo(
+            i * width / n,
+            height/2 * (1.5 - c_value.real)
+          )
+        })
+        context.stroke()
+      }
+
+      window.onload = function() {
+        var
+          data = new complex_array.ComplexArray(128)
+
+        data.map(function(value, i, n) {
+          value.real = (i > n/3 && i < 2*n/3) ? 1 : 0
+        })
+
+        drawToCanvas('original', data)
+
+        data.FFT()
+        drawToCanvas('fft', data)
+        data.map(function(freq, i, n) {
+          if (i > n/5 && i < 4*n/5) {
+            freq.real = 0
+            freq.imag = 0
+          }
+        })
+        drawToCanvas('fft_filtered', data)
+        drawToCanvas('original_filtered', data.InvFFT())
+
+        drawToCanvas('all_in_one', data.frequencyMap(function(freq, i, n) {
+          if (i > n/5 && i < 4*n/5) {
+            freq.real = 0
+            freq.imag = 0
+          }
+        }))
+      }
+    }()
+  </script>
+</body>
+</html>

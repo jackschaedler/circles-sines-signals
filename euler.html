@@ -1,0 +1,155 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+
+	<div class="littleheader"> EULER’S FORMULA
+		<div class="subheader" style="font-size: 14px"> e AND THE CIRCLE </div>
+	</div>
+
+	<table class="figureTable">
+		<tr>
+			<td style="vertical-align: top;">
+
+				<div class="text" style="margin-left: 0px">
+				<p>
+				Now that we have a cursory understanding of the number <span class="inlineexample">i</span>, we can return to that particularly tricky part of the Discrete Fourier Transform which involves both the imaginary number <span class="inlineexample">i</span> and the transcendental number <span class="inlineexample">e</span>,
+				</p>
+
+				<div style="font-size: 25px">
+				$$e^{\varphi \mathrm{i}}$$ 
+				</div>
+
+				<p>
+				In the same way that we can choose to represent points on a two-dimensional plane using either polar or Cartesian coordinates, we can also choose to represent points on the <i>complex</i> plane using polar or Cartesian coordinates. When we use <span class="inlineexample">e</span>, we're using the <i>polar</i> form of representation. The polar form is somehow more beautiful, but the Cartesian form is easier for us to work with. The relationship between the Cartesian and polar form is given by <i>Euler’s Formula</i>, which states that,
+				</p>
+
+				<div class='' style="font-size: 20px">
+					$$ e^{\varphi \mathrm{i}} = cos(\varphi) - sin(\varphi) i$$
+				</div>
+
+				<p>
+				Euler’s formula establishes the relationship between <span class="inlineexample">e</span> and the unit-circle on the complex plane. It tells us that <span class="inlineexample">e</span> raised to any imaginary number will produce a point on the unit circle. As we already know, points on the unit circle can always be defined in terms of sine and cosine. So, writing <span class="inlineexample">e<sup>φi</sup></span> is a shorthand for writing out the cartesian form which uses sine and cosine. The visualization below shows the value of <span class="inlineexample">e<sup>φi</sup></span> for various values of <span class="inlineexample">φ</span>. Note how similar this looks to a phasor. In fact, this construction can be referred to as a <i>complex</i> phasor.
+				</p>
+				<br/>
+
+				<svg id="euler" class="svgWithText" width="270" height="400" style="margin-left: 250px"></svg>
+				<script type="text/javascript" src="js/euler.js"></script>
+
+  				</div>
+
+			</td>
+			<td class="figureExplanation" style="">
+<!-- 				<b>1.</b>
+					Euler’s formula is much beloved<br/><br/> -->
+			</td>
+		</tr>
+	</table><br/><br/><br/>
+
+
+
+	<div class="littleheader"> GEOMETRIC INTERPRETATION OF THE DFT
+		<div class="subheader" style="font-size: 14px"> DROPPING THE e </div>
+	</div>
+
+	  	<table class="figureTable">
+			<tr>
+				<td style="vertical-align: top;">
+					<div class="text" style="margin-left: 0px">
+						Let’s recall the definition of the Discrete Fourier Transform and see how we might simplify it given our awareness of Euler’s Formula. Recall that the classical notation is written as,
+						<div class='fourierEquation'>
+							$$ \mathrm{DFT}[k] = \sum_{n=0}^{N-1} \mathrm{x}[n] \cdot
+							e^{\mathrm{j} \varphi}
+							$$
+						</div>
+
+						When we perform a simple substitution using Euler’s Formula,
+						<div class='fourierEquation' style="">
+							$$ e^{\mathrm{j} \varphi} = cos(\varphi) - sin(\varphi)i$$
+						</div>
+
+						We arrive at a formula which is considerably less esoteric, and imminently more understandable given our familiarity with sine and cosine. We now see that the DFT is somehow all about performing dot products on an input signal with sine and cosine waves which vary in frequency.
+						<div class='fourierEquation'>
+							$$ \mathrm{DFT}[k] = \sum_{n=0}^{N-1} \mathrm{x}[n] \cdot
+							(cos(\varphi) - sin(\varphi)i) \\
+							$$
+						</div>
+
+						The remaining piece of the puzzle is understanding how exactly the dot product helps us construct phasors which represent our signal. In the next three sections we’ll explore this topic in detail.
+	  				</td>
+				<td class="figureExplanation" style="">
+				</td>
+			</tr>
+		</table><br/><br/><br/><br/>
+
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

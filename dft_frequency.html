@@ -1,0 +1,208 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+	<div class="littleheader"> FREQUENCY-BASED INTERPRETATION
+		<div class="subheader" style="font-size: 14px"> FREQUENCY LAYOUT OF THE DFT BINS </div>
+	</div>
+
+  	<table class="figureTable">
+		<tr>
+			<td style="vertical-align: top;">
+				<div class="text" style="margin-left: 0px">
+
+				<p>
+				Each bin in the DFT output corresponds to a particular frequency. We can determine the frequency of a given bin using the following equation,
+				</p>
+
+				<div style="font-family: lato; color: #333; padding-left: 20px; text-align: center">
+
+				The <b>frequency</b> of the <b>k<sup>th</sup> bin</b> is given by,<br/><br/>
+
+				<b>k × (sampling_rate / N)</b></br></br>
+				<sub>Where <b>N</b> is the number of samples in the input signal</sub>
+				</div>
+				<br/><br/>
+
+				Recall that the sampling rate used in our last few examples is <span class="inlineexample">8Hz</span>.
+				This means that the frequencies of the output bins for our examples are <span class="inlineexample">0Hz, 1Hz, 2Hz, 3Hz, 4Hz, 5Hz, 6Hz, and 7Hz.</span> Play around with the following visualization to see how the bin frequencies are layed out as the number of samples in the input <span class="inlineexample">(N)</span> changes.
+
+				<br/><br/>
+
+				<script>
+					var N = 8;
+					var K = 0;
+					function updateN(value) {
+						N = value * 2;
+					}
+					function updateK(value) {
+						K = value;
+					}
+				</script>
+
+				<table>
+						<tr class="figureCaption">
+							<td width="100%">
+							<b>Figure 1.</b>&nbsp; Frequency Layout of DFT Bins<br/>
+							<sub> Sampling Rate is assumed to be 8Hz </sub>
+							</td>
+						</tr>
+						<tr>
+							<td>
+									<svg id="binfrequencies" class="svgWithText" width="705" height="80" style="margin-top:30px; padding-left: 0px; padding-bottom: 0px;"></svg>
+									<script type="text/javascript" src="js/bin_frequencies.js"></script>
+									<div class="controls" style="margin-top: 15px;">
+										<label for=N>N <br/><sub>(Number of Input Samples)</sub></label><br/>
+										<input type=range min=1 max=8 value=4 id=N step=1 oninput="updateN(value);"
+										onMouseDown="" onMouseUp="" style="width: 150px"><br/>
+									</div>
+  							</td>
+						</tr>
+  				</table>
+
+  				<p>
+  				Notice that the bins are always evenly distributed across the frequency spectrum from <span class="inlineexample">0Hz</span> up to the sampling rate. In addition, the bins are always harmonically related. In other words, all bin frequencies are multiples of the frequency of the second bin (the bin right after the DC bin). You can think of this frequency as the <i>fundamental</i> frequency of the DFT, and calculate it as <span style="font-family: lato; color: #333; font-weight: bold"> (N / sampling rate)</span> hertz.
+  				</p>
+
+
+				<div class="littleheader" style="margin-left: 0px"> FREQUENCY AND THE DFT
+					<div class="subheader" style="font-size: 14px"> THE CURIOUS CASE OF LEAKAGE </div>
+				</div>
+
+				<p>
+				Up until now, we’ve seen contrived signals which produce "clean" DFT results. As it turns out, most signals that you’ll process using the DFT will produce quite messy results. If some frequency component of the input signal does not <i>perfectly</i> match up with an available bin frequency, the energy related to that frequency component will "spill" out into all of the other bins. This is a phenomenon known as <i>frequency leakage</i>.
+				</p>
+
+				<p>
+				<i>Figure 2</i> Allows you to see the effect of altering the frequency of the input signal. The slider allows you to change the input frequency smoothly from <span class="inlineexample">1Hz</span> to <span class="inlineexample">3Hz</span>. Notice that when the frequency of the input signal perfectly matches one of the bin frequencies, there is no leakage. As soon as the frequency varies <i>all</i> of the other bins will assume a non-zero magnitude.
+				</p>
+
+
+				<script>
+					var PHASE = 0.0;
+					var FREQUENCY = 1;
+					function updatePhase(value) {
+						PHASE = Math.PI * 2 * (value / 100);
+					}
+					function updateFreq(value) {
+						FREQUENCY = value;
+					}
+				</script>
+
+				<br/>
+				<table>
+						<tr class="figureCaption">
+							<td width="100%">
+							<b>Figure 2.</b>&nbsp; DFT Response to Different Input Frequencies<br/><br/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id="animatedDftWrapper" class="animation" style="width:750px; margin-left: auto; margin-right: auto; position: relative; ">
+
+									<table>
+										<tr style="">
+											<td>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div id="fourierEquations" style="width: 50%; margin-right: 0px; margin-left: auto; display: inline;">
+												</div>
+											</td>
+										</tr>
+									</table>
+
+									<br/><br/>
+									<div class="controls" style="margin-top: 15px;">
+										<label for=frequencyBasisOne>Input Frequency</label><br/>
+										<input type=range min=1 max=3 value=1 id=frequencyBasisOne step=0.01 oninput="updateFreq(value);"
+										onMouseDown="" onMouseUp="" style="width: 150px"><br/>
+									</div>
+									<svg id="dftDeeper" class="svgWithText" width="705" height="380" style="margin-top:30px; padding-left: 10px; padding-bottom: 10px;"></svg>
+									<script type="text/javascript" src="js/dft_deeper_2.js"></script>
+									<div class="controls" style="margin-top: 25px;">
+									</div>
+								</div>
+  							</td>
+						</tr>
+  				</table>
+  			</td>
+			<td class="figureExplanation" style="">
+<!-- 				<b>1.</b>
+					It's also possible to sample a discrete signal. This process is called re-sampling. Discrete signals may also be synthesized or constructed, which is what your digital synthesizer is doing. Just rememebr that a discrete signal is fundamentally just a list of numbers. <br/><br/> -->
+			</td>
+		</tr>
+	</table><br/>
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

@@ -1,0 +1,150 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+		<div class="littleheader"> THE WAGON WHEEL EFFECT
+			<div class="subheader" style="font-size: 14px"> YET MORE ALIASING </div>
+		</div>
+
+
+	  	<table class="figureTable">
+			<tr>
+				<td style="vertical-align: top;">
+					<div class="text" style="margin-left: 0px">
+
+					<p>
+					You've probably noticed that wheels sometimes appear to spin backwards on film or television even when the vehicle they're attached to is moving forward. This phenomenon is known as the <i>Wagon Wheel Effect</i>, and it’s caused by undersampling and aliasing.
+					</p>
+
+					<p>
+					A movie camera samples the light entering its lens 24 times per second. Recalling the Nyquist-Shannon Sampling Theorem, we know that our camera will be unable to properly film any phenomenon which cycles at a frequency greater than <span class="inlineexample">12Hz</span>. Whenever the camera undersamples, there will be an apparent reversal of motion when playing back the film.
+					</p>
+
+					<p>
+					<i>Figure 1</i> demonstrates this effect. On the left side of the figure you see a rotating object. On the right side you see a sequence of "snapshots" which are taken at the sampling rate. You can adjust the sampling rate using the slider at the bottom of the figure.
+					</p>
+
+					<br/><br/>
+					<table>
+							<tr class="figureCaption">
+								<td width="100%">
+								<b>Figure 1.</b>&nbsp; The Wagon Wheel Effect
+								<br/><br/><br/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<script>
+										var NEW_RATE_AVAILABLE = true;
+										var RATE_FACTOR = 0.1;
+										var SETTING_RATE = false;
+										function updateRate(rate) {
+											RATE_FACTOR = rate / 10;
+											NEW_RATE_AVAILABLE = true;
+										}
+										function startSetRate() {
+											SETTING_RATE = true;
+										}
+										function endSetRate() {
+											SETTING_RATE = false;
+										}
+									</script>
+								
+									<svg id="wagonWheel" class="svgWithText" width="350" height="150" style="margin-left: 190px; margin-right: 210px;"></svg>
+									<script type="text/javascript" src="js/wagon_wheel.js"></script><br/><br/>
+									<div class="controls">
+										<label for=rateSlider>Sampling Rate</label><br/>
+										<input type=range min=0 max=9.5 value=0.1 id=rateSlider step=0.1 oninput="updateRate(value);"
+										onMouseDown="startSetRate();" onMouseUp="endSetRate();">
+									</div>
+	  							</td>
+							</tr>
+	  				</table>
+	  				<br/>
+	  				<p>
+	  				If you play around with the visualization long enough, you’ll notice that in order to preserve the effect of clockwise motion in the snapshots you need to ensure that a picture is taken at least twice per every revolution of the moving object. Notice too that very weird things can happen if you set the sampling rate to special values. For example, if we take exactly one snapshot per revolution, the object will appear to be stationary in the snapshots.<sup>1</sup> If you sample twice per revolution, the snapshots will show an object in motion, but it will be impossible to infer the direction of motion - it just flips back and forth.  
+	  				</p>
+	  				<p>
+	  				In the next section we'll take one final look at sampling theory before starting our investigations into the Discrete Fourier Transform.
+	  				</p>
+	  			</td>
+				<td class="figureExplanation" style="">
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<b>1.</b>
+					This is why the propellers and fans in factories must not spin at the same rate that the flourescent lamps blink. Many a hand and finger has been lost because the stroboscopic rate of the flourescent lamps causes the spinning machinery to appear stationary, and so safe for the insertion of fleshy appendages.<br/><br/>
+				</td>
+			</tr>
+		</table><br/><br/>
+
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

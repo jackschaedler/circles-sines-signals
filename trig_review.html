@@ -1,0 +1,154 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+
+		<div class="littleheader"> THE UNIT CIRCLE
+			<div class="subheader" style="font-size: 14px"> TRIGONOMETRY REVIEW </div>
+		</div>
+
+	  	<table class="figureTable">
+			<tr>
+				<td style="vertical-align: top;">
+					<div class="text" style="margin-left: 0px">
+
+					<p>
+					We saw in the previous section that the <i>unit circle</i> is a circle with a radius of one, and sine and cosine are defined in terms of periodic movement around the unit circle. We measure distances around the unit circle in terms of <i>phase</i>. The phase can be thought of as the angle between our rotating line and the x-axis. We can express the phase in either degrees or radians<sup>1</sup>. For any given point on the unit circle, the <i>y-coordinate</i> of the point is given by the sine of the phase, and the <i>x-coordinate</i> is given by cosine of the phase. You can fiddle with the slider in the bottom left corner of <i>Figure 1</i> to better understand the relationship between the unit circle, sine, cosine, and phase.
+					</p>
+					<p>
+					
+					</p><br/><br/>
+					<table>
+							<tr>
+								<td>
+									<div class="figureCaption">
+									<b>Figure 1.</b>&nbsp; The Unit Circle<br/><br/>
+									</div>
+									<svg id="phasorTrig" class="svgWithText" width="250" height="420" style=""></svg>
+									<script type="text/javascript" src="js/phasor_trig.js"></script>
+
+									<div class="controls">
+										<label for=phaseFader>Phase</label>
+										<input type=range min=0 max=1000 value=125 id=phaseFader step=20 oninput="updatePhase(value);" style="width:100%">
+									</div>
+	  							</td>
+	  							<td>
+	  								<td class="math" width="500px" style="padding-left: 10px;">
+										If you’re willing to recall some high school trigonometry, you’ll probably remember that sine and cosine were defined using the mnemonic SOHCAHTOA,
+										<br/><br/> 
+										<div style="font-family: lato; color: #333; padding-left: 20px; text-align: center;">
+										<b>Sine</b> is <b>Opposite</b> over <b>Hypotenuse</b><br/>  <b>Cosine</b> is <b>Adjacent</b> over <b>Hypotenuse</b><br/> <b>Tangent</b> is <b>Opposite</b> over <b>Adjacent</b>
+										</div><br/><br/>
+
+										Recall further that <i>opposite</i> refers to the length of the vertical or green line, and <i>adjacent</i> refers to the length of the horizontal or red line.<br/><br/>
+										<div style="font-family: lato; color: #333; padding-left: 20px; text-align: center">
+				  						<b>sin(phase)</b> = <b><span style="color: green">opposite</span></b> / <b><span style="color: steelblue">hypotenuse</span></b><br/><br/>
+				  						<b>cos(phase)</b> = <span style="color: red"><b>adjacent</b></span> / <b><span style="color: steelblue">hypotenuse</span></b>
+				  						</div>
+										<br/><br/>
+										In the case of the unit circle, the length of the hypotenuse (blue line) is always equal to one, making our equations pretty trivial.<br/><br/>
+										<div style="font-family: lato; color: #333; padding-left: 20px; text-align: center">
+				  						<b>sin(phase)</b> = <b><span style="color: green">opposite</span></b> / <b>1</b><br/><br/>
+				  						<b>cos(phase)</b> = <span style="color: red"><b>adjacent</b></span> / <b>1</b>
+				  						</div>
+									</td>
+	  							</td>
+							</tr>
+	  				</table><br/><br/>
+
+
+	  				<br/>
+	  			</td>
+				<td class="figureExplanation" style="">
+					<b>1.</b> There are 360 degrees in a circle, and 2π radians. Radians are a much purer way to measure distances around the circle. We find it normal to think of a circle as containing 360 degrees, but this is an Earth-centric, historical, and non-universal notion. Humans have settled on the number 360 because it’s nicely divisible, and happens to be quite close to the number of days in a year. When our alien overlords arrive from a different solar system, they’ll understand radians but not degrees because radians are defined purely in terms of <a href="http://en.wikipedia.org/wiki/File:Circle_radians.gif">distances around the unit-circle</a>. 
+				<br/><br/>
+				</td>
+			</tr>
+		</table>
+
+		<script>
+			var TRIG_PHASE = 0.125;
+			var TARGET_TRIG_PHASE = 0.125;
+			var TRIG_PHASE_INTERPOLATOR = d3.interpolateNumber(TRIG_PHASE, TARGET_TRIG_PHASE);
+			var TRIG_PHASE_INTERPOLATION = 1.0;
+			function GET_TRIG_PHASE() {
+				return TRIG_PHASE_INTERPOLATOR(Math.min(TRIG_PHASE_INTERPOLATION, 1.0));
+			}
+			function updatePhase(phase) {
+				TRIG_PHASE = GET_TRIG_PHASE();
+				TARGET_TRIG_PHASE = phase / 1000;
+				TRIG_PHASE_INTERPOLATION = 0.0;
+				TRIG_PHASE_INTERPOLATOR = d3.interpolateNumber(TRIG_PHASE, TARGET_TRIG_PHASE);
+			}
+		</script>
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

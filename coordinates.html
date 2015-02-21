@@ -1,0 +1,217 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+  	<div class="littleheader"> REPRESENTATIONS
+		<div class="subheader" style="font-size: 14px"> REPRESENTATIONS FOR THINKING </div>
+	</div>
+
+  	<table class="figureTable">
+		<tr>
+			<td style="vertical-align: top;">
+				<div class="text" style="margin-left: 0px">
+
+				<p>
+				To appreciate the nature of the Fourier Transform, it’s crucial to internalize the notion that there are many ways to <i>represent</i> some thing. Some representations are better than others, and some representations are particularly well suited to certain types of analysis and manipulation. For example, we can choose to represent the number "three hundred and eighty nine" using Arabic numberals (389) or Roman numerals (CCCLXXXIX). The Arabic system is preferable if we want to multiply or divide the number. Both sets of symbols refer to the same thing, but the representations are not equally well suited to the task of basic arithmetic.
+				</p>
+
+				<p class="quote">
+					"At PARC we had a slogan: <i>Point of view is worth 80 IQ points.</i> It was based on a few things from the past like how smart you had to be in Roman times to multiply two numbers together; only geniuses did it. We haven't gotten any smarter, we've just changed our representation system."<br/><b>-Alan Kay</b>
+				</p>
+				<br/>
+				
+				<p>
+				The Cartesian coordinate system is one way of representing points on a two-dimensional surface<sup>1</sup>. In the Cartesian system we represent the grey point in <i>Figure 1</i> as <span class="inlineexample">(3, 2)</span>. All points in the Cartesian system can be represented or <i>reached</i> by scaling and combining two special vectors. These special vectors sit at right angles to one another, and both start at the origin <span class="inlineexample">(0, 0)</span>. These two vectors are known as the <i>bases</i> of the coordinate system since they are the basic components which are scaled and combined to reach various points on the plane.
+				</p><br/>
+
+				<table>
+						<tr class="figureCaption">
+							<td width="100%">
+							<b>Figure 1.</b>&nbsp; The Cartesian Coordinate System
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table>
+									<tr height="250px">
+										<td>
+											<svg id="vector" class="svgWithText" width="200" height="200" style="padding:10px"></svg>
+											<script type="text/javascript" src="js/vector.js"></script>
+										</td>
+										<td>
+											<svg id="vector3" class="svgWithText" width="200" height="200" style="padding:10px;"></svg>
+											<script type="text/javascript" src="js/vector3.js"></script>
+										</td>
+										<td>
+											<svg id="vector2" class="svgWithText" width="200" height="200" style="padding:10px;"></svg>
+											<script type="text/javascript" src="js/vector2.js"></script>
+										</td>
+									</tr>
+									<tr style="text-align:center;font-size:12px;font-family: 'Lato', serif;">
+										<td>Point</td>
+										<td>Bases</td>
+										<td>Combining Bases to Reach the Point</td>
+									</tr>
+								</table>
+  							</td>
+						</tr>
+  				</table><br/><br/>
+
+  				<p>
+				The Cartesian coordinate system works well, and it possesses two nice properties. First, we can reach any point in two-dimensional space using this system. We might say that the bases <i>span</i> the two-dimensional plane. Second, the bases are <i>orthogonal</i> to one another. When vectors are perpindicular to one another, they are <i>orthogonal</i>. Put another way, the two bases do not interfere with one another - we can move left and right independently of moving up and down in the Cartesian system. <sup>2</sup>
+				</p>
+
+				<p>
+				There is however, another way that we might choose to represent the grey point. We could instead choose to use a <i>polar</i> coordinate system. Instead of reaching the point by travelling to the right and then up, we could instead specify a rotation and length. In a polar system, we would specify the point as <span class="inlineexample">(33.69°, 3.16). </span> With this system of representation we can do things that would probably be a bit more difficult in the Cartesian system like describing circles and spirals.
+				</p><br/>
+
+				<table>
+						<tr class="figureCaption">
+							<td width="100%">
+							<b>Figure 2.</b>&nbsp; Representation Using Polar Coordinates.<br/>
+							<sub>Rotation and Scaling</sub>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<svg id="polarRepresentation" class="svgWithText" width="200" height="200" style="margin: 10px; margin-left: 235px; margin-right: 235px; padding: 5px"></svg>
+								<script type="text/javascript" src="js/polar_representation.js"></script>
+  							</td>
+						</tr>
+  				</table>
+
+			<div class="littleheader" style="margin-left: 0px"> TRANSFORMS
+				<div class="subheader" style="font-size: 14px"> SWITCHING BETWEEN REPRESENTATIONS </div>
+			</div>
+
+			<p>
+  			<i>Transforms</i> are mathematical tools which <i>translate</i> between representations. For example, a process for translating from Cartesian coordinates to polar coordinates is a transform. Likewise, a process for translating from polar to Cartesian coordinates is also a transform.<sup>3</sup>
+  			</p>
+
+  			<br/>
+
+			<table width="700">
+				<tr class="figureCaption" style="color: #666">
+					<td width="50%">
+					<b><span style="font-size:13px">The Cartesian to Polar Transform</span></b><br/><br/>
+					</td>
+					<td width="50%">
+					<b><span style="font-size:13px">The Polar to Cartesian Transform</span></b><br/><br/>
+					</td>
+				</tr>
+				<tr class="figureCaption">
+					<td>
+						Given <b>(x, y)</b> in Cartesian Representation,<br/><br/>
+						<b>(rotation, length)</b> can be determined by,<br/><br/>
+						<b>rotation</b> = arctan (y / x)<br/>
+						<b>length</b> = sqrt(x<sup>2</sup> + y<sup>2</sup>)
+					</td>
+
+					<td>
+						Given <b>(rotation, length)</b> in Polar Representation,<br/><br/>
+						<b>(x, y)</b> can be determined by,<br/><br/>
+						<b>x</b> = length × cos(rotation)<br/>
+						<b>y</b> = length × sin(rotation)<br/>
+					</td>
+				</tr>
+			</table><br/><br/>
+
+			<p>
+			It may not seem like it, but the <i>Fourier Transform</i> isn’t that much different. It’s a transform which translates a time-based representation of a signal into a frequency-based representation of a signal just like our Cartesian to Polar transforms translate from a grid-based to a rotation-based representation of points. In the next few sections we’ll start to unpack and explicate the details of the process.
+			</p>
+
+
+  			<br/>
+
+  			</td>
+			<td class="figureExplanation" style="">
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<b>1.</b>
+					It seems apocryphal, but legend has it that Descartes formulated the Cartesian system of representation while lying sick in bed. Apparently, he was watching a fly buzzing around the ceiling when he realized that he could describe the position of the fly in terms of its distance from two perpindular walls of his room.<br/><br/>
+
+					<b>P.S.</b> Mindstorms by Seymour Papert is a really great book. In the introduction he explains how he used the mental model of gears and gearing as a representational tool for thinking about mathematics - especially algebra. I really recommend the introduction if you're into the idea of using representations as "tools for thought".
+					<br/><br/>
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<b>3.</b>
+					We'll discuss Orthogonality a bit more in <a href="sine_wave_properties.html"> a later section</a> and see how the concept relates deeply to the Fourier Transform. For the time being, we'll pretend we're ignorant and attack the DFT without worrying too much about this property.<br/><br/>
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<br/><br/><br/><br/><br/>
+				<b>3.</b>
+					You don't have to understand exactly how these work. If you want to convince yourself that these transforms do indeed work, you’ll find all you need by reviewing the earlier section on <a href="trig_review.html">trigonometry</a>. <br/><br/>
+			</td>
+		</tr>
+	</table><br/>
+
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

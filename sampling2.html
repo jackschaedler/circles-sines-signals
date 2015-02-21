@@ -1,0 +1,126 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+		<div class="littleheader"> PASSING THE NYQUIST LIMIT
+			<div class="subheader" style="font-size: 14px"> ALIASING </div>
+		</div>
+
+	  	<table class="figureTable">
+			<tr>
+				<td style="vertical-align: top;">
+					<div class="text" style="margin-left: 0px">
+					<p>
+					The Sampling Theorem tells us that we can accurately sample signals which have <i>all</i> of their frequency content beneath the Nyquist Frequency (Half the Sampling Rate). Thanks to the Nyquist-Shannon theorem, we know that if we’re attempting to sample a signal containing frequencies higher than the Nyquist Frequency, our sampling process is flawed.
+					What the theorem doesn't tell us, is how exactly the sampling process breaks down when we attempt to sample signals which spill over the Nyquist limit. What actually happens when our input signals cross the Nyquist Limit?</p>
+					</p>
+					<p>
+					<i>Figure 1</i> depicts the sampling of a sine wave as it rises in frequency. In this case, our sampling rate is <span class="inlineexample">24 Hz</span>, so the Nyquist Limit is at <span class="inlineexample">12 Hz</span>. you’ll notice that once the input signal crosses the Nyquist Frequency something very strange begins to happen. After crossing the Nyquist Frequency, the sampled signal becomes a valid representation for not only the actual input wave (blue), but also a new sine wave (grey) which begins to <i>decrease</i> in frequency.
+					</p>
+					<br/><br/>
+
+					<br/>
+					<table>
+							<tr class="figureCaption">
+								<td width="100%">
+								<b>Figure 1.</b>&nbsp; Crossing the Nyquist Frequency
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<div id="animatedWrapper" class="animation" style="position: relative;">
+								<svg id="aliasFrequency" class="svgWithText" width="750" height="390" style=""></svg>
+								<script type="text/javascript" src="js/crossing_nyquist.js"></script>
+	  							</div>
+	  							</td>
+							</tr>
+	  				</table>
+
+	  				<p>
+					If we don’t limit the frequency of the input signal, and instead allow it to travel over the Nyquist limit, our sampled signal will end up representing a sine wave which is flipped or reflected about the Nyquist Frequency. In practice, we will end up registering measurements for the grey signal which doesn’t actually exist. In the next two sections, we’ll look at two more examples of aliasing, and their relationship to the Sampling Theorem.
+					</p>
+					<br/>
+
+	  			</td>
+				<td class="figureExplanation" style="">
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+					<b>1.</b>
+						If you’re into audio software, music production, or music gear you might have come across the website <a href="http://src.infinitewave.ca">src.infinitewave.ca</a>. This site compares the quality of resampling algorithms in various music making applications. The "Sweep" images you’ll find when loading the page are visualizing this same phenomenon of reflection about the Nyquist frequency that we're demonstrating here in <i>Figure 1</i><br/><br/>
+					<br/><br/><br/>
+					Nothing that I've done here is new, and there's a <a href="http://youtu.be/OQNR099y8mM?t=5m5s">great video</a> of this exact same sort of demo available through MIT Open Courseware. The only difference, is that the MIT one was done in the seventies. I fervently recommend that you watch it.
+				</td>
+			</tr>
+		</table><br/>
+
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

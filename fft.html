@@ -1,0 +1,217 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+	<div class="littleheader"> THE <i>FAST</i> FOURIER TRANSFORM
+		<div class="subheader" style="font-size: 14px"> OUTPUT FORMATS AND SCALING FACTORS </div>
+	</div>
+
+
+	  	<table class="figureTable">
+			<tr>
+				<td style="vertical-align: top;">
+					<div class="text" style="margin-left: 0px">
+					
+					<p>
+					The <i>Fast</i> Fourier Transform is literally just a <i>faster</i> version of the Discrete Fourier Transform. In its naive form, the Discrete Fourier Transform is quite costly to compute, especially if you are interested in computing it in real-time. The FFT is an algorithmic optimization of the DFT which makes fast, real-time computation of the DFT possible on consumer grade hardware.
+					I don't want to go into the details of the FFT, but I feel obliged to share some quirks and gotchas you might encounter when using FFT libraries to develop software.
+					</p>
+
+					<div style="color: #999">
+					<span class="icon-attention-1 bigicon" style="color: #999; font-size: 15px"></span> This rest of this section is esoteric and technical and there's no need to read any futher unless you're interested in writing software which uses the DFT/FFT.
+					</div>
+					<br/>
+
+					<p>
+					The first eccentricity you’ll notice is that not all libraries output their data in the same format. All good libraries will output a set of complex numbers<sup>1</sup>, but the layout and ordering of these complex numbers may differ depending upon the library that you use. My suggestion is to familiarize yourself with the open-source package Octave<sup>2</sup>, and use Octave’s implementation of the FFT as your ground-truth when comparing different FFT implementations. You can compute the FFT of an 8-sample sine wave in Octave using the following commands,
+					</p>
+
+					<div style="font-weight: bold; font-family: lato; color: #333; padding-left: 20px; text-align: left">
+
+					> eight_sample_sine_wave = [0, 0.707, 1, 0.707, 0, -0.707, -1, -0.707]<br/>
+					> fft(eight_sample_sine_wave)<br/>
+					</div>
+
+					<br/>
+					The first command declares a discrete signal called <span class="inlineexample">eight_sample_sine_wave</span>. The second command runs the FFT on this signal and will produce the following list of complex numbers as a result. You can compare this output to the results given earlier in our <a href="dft_deeper.html">walk-through</a> of the transform,
+					<br/>
+					<br/>
+
+					<div style="font-weight: bold; font-family: lato; color: #333; padding-left: 20px; text-align: left">
+
+					> ans = <br/>
+					&nbsp;&nbsp;0.00000 + 0.00000i<br/>
+					&nbsp;&nbsp;0.00000 - 3.99970i<br/>
+					&nbsp;&nbsp;0.00000 + 0.00000i<br/>
+					&nbsp;&nbsp;0.00000 + 0.00030i<br/>
+					&nbsp;&nbsp;0.00000 + 0.00000i<br/>
+					&nbsp;&nbsp;0.00000 - 0.00030i<br/>
+					&nbsp;&nbsp;0.00000 - 0.00000i<br/>
+					&nbsp;&nbsp;0.00000 + 3.99970i<br/>
+					</div>
+					<br/>
+					<p>
+					I consider this to be "normal" output.
+					Some high-performance libraries will output the result with a different layout in order to optimize the memory and speed characteristics of their FFT routines. For example, some libraries will omit the <i>imaginary</i> parts of the DC and Nyquist bins since these are always known to be zero for real-valued inputs.<sup>3</sup> Omitting these two components, the library might choose to output the data in a format like this,
+					</p>
+
+					<div style="font-weight: bold; font-family: lato; color: #333; padding-left: 20px; text-align: left">
+					[R0, R4, R1, I1, R2, I2, R3, I3, R5, I5, R6, I6, R7, I7]
+					</div>
+
+					<br/>
+					Since the bins after the Nyquist bin are complex-conjugate mirrors of the bins before the Nyquist bin, some libraries will omit these bins from the output altogether. For example you might receive your results in a format like this.
+					<br/><br/>
+
+					<div style="font-weight: bold; font-family: lato; color: #333; padding-left: 20px; text-align: left">
+					[R0, R4, R1, I1, R2, I2, R3, I3]
+					</div>
+
+					<br/><br/>
+					<a href="http://linux.iingen.unam.mx/pub/Documentacion/Cluster_TONATIUH/Compiladores/Fortran_y_C_intel_v12/ipp/ipp_manual/IPPS/ipps_ch7/ch7_packed_formats.htm">This page</a> gives a pretty nice overview of the different formats you might encounter when trying to interpret the output of your FFT library. Note too, that the output layout may vary depending upon platform! Good Luck!
+
+					<br/><br/>
+					<p>
+					The second eccentricity you’ll encounter is that different FFT libraries apply the <i>scaling factor</i> at different points in the FFT⇄IFFT roundtrip. The scaling factor may be applied during the forward transform, during the inverse transform, or partly in the forward transform and partly in the inverse transform.
+					The <i>scaling factor</i> is used to ensure that when performing an FFT and IFFT (Inverse Fast Fourier Transform) the IFFT will output original signal. For example, try the following in Octave,<sup>4</sup>
+					</p>
+
+					<div style="font-weight: bold; font-family: lato; color: #333; padding-left: 20px; text-align: left">
+					> fft([0, 1, 0, -1])<br/>
+
+					<div style="color: #999">
+					> ans = <br/>
+					&nbsp;&nbsp;0 + 0i<br/>
+					&nbsp;&nbsp;0 - 2i<br/>
+					&nbsp;&nbsp;0 + 0i<br/>
+					&nbsp;&nbsp;0 + 2i<br/>
+					</div>
+					> ifft(ans)<br/>
+					<div style="color: #999">
+					> ans = 0 1 0 -1<br/>
+					</div>
+					<br/>
+
+
+					> fft([0, 0.707, 1, 0.707, 0, -0.707, -1, -0.707])
+
+					<div style="color: #999">
+					> ans = <br/>
+					&nbsp;&nbsp;0.00000 + 0.00000i<br/>
+					&nbsp;&nbsp;0.00000 - 3.99970i<br/>
+					&nbsp;&nbsp;0.00000 + 0.00000i<br/>
+					&nbsp;&nbsp;0.00000 + 0.00030i<br/>
+					&nbsp;&nbsp;0.00000 + 0.00000i<br/>
+					&nbsp;&nbsp;0.00000 - 0.00030i<br/>
+					&nbsp;&nbsp;0.00000 - 0.00000i<br/>
+					&nbsp;&nbsp;0.00000 + 3.99970i<br/>
+					</div>
+					> ifft(ans)<br/>
+					<div style="color: #999">
+					> ans = 0.00000   0.70700   1.00000   0.70700   0.00000  -0.70700  -1.00000  -0.70700<br/>
+					</div>
+					</div>
+
+					<br/>
+
+					<p>
+					Note that the maximum bin magnitude after performing the FFT is related to the length of the input signal. For a four sample sine wave, the maximum is 2, and for an eight sample sine wave the maximum is 4. We need to account for the length of the input signal, and this is where the scaling factor comes in. We must divide our signal by <span class="inlineexample">N/2</span> at some point during the FFT/IFFT round trip if we want to get the original signal back when performing the IFFT.
+					</p>
+
+					<p>
+					Some libraries don't perform this scaling. <a href="http://www.fftw.org">FFTW</a> will return a scaled output and force you to apply the scaling factor yourself. They have good reasons for this, which you can read about <a href="http://www.fftw.org/faq/section3.html#whyscaled">here</a>. Other packages like Octave will apply the scaling factor during the IFFT. Some libraries will perform a little bit of the scaling during both the forward and inverse transform by dividing by <span class="inlineexample">SQRT(N/2)</span> in both the inverse and forward transform.
+					</p>
+					<br/><br/>
+
+
+					<b>Too Lazy, Didn't Read</b><br/>
+					Read the documentation of your library before becoming frustrated and confused by its output. If your output doesn't look like you would expect it to, you should check the <i>output layout</i> and understand how the <i>scaling factor</i> is applied in your library of choice. This stuff is <i>not</i> standardized.
+	  			</td>
+				<td class="figureExplanation" style="">
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+					<b>1.</b>
+						Some libraries will only output the bin magnitudes. This sort of output is fine if you’re only interested in creating simple visualizers, but it won't be appropriate if you want to perform any kind of special signal processing or transformations on the signal data.<br/><br/>
+					<b>2.</b>
+						Octave is something like an open-source version of MATLAB.
+						If you’re on a Mac, installing Octave is as easy as installing homebrew and then typing '<b>brew install octave</b>' into your terminal window. <br/><br/>
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+					<b>3.</b>
+						You can convince yourself of this fact by revisiting the sine-waves which are used to compute the imaginary component of the DC and Nyquist bins in our <a href="dft_deeper.html">walk-through of the DFT</a>. Note that all of the samples for these sines are zero-valued.<br/><br/
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+					<b>4.</b>
+						Outputs are shown in grey if you don't have Octave handy.
+				</td>
+			</tr>
+		</table><br/>
+
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

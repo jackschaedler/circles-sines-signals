@@ -1,0 +1,168 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+	<div class="littleheader"> DIGGING DEEPER
+		<div class="subheader" style="font-size: 14px"> EXAMINING THE RESULTS </div>
+	</div>
+
+  	<table class="figureTable">
+		<tr>
+			<td style="vertical-align: top;">
+				<div class="text" style="margin-left: 0px">
+				<p>
+				You probably noticed a number of odd, confusing, and maybe even surprising things when watching the animation of the DFT in the previous section. In this section, you can scrutinize the different inputs, outputs and intermediate steps in the transform to better understand the final results.
+				</p>
+
+				<p>
+				Before going any further, we need to explain a bit of terminology. Each of the complex numbers in the <span class="inlineexample">DFT</span> output is referred to as a <i>bin</i>. You can use the Next and Previous buttons to examine the sine, cosine and resultant dot product signals for each <i>bin</i>. The first bin is referred to as the <i>DC</i> bin. you’ll notice that the corresponding sine and cosine signals for the DC bin aren’t really even waves, they’re just flat lines. This is because the <span class="inlineexample">k</span> term in our equation is zero for the first bin, and <span class="inlineexample">cos(0)= 1</span> and <span class="inlineexample">sin(0) = 0</span>. The DC bin gives us a measurement of the input signal’s <i>average</i> value. Since our input signals are all centered around zero, the DC bin has a magnitude of zero for each of our three signals.
+				</p>
+
+				<p>
+				The fifth bin (<span class="inlineexample">DFT[4]</span>) is also quite interesting. If you cast your mind back to the sections on aliasing, you’ll notice that the sine and cosine waves for this bin are right at the Nyquist Limit. For this reason, this bin is often referred to as the <i>Nyquist Bin</i>. Notice that everything to the right of the Nyquist bin is a vertically-flipped mirror image of the bins to the left.<sup>1</sup> This is because the sine and cosine waves for the 6<sup>th</sup>, 7<sup>th</sup>, and 8<sup>th</sup> bins are actually undersampled - they are aliases of the 2<sup>nd</sup>, 3<sup>rd</sup>, and 4<sup>th</sup> bins.<sup>2</sup> Recall the section on <a href="sampling2">Crossing the Nyquist Limit</a> if you need an intuitive explaination for why this is so.
+				</p>
+
+				<script>
+					var PHASE = 0.0;
+					var FREQUENCY = 1;
+					function updatePhase(value) {
+						PHASE = Math.PI * 2 * (value / 100);
+					}
+					function updateFreq(value) {
+						FREQUENCY = value;
+					}
+				</script>
+
+				<br/>
+				<table>
+						<tr class="figureCaption">
+							<td width="100%">
+							<b>Figure 1.</b>&nbsp; Animated Walkthrough of the Discrete Fourier Transform<br/><br/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id="animatedDftWrapper" class="animation" style="width:750px; margin-left: auto; margin-right: auto; position: relative; ">
+
+									<table>
+										<tr style="">
+											<td>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div id="fourierEquations" style="width: 50%; margin-right: 0px; margin-left: auto; display: inline;">
+												</div>
+											</td>
+										</tr>
+									</table>
+									<br/><br/>
+									<div class="controls" style="margin-top: 15px;">
+										<label for=simpleCorrelationOffsetTwo>Input Signal Phase</label><br/>
+										<input type=range min=0 max=100 value=0 id=simpleCorrelationOffsetTwo step=1 oninput="updatePhase(value);"
+										onMouseDown="" onMouseUp="" style="width: 150px">
+									</div>
+									<svg id="dftDeeper" class="svgWithText" width="705" height="400" style="margin-top:30px; padding-left: 10px; padding-bottom: 10px;"></svg>
+									<script type="text/javascript" src="js/dft_deeper.js"></script>
+									<div class="controls" style="margin-top: 25px;">
+									</div>
+								</div>
+  							</td>
+						</tr>
+  				</table>
+  				<p>
+				As you twiddle the slider which controls the phase of the input signal, you’ll notice that the <i>magnitudes</i> of output bins will remain constant, but their phases will change in relation to the shift in input phase.<sup>3</sup> In the next section, we'll see what happens when the frequency of the input signal is changed.
+				</p>
+				<br/>
+  			</td>
+			<td class="figureExplanation" style="width: 200px">
+				Here's the definition of the DFT if you need to cross-reference with the text:
+					$$ \mathrm{DFT}[k] = \sum_{n=0}^{N-1} \mathrm{x}[n] \cdot
+					(cos(\varphi) - sin(\varphi)i) \\
+					where \quad \varphi = k \frac{n}{N} 2\pi
+					$$<br/><br/>
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<b>1.</b>
+					This type of mirroring is known as complex-conjugate-symmetry. <br/><br/>
+				<b>2.</b>
+					This is only the case when computing the DFT on real-valued inputs. When working with audio, your inputs will always be real-valued, so this claim is OK to make. In other domains where you’re working with complex valued inputs, you do not get this symmetry.<br/><br/>
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<b>3.</b>
+					The fact that a phase shift of the input signal results in a corresponding phase shift of the DFT's output phasors is sometimes referred to in the literature as the <i>Shifting Theorem<i/>.<br/><br/>
+			</td>
+		</tr>
+	</table><br/>
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

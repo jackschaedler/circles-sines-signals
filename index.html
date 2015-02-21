@@ -1,0 +1,172 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 		<script type="text/javascript" src="phasortitle.js"></script>
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+		<div class="littleheader"> INTRODUCTION 
+			<div class="subheader" style="font-size: 14px"> INTRODUCTION, REFERENCES, AND A DISCLAIMER</div>
+		</div>
+
+
+		<table class="figureTable">
+			<tr>
+				<td style="vertical-align: top;">
+				 <div class="text" style="margin-left: 0">
+
+				 	<p>
+				 	This text is designed to accompany your study of introductory digital signal processing<sup>1</sup>. It’s an eccentric piece of not-so-rigourous literature with a preoccupation for explaining things using interactive<sup>2</sup> visualizations, animations and sound. My goal is to explain the Discrete Fourier Transform using a miniature curriculum which leverages your ability to learn concepts and absorb information <i>visually</i> instead of linguistically<sup>3</sup>. My hope is that these gyphs become slightly more comprehensible and slightly less intimidating<sup>4</sup> after reading the subsequent 30 or so pages:
+				 	</p>
+
+				  	<table>
+				  		<tr>
+				  			<td>
+							  	<div class='fourierEquation' style="font-size: 110%">
+									$$ \mathrm{DFT}[k] = \sum_{n=0}^{N-1} \mathrm{x}[n] \cdot
+									e^{\mathrm{j} \varphi} \\
+									where \quad \varphi = k \frac{n}{N} 2\pi
+									$$
+								</div>
+							</td>
+							<td>
+							  		<div class="quote">
+				  						"One reason math texts are so abstruse and technical is because of all the specifications and conditions that have to be put on theorems to keep them out of crevasses. In this sense, they’re like legal documents, and often about as much fun to read."
+				  					</div>
+							</td>
+						</tr>
+						<tr class="figureCaption">
+							<td width="50%">
+								<b>Equation 1.</b> The Discrete Fourier Transform
+							</td>
+							<td width="50%">
+								<div class="quote">
+				  					<b> - David Foster Wallace,<br/> <i>Everything and More</i><sup>5</sup> </b>
+				  				</div>
+							</td>
+						</tr>
+					</table>
+					<br/>
+					<br/>
+
+					<p>
+					If you’re really serious about learning the theory and practice of digital signal processing, you should <i>not</i> use this website as your sole resource. Wherever a comprimise was necessary, I’ve erred in favour of simplicity over completeness, fun and engagement over rigour. This text is a piece of pop-science and you should treat it as such.
+					</p>
+
+				  	<p>
+					If you want a solid introduction to digital signal processing, I fervently suggest that you read <a href="http://www.amazon.com/Understanding-Digital-Signal-Processing-Edition/dp/0137027419"> Understanding Digital Signal Processing </a> by Richard J Lyons. Lyons writes with a great deal of empathy for the reader, patiently explicating concepts that other authors might deem to be "obvious". <a href="https://ccrma.stanford.edu/~jos/">Julius O. Smith III</a> has an encyclopedic catalog of DSP writings freely available on his <a href="https://ccrma.stanford.edu/~jos/"> site </a>. Smith’s online text, <a href="https://ccrma.stanford.edu/~jos/mdft/">The Mathematics of the Discrete Fourier Transform </a> is of particular interest. Geoff Martin’s delightful <a href="http://www.tonmeister.ca/main/textbook/index.html">online book</a> is recommended if you’re interested in a less formal, but still very thorough resource on maths and DSP.
+					</p>
+					<p>
+					<a href="http://www.twitter.com/jackschaedler">Contact me</a> on twitter if you have any comments, questions, or complaints about this site. If you encounter an error in the mathematics or a technical issue with the presentation, please file this as an <i>issue</i> on the <a href="https://github.com/jackschaedler/circles-sines-signals">github site</a>.
+					</p>
+
+				  	
+				<td class="figureExplanation" style="color: #666">
+					<b>1.</b>
+						Almost always referred to as "DSP", especially if you’re into the whole brevity thing.<br/><br/>
+					<b>2.</b>
+						I’ve attempted to avoid the gratuitous use of interactivity after reading the section titled <a href="http://worrydream.com/#!/MagicInk"> Interactivity Considered Harmful </a> in Bret Victor’s "Magic Ink" essay. If you have strong feelings about interactivity and computer-centric presentations of information, I highly recommend this essay.<br/><br/>
+					<b>3.</b>
+						This sentiment and wording might be familiar to you if you’ve read Bret Victor’s <a href="http://worrydream.com/KillMath/"> Kill Math </a>. If you haven’t already, you might also be interested in reading Evan Miller's <a href="http://www.evanmiller.org/dont-kill-math.html">critique of Kill Math</a>.<br/><br/>
+					<b>4.</b>
+						See Seymour Papert’s exceptional <a href="http://books.google.de/books/about/Mindstorms.html?id=AP8WBQAAQBAJ&redir_esc=y">Mindstorms</a>. Chapter two is all about "Mathophobia" where he writes, "It is not uncommon for intelligent adults to turn into passive observers of their own incompetence in anything but the most elementary mathematics." If you’re a mathophobe (like me), I hope is that this text is a welcoming respite.<br/><br/>
+					<b>5.</b>
+						I'm mentioning DFW here because he has an interesting take on technical writing. Everything and More wasn't received particularly well by mathematicians (See Michael Harris' review titled, "A Sometimes Funny Book Supposedly About Infinity"), but I think his comments about technical writing are totally relevant.
+				</td>
+			</tr>
+		</table>
+
+		<div class="littleheader"> REFERENCES 
+			<div class="subheader" style="font-size: 14px"> PRAISE AND STEALING</div>
+		</div>
+
+
+		<table class="figureTable">
+			<tr>
+				<td style="vertical-align: top;">
+					 <div class="text" style="margin-left: 0">
+						This piece was inspired<sup>1</sup> by Mike Bostock’s<a href="http://vimeo.com/112319901"> Visualizing Algorithms</a>, David Mimno’s <a href="http://youtu.be/-0Pe30Zz3a0">Understanding Machine Learning with D3</a>, Bret Victor’s <a href="http://vimeo.com/67076984">Media for Thinking the Unthinkable</a>, and Setosa’s <a href="http://setosa.io/ev/">Explained Visually</a><sup>6</sup>.
+					</div><br/><br/>
+					<div class="text" style="margin-left: 0">
+						All of the visualizations were created using the <a href="http://d3js.org/">D3.js</a> library. D3 is an exceptional piece of software, and presents a brilliantly low barrier to entry via an <a href="http://bl.ocks.org/mbostock">enormous amount</a> of freely available <a href="http://vimeo.com/69448223"> online examples</a>. If <a href="http://jackschaedler.github.io/goya/">my last project</a> was an exploration into <a href="https://github.com/clojure/clojurescript">ClojureScript</a>, this one is an exploration into D3.<sup>3</sup>
+					</div>
+				</td>
+				<td class="figureExplanation" style="color: #666">
+					<b>6.</b>
+						<i>Heavily</i> inspired. If you suspect that I’ve cribbed anything, you’re probably right. Any similarities between this text and their stuff can be attributed to my great admiration for these people and their work.<br/><br/>
+					<b>3.</b>
+						That being said, this is <i>not</i> a coding project. This project is primarily an experimental piece of educational art. Don’t let my sloppy coding reflect poorly on the underlying technology.
+				</td>
+			</tr>
+		</table>
+		</p>
+		<br/><br/>
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

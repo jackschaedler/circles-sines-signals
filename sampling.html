@@ -1,0 +1,190 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+		<div class="littleheader"> THE NYQUIST-SHANNON SAMPLING THEOREM
+			<div class="subheader" style="font-size: 14px"> AVOIDING UNDER AND OVERSAMPLING </div>
+		</div>
+
+	  	<table class="figureTable">
+			<tr>
+				<td style="vertical-align: top;">
+					<div class="text" style="margin-left: 0px">
+					<p>
+
+					
+					Now that we’re familiar with notion of <i>frequency</i>, we can return to the question which was posed earlier in the section on <a href="aliasing.html">aliasing</a>. Namely, how does one choose a sampling rate (or period) which will avoid undersampling and oversampling and faithfully represent the signal being sampled?
+					As it turns out, there is a theorem which tells us how to precisely calculate the proper sampling rate and it’s known as the <i>Nyquist-Shannon Sampling Theorem</i><sup>1</sup>. The theorem is stated as follows,
+					</p>
+
+					<p class="quote">
+						<b> The Nyquist-Shannon Sampling Theorem </b><br/><br/>
+				  		If a signal contains no frequencies higher than <b>B</b> hertz, it is completely determined by giving its ordinates at a series of points [samples] spaced <b>1/(2B)</b> seconds apart.<br/>
+				  		 <br/><br/>
+				  	</p>
+
+				  	<p>
+				  	For example, if we are attempting to sample a sine wave at <span class="inlineexample">300 Hz</span>, the Nyquist-Shannon Theorem tells us that we must sample at a rate greater than <span class="inlineexample">600 Hz</span> to faithfully capture the incoming sinusoid. If you know what the highest frequency component in your signal is, you simply set your sampling rate to be greater than twice that frequency.
+				  	</p>
+
+				  	<p>
+				  	This formulation of the theorem is quite signal-specific. You can also choose to look at it from a more sampling-rate-centric viewpoint,
+				  	</p>
+
+				  	<p class="quote" style="">
+
+				  		Given a sampling rate of <b>FS</b> hertz, you cannot accurately sample any signal containing frequencies greater than or equal to <b>FS/2</b>.<br/><br/>
+				  	</p>
+
+				  	<p>
+
+				  	 I sometimes find this interpretation easier to think about, since it can be confusing for the uninitiated to think about determining the "frequency content" of a signal without first understanding the DFT. This formulation is also helpful because it introduces the value of <span class="inlineexample">FS/2</span> (half the sampling rate) as being key. This value is so crucial to sampling theory that it’s often referred to using the special name of the <i>Nyquist Limit</i> or <i>Nyquist Frequency</i>. 
+				  	</p>
+
+				  	<p>
+				  	<i>Figure 1</i> shows a set of four continuous sine waves which are all being sampled at the same rate. You can adjust the sampling rate using the slider at the bottom of the visualization. Spend enough time with this visualization and you’ll notice some very strange properties of the sampling process. One such oddity will occur when you set the sampling rate to <span class="inlineexample">4 Hz</span>. In this case, the sampled version of the <span class="inlineexample">3 Hz</span> sinusoid will look exactly like the sampled version of the <span class="inlineexample">1 Hz</span> sinusoid except for being flipped over the x-axis. When the sampling rate is set to <span class="inlineexample">1 Hz</span>, all four sampled signals will look <i>exactly</i> the same.
+				  	</p>
+
+					<br/>
+					<table>
+							<tr class="figureCaption">
+								<td width="100%">
+								<b>Figure 1.</b>&nbsp; Playing with the Sampling Period<br/><br/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<svg id="fourWaveAlias" class="svgWithText" width="485" height="300" style="padding: 5px; margin-left: 110px; margin-right: 145px;"></svg>
+								<script type="text/javascript" src="js/four_wave_alias.js"></script>
+									<div class="controls">
+										<br/>
+										<label for=waveAliasSlider>Sampling Period</label><br/>
+										<input type=range min=1 max=4 value=4 id=waveAliasSlider step=1 oninput="updateAliasRate(value);"
+										onMouseDown="startSetAliasRate();" onMouseUp="endSetAliasRate();">
+									</div>
+	  							</td>
+							</tr>
+	  				</table><br/>
+	  				
+					<p>
+				  	Recall for a moment the section on <a href="sound.html">sound and perception</a>. In that section we mentioned that the range of human hearing runs from about <span class="inlineexample">20 Hz</span> to <span class="inlineexample">20,000 Hz</span>. Since humans can’t actually hear frequency content above <span class="inlineexample">20,000 Hz</span>, frequencies above this limit are actively removed from most audio and music signals before they are sampled. Given what we now know about the Sampling Theorem, you won’t be surprised to hear that the most common sampling rate for audio and music signals is around <span class="inlineexample">40,000 Hz</span>, or twice the highest audible frequency.<sup>3</sup>
+				  	</p> 
+	  			</td>
+				<td class="figureExplanation" style="">
+					<b>1.</b>
+						Claude Shannon is a really interesting guy. He wrote equations for juggling, invented the Most Useless Machine Ever, and even built a flame-throwing trumpet. Interestingly, he was also the thesis advisor to Ivan Sutherland, creator of the famous <a href="http://youtu.be/USyoT_Ha_bA">Sketchpad</a> computing environment. When you’re sick of DSP, you should watch Claude Shannon demo <a href="http://youtu.be/vPKkXibQXGA">Theseus</a> and watch Alan Kay talk about <a href="http://youtu.be/495nCzxM9PI">Sketchpad</a>. <br/><br/>
+					<b>2.</b>
+						Sampling is exceptionally tricky, and as with anything, there is more to the story than meets the eye. I recommend <a href="http://www.wescottdesign.com/articles/Sampling/sampling.pdf">this article</a> by Tim Wescott for a more in-depth and pragmatic approach to thinking about the Nyquist Limit and sampling in general. <br/><br/>
+					
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+					<b>3.</b>
+						The sampling rate is actually 44,100 Hz. This is for purely historical reasons which are largely related to broadcasting. <br/><br/>
+				</td>
+			</tr>
+		</table><br/>
+
+		<script>
+			var NEW_ALIAS_RATE_AVAILABLE = true;
+			var ALIAS_RATE = 4;
+			var SETTING_ALIAS_RATE = false;
+			function updateAliasRate(rate) {
+				ALIAS_RATE = rate;
+				NEW_ALIAS_RATE_AVAILABLE = true;
+			}
+			function startSetAliasRate() {
+				SETTING_ALIAS_RATE = true;
+			}
+			function endSetAliasRate() {
+				SETTING_ALIAS_RATE = false;
+			}
+		</script>
+
+		<p class="text">
+		<script>
+			var NEW_RATE_AVAILABLE = true;
+			var RATE_FACTOR = 0.1;
+			var SETTING_RATE = false;
+			function updateRate(rate) {
+				RATE_FACTOR = rate / 10;
+				NEW_RATE_AVAILABLE = true;
+			}
+			function startSetRate() {
+				SETTING_RATE = true;
+			}
+			function endSetRate() {
+				SETTING_RATE = false;
+			}
+		</script>
+		</p>
+
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>

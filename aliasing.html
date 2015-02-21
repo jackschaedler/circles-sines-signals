@@ -1,0 +1,183 @@
+<html>
+ 	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  jax: ["input/TeX","input/MathML","output/SVG"],
+			  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+			  TeX: {
+			    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+			  }
+			});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
+		<script type="text/x-mathjax-config">
+		    MathJax.Hub.Config(
+		    	{
+		        	SVG: {linebreaks: { automatic:true }},
+		        	displayAlign: "center"
+		       	}
+		        );
+		</script>
+
+		<script type="text/javascript"
+		   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG">
+		</script>
+
+
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400' rel='stylesheet' type='text/css'>
+		 
+
+		<style>
+			@import url("fontello-b1d57784/css/fontello.css");
+			@import url("style.css");
+		</style>
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-59785365-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+ 	</head>
+
+  <body>
+  	<div class="title">
+  		<table width="900">
+  			<tr>
+	  			<td width="90%">
+				  	<div class="bigheader" id="titleinfo">
+				 	</div>
+			 	</td>
+			 </tr>
+			 <tr>
+			 	<td width="70%">
+			 		<br/>
+			 		<div id="menu" class="menu" style="margin-left: 45; ">
+			 			<div class="contentsHeader"> CONTENTS </div>
+			 		</div>
+			 		<!-- -->
+			 	</td>
+		 	</tr>
+	 	</table>
+  	</div>
+
+		<div class="littleheader"> INTERPRETING DISCRETE SIGNALS
+			<div class="subheader" style="font-size: 14px">DON'T CONNECT THE DOTS! </div>
+		</div>
+
+	  	<table class="figureTable">
+			<tr>
+				<td style="vertical-align: top;">
+					<div class="text" style="margin-left: 0px">
+
+					<p>
+						You must always avoid the temptation to "connect the dots" (to naively interpolate between samples) when working with discrete signals<sup>1</sup>. Let’s recall the example from the <a href="discreteSignals.html">previous section</a>, and see how connecting the dots can get us into trouble.
+					</p>
+					<p>
+						Imagine someone asks you what the altitude of the plane was at 65 minutes into the flight. How should you respond? You don't actually have a sample for the altitude at 65 minutes, but you <i>do</i> have measurements for the altitude at 60 minutes and 70 minutes. You might feel tempted to draw a line between these two samples, perform some simple linear interpolation, and infer that the altitude was about 31,000 feet. This sort of temptation is completely natural, but <i>really unhealthy</i> when working with discrete signals. The most appropriate response is simply to say, "I don’t know". Anything else would be a fib.
+					</p>
+					<p>
+						Given our measurements and context, we cannot confidently report an altitude for 65 minutes into the flight. Our discrete signal tells us nothing about the altitude of the plane at 65 minutes into the flight. Think about it like this: our discrete signal can actually represent many potential flight histories, most of which have different altitudes at 65 minutes into the flight. In actuality, there are an <i>infinite</i> number of possible flight histories which intersect with the samples of our discrete signal but assume decidedly different altitudes at the 65 minute mark. Click the Play button to see four examples. I hope you’ll notice that connecting the dots in a naive way can be extremely misleading.
+					</p>
+
+					<br/><br/><br/>
+					<table>
+							<tr class="figureCaption">
+								<td width="100%">
+								<b>Figure 1.</b>&nbsp; Altitude of a Plane as it Traveled from Paris to Berlin<br/><sub>Samples connected dubiously with a grey line</sub><br/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div id="animatedWrapperAliases" class="animation" style="position: relative;">
+										 <svg id="planealiases" class="svgWithText" width="700" height="200" style="padding-top: 0px; margin-left: 30px;"></svg>
+										 <script type="text/javascript" src="js/plane_aliases.js"></script>
+									</div>
+	  							</td>
+							</tr>
+	  				</table>
+		  				
+					<p>
+						 We would call the red, blue, green, and orange curves <i>aliases</i> of one another since they are indistinguishable from one another when sampled with a samping period of <span class="inlineexample">10 minutes per sample</span>. In other words, the red, green, blue, and orange altitude signals all look <i>exactly</i> the same after being sampled every ten minutes. 
+					</p>
+					<br/>
+
+					<div style="color: #999">
+					<span class="icon-attention-1 bigicon" style="color: #999; font-size: 15px"></span> I’ve strongly advised that you should not, "connect the dots" when working with discrete signals. Over the next thirty or so pages I will break this rule. I’m breaking the rule because all of the signals in this document are contrivances, and I feel that showing the continuous counterpart to each discrete signal makes the visualizations more readable and easier to understand. Always remember that I’m being naughty when you see connected dots. Do as I say, and not as I do when you’re out practicing DSP out in the real world.
+					</div>
+	  				</td>
+				<td class="figureExplanation" style="">
+					<b>1.</b>
+						If you <i>properly</i> sample, it is possible to confidently extrapolate between samples. The point I'm trying to make here is that naïve sampling will almost always get you into a situation where your discrete signal doesn't represent the signal you measured with very good fidelity.<br/><br/><b>P.S.</b> If you’re feeling eager to point out the contradictory and awkward nature of presenting continuous signals using a computer program and digital screen, I'm way ahead of you, and fully aware of the embarrasing meta concerns here.<br/><br/>
+				</td>
+			</tr>
+		</table>
+
+		<div class="littleheader"> REMOVING UNCERTAINTY
+			<div class="subheader" style="font-size: 14px">FREQUENCY AND CONTEXT</div>
+		</div>
+
+	  	<table class="figureTable">
+			<tr>
+				<td style="vertical-align: top;">
+					<div class="text" style="margin-left: 0px">
+
+					<p>
+					 Whenever there is a gap between samples, uncertainty can creep into our measurements. As the gaps get larger, we become less confident that our discrete signal faithfully represents the physical phenomenon that it was meant to measure. Rapid fluctuations and movements in the continuous signal which occur between samples will be lost. We can improve the fidelity of our discrete signals by shortening the gap between samples - by reducing the sampling period.
+					</p>
+
+					<p>
+					Imagine that instead of sampling every ten minutes, we had decided to sample the plane’s altitude every 5 minutes. This simple choice would allow us to rule out the orange, green, and red curves as possible aliases of our true signal based upon the sample at 65 minutes. It would be clear that the blue curve is the only possible candidate which still intersects with our samples.
+					</p>
+
+					<br/>
+					<table>
+							<tr class="figureCaption">
+								<td width="100%">
+								<b>Figure 2.</b>&nbsp; Decreasing the Sampling Period to 5 Minutes.
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<svg id="plane5" class="svgWithText" width="700" height="180" style="padding-top: 0px; margin-left: 30px;"></svg>
+						 			<script type="text/javascript" src="js/plane_lower_period.js"></script><br/><br/>
+	  							</td>
+							</tr>
+	  				</table>
+
+	  				<p>
+	  				Unfortunately, there is a cost associated with sampling. Each sample must be stored somewhere, and space (e.g. memory) is not free. We cannot reduce our sampling period without incurring some overhead. The fundamental trick to sampling is understanding <i>precisely</i> how often you must sample in order to avoid information loss. When we sample more often than is necessary, we say that we are <i>oversampling</i>. Generally, oversampling implies that memory or computational resources are being wasted <sup>2</sup>. When we sample too infrequently and lose information we say that we are <i>undersampling</i>.
+	  				</p>
+	  				<p>
+	  				Proper understanding of sampling theory is much easier when we understand the notion of <i>frequency</i>. In the next few sections we'll leave altitudes behind and look at a class of signals for which frequency is a more natural concept. Sound waves.
+	  				</p>
+
+	  				
+	  				
+
+	  				</td>
+				<td class="figureExplanation" style="">
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+					<b>2.</b>
+						Oversampling and undersampling are sometimes done deliberately. For example, audio plugins will often deliberately oversample to ensure that they don't produce audible artifacts as a result of their processing. In this case you’re trading memory and computation for audio quality.<br/><br/>
+				</td>
+			</tr>
+		</table>
+
+
+		<br/><br/><br/>
+
+  	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
+</html>
