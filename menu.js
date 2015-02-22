@@ -16,7 +16,7 @@ var menuoptions =
   ["The Fourier Transform", "dft_introduction.html"],
   ["Notation", "notation.html"],
   ["Complex Numbers", "complex.html"],
-  ["Euler's Formula", "euler.html"],
+  ["Euler’s Formula", "euler.html"],
   ["The Dot Product", "dotproduct.html"],
   ["Correlation", "dotproduct2.html"],
   ["Correlation With Sine", "dotproduct3.html"],

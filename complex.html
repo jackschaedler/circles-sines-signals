@@ -89,7 +89,7 @@
 				$$e^{\varphi \mathrm{i}}$$ 
 				</div><br/>
 
-				my advice is to not let the presence of <span class="inlineexample">i</span>, <span class="inlineexample">e</span>, and the complex numbers discourage you. In the next two sections we’ll reacquaint ourselves with imaginary and complex numbers, and see that the exponentiated <span class="inlineexample">e</span> is simply an interesting mathematical shorthand for referring to our two familiar friends, the sine and cosine wave. <span style="color: #666">I’m not trying to say that Euler's formula is just some wacky bit of syntactic sugar. However, for someone that wants to simply understand how to think about the DFT, it’s really not crucially important to totally understand Euler’s formula.</span>
+				my advice is to not let the presence of <span class="inlineexample">i</span>, <span class="inlineexample">e</span>, and the complex numbers discourage you. In the next two sections we’ll reacquaint ourselves with imaginary and complex numbers, and see that the exponentiated <span class="inlineexample">e</span> is simply an interesting mathematical shorthand for referring to our two familiar friends, the sine and cosine wave. <span style="color: #666">I’m not trying to say that Euler’s formula is just some wacky bit of syntactic sugar. However, for someone who just wants to  understand how the DFT works, it’s really not crucially important to have a deep understanding of Euler’s formula.</span>
 
 			<td class="figureExplanation" style="">
 				<b>1.</b>
@@ -111,7 +111,7 @@
 
 				<div class="text" style="margin-left: 0px">
 				<p>
-				There are different <i>types</i> of numbers. Most people are accustomed to two common types: positive and negative numbers. We can convert a positive number into its negative counterpart by multiplying it by <span class="inlineexample">-1</span>. You can choose to think of this as a horizontal "flip" or rotation of 180° around a pivot which lies at zero. Multiplying a negative number by <span class="inlineexample">-1</span> performs yet another rotation of 180°, flipping the number back onto the positive axis.
+				There are different <i>types</i> of numbers. Most people are accustomed to two common types: positive and negative numbers. We can convert a positive number into its negative counterpart by multiplying it by <span class="inlineexample">-1</span>. You can choose to think of this as a horizontal “flip” or rotation of 180° around a pivot which lies at zero. Multiplying a negative number by <span class="inlineexample">-1</span> performs yet another rotation of 180°, flipping the number back onto the positive axis.
 				</p>
 				
 
@@ -129,7 +129,7 @@
   				</p>
 
   				<p>
-				If you’re thinking of using zero to perform the rotation, that's a good idea but it wont work. We need to ensure that the number we use to rotate by 90° can also be used to rotate by 180°. In other words, we should be able to rotate 180° by first rotating 90°, and then rotating by 90° again. If we use zero, we cannot perform multiple rotations. Once we multiply once by zero, we can never recover the original number. After ruling out zero, you can try a zillion other "normal" numbers but you’ll never find one that performs this special rotation of 90°. The number simply doesn't exist.
+				If you’re thinking of using zero to perform the rotation, that’s a good idea but it wont work. We need to ensure that the number we use to rotate by 90° can also be used to rotate by 180°. In other words, we should be able to rotate 180° by first rotating 90°, and then rotating by 90° again. If we use zero, we cannot perform multiple rotations. Once we multiply once by zero, we can never recover the original number. After ruling out zero, you can try a zillion other “normal” numbers but you’ll never find one that performs this special rotation of 90°. The number simply doesn't exist.
   				This is where the number <span class="inlineexample">i</span> comes in. The number <span class="inlineexample">i</span> is an <i>invention</i>. It’s specially constructed to perform this 90° rotation and is defined as,<sup>2</sup>
   				</p>
   				<div style="font-family: lato; color: #333; padding-left: 20px; text-align: center; font-size: 19px; font-weight: bold">

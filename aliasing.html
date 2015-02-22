@@ -83,10 +83,10 @@
 					<div class="text" style="margin-left: 0px">
 
 					<p>
-						You must always avoid the temptation to "connect the dots" (to naively interpolate between samples) when working with discrete signals<sup>1</sup>. Let’s recall the example from the <a href="discreteSignals.html">previous section</a>, and see how connecting the dots can get us into trouble.
+						You must always avoid the temptation to “connect the dots” (to naively interpolate between samples) when working with discrete signals<sup>1</sup>. Let’s recall the example from the <a href="discreteSignals.html">previous section</a>, and see how connecting the dots can get us into trouble.
 					</p>
 					<p>
-						Imagine someone asks you what the altitude of the plane was at 65 minutes into the flight. How should you respond? You don't actually have a sample for the altitude at 65 minutes, but you <i>do</i> have measurements for the altitude at 60 minutes and 70 minutes. You might feel tempted to draw a line between these two samples, perform some simple linear interpolation, and infer that the altitude was about 31,000 feet. This sort of temptation is completely natural, but <i>really unhealthy</i> when working with discrete signals. The most appropriate response is simply to say, "I don’t know". Anything else would be a fib.
+						Imagine someone asks you what the altitude of the plane was at 65 minutes into the flight. How should you respond? You don’t actually have a sample for the altitude at 65 minutes, but you <i>do</i> have measurements for the altitude at 60 minutes and 70 minutes. You might feel tempted to draw a line between these two samples, perform some simple linear interpolation, and infer that the altitude was about 31,000 feet. This sort of temptation is completely natural, but <i>really unhealthy</i> when working with discrete signals. The most appropriate response is simply to say, “I don’t know”. Anything else would be a fib.
 					</p>
 					<p>
 						Given our measurements and context, we cannot confidently report an altitude for 65 minutes into the flight. Our discrete signal tells us nothing about the altitude of the plane at 65 minutes into the flight. Think about it like this: our discrete signal can actually represent many potential flight histories, most of which have different altitudes at 65 minutes into the flight. In actuality, there are an <i>infinite</i> number of possible flight histories which intersect with the samples of our discrete signal but assume decidedly different altitudes at the 65 minute mark. Click the Play button to see four examples. I hope you’ll notice that connecting the dots in a naive way can be extremely misleading.
@@ -110,17 +110,17 @@
 	  				</table>
 		  				
 					<p>
-						 We would call the red, blue, green, and orange curves <i>aliases</i> of one another since they are indistinguishable from one another when sampled with a samping period of <span class="inlineexample">10 minutes per sample</span>. In other words, the red, green, blue, and orange altitude signals all look <i>exactly</i> the same after being sampled every ten minutes. 
+					We would call the red, blue, green, and orange curves <i>aliases</i> of one another since they are indistinguishable from one another when sampled with a period of <span class="inlineexample">10 minutes per sample</span>. In other words, the red, green, blue, and orange signals all look <i>exactly</i> the same after being sampled every ten minutes. 
 					</p>
 					<br/>
 
 					<div style="color: #999">
-					<span class="icon-attention-1 bigicon" style="color: #999; font-size: 15px"></span> I’ve strongly advised that you should not, "connect the dots" when working with discrete signals. Over the next thirty or so pages I will break this rule. I’m breaking the rule because all of the signals in this document are contrivances, and I feel that showing the continuous counterpart to each discrete signal makes the visualizations more readable and easier to understand. Always remember that I’m being naughty when you see connected dots. Do as I say, and not as I do when you’re out practicing DSP out in the real world.
+					<span class="icon-attention-1 bigicon" style="color: #999; font-size: 15px"></span> I’ve strongly advised that you should not, “connect the dots” when working with discrete signals. Over the next thirty or so pages I will break this rule. I’m breaking the rule because all of the signals in this document are contrivances, and I feel that showing the continuous counterpart to each discrete signal makes the visualizations more readable and easier to understand. Always remember that I’m being naughty when you see connected dots. Do as I say, and not as I do when you’re out there practicing DSP out in the real world.
 					</div>
 	  				</td>
 				<td class="figureExplanation" style="">
 					<b>1.</b>
-						If you <i>properly</i> sample, it is possible to confidently extrapolate between samples. The point I'm trying to make here is that naïve sampling will almost always get you into a situation where your discrete signal doesn't represent the signal you measured with very good fidelity.<br/><br/><b>P.S.</b> If you’re feeling eager to point out the contradictory and awkward nature of presenting continuous signals using a computer program and digital screen, I'm way ahead of you, and fully aware of the embarrasing meta concerns here.<br/><br/>
+						If you <i>properly</i> sample, it is possible to confidently interpolate between samples. The point I'm trying to make here is that naïve sampling will almost always get you into a situation where your discrete signal doesn't represent the signal you measured with very good fidelity.<br/><br/><b>P.S.</b> If you’re feeling eager to point out the contradictory and awkward nature of presenting continuous signals using a computer program and digital screen, I'm way ahead of you, and fully aware of the embarrasing meta concerns here.<br/><br/>
 				</td>
 			</tr>
 		</table>
@@ -135,7 +135,7 @@
 					<div class="text" style="margin-left: 0px">
 
 					<p>
-					 Whenever there is a gap between samples, uncertainty can creep into our measurements. As the gaps get larger, we become less confident that our discrete signal faithfully represents the physical phenomenon that it was meant to measure. Rapid fluctuations and movements in the continuous signal which occur between samples will be lost. We can improve the fidelity of our discrete signals by shortening the gap between samples - by reducing the sampling period.
+					 Whenever there is a gap between samples, uncertainty can creep into our measurements. As the gaps get larger, we become less confident that our discrete signal faithfully represents the physical phenomenon that it was meant to measure. Rapid fluctuations and movements which occur between samples will be lost. We can improve the fidelity of our discrete signals by shortening the gap between samples - by reducing the sampling period.
 					</p>
 
 					<p>
@@ -171,7 +171,7 @@
 				<td class="figureExplanation" style="">
 					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 					<b>2.</b>
-						Oversampling and undersampling are sometimes done deliberately. For example, audio plugins will often deliberately oversample to ensure that they don't produce audible artifacts as a result of their processing. In this case you’re trading memory and computation for audio quality.<br/><br/>
+						Oversampling and undersampling are sometimes done deliberately. For example, audio plugins will often deliberately oversample to ensure that they don't produce audible artifacts as a result of their processing. In this case you’re trading memory and computation resources for better audio quality.<br/><br/>
 				</td>
 			</tr>
 		</table>
