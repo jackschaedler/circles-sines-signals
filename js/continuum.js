@@ -136,6 +136,8 @@ function handlePlay()
 
 function resetToInitialState()
 {
+  iteration = 0;
+
   for (var i = 0; i < dots.length; i++)
   {
     dots[i].remove();
