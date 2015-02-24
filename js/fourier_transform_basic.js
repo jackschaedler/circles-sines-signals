@@ -69,8 +69,17 @@ for (var i = 0; i < 5; i++)
   );
 }
 
-var axisExtension = vis.append("line")
+vis.append("line")
   .attr("x1", 20)
+  .attr("y1", yRange(0))
+  .attr("x2", 340)
+  .attr("y2", yRange(0))
+  .attr("stroke-width", 1.0)
+  .attr("stroke", "black")
+  .style("opacity", 0.5);
+
+vis.append("line")
+  .attr("x1", 439)
   .attr("y1", yRange(0))
   .attr("x2", 700)
   .attr("y2", yRange(0))

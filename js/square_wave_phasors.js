@@ -87,9 +87,9 @@ var sineProjection = vis.append("line")
   .style("opacity", 1.0);
 
 var axisExtension = vis.append("line")
-  .attr("x1", xRange(1.25))
+  .attr("x1", xRange(3.7))
   .attr("y1", yRange(0))
-  .attr("x2", 655)
+  .attr("x2", 600)
   .attr("y2", yRange(0))
   .attr("stroke-width", 1.0)
   .attr("stroke", "black")

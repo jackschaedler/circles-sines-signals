@@ -126,7 +126,7 @@ var sineProjection = vis.append("line")
   .style("opacity", 1.0);
 
 var axisExtension = vis.append("line")
-  .attr("x1", xRange(1.25))
+  .attr("x1", xRange(2.5))
   .attr("y1", yRange(0))
   .attr("x2", 655)
   .attr("y2", yRange(0))
