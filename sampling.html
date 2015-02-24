@@ -84,7 +84,7 @@
 
 					
 					Now that we’re familiar with notion of <i>frequency</i>, we can return to the question which was posed earlier in the section on <a href="aliasing.html">aliasing</a>. Namely, how does one choose a sampling rate (or period) which will avoid undersampling and oversampling and faithfully represent the signal being sampled?
-					As it turns out, there is a theorem which tells us how to precisely calculate the proper sampling rate and it’s known as the <i>Nyquist-Shannon Sampling Theorem</i><sup>1</sup>. The theorem is stated as follows,
+					As it turns out, there is a theorem which tells us how to precisely calculate the proper sampling rate and it’s known as the <i>Nyquist-Shannon Sampling Theorem</i>.<sup>1</sup> The theorem is stated as follows,
 					</p>
 
 					<p class="quote">
@@ -137,17 +137,16 @@
 	  				</table><br/>
 	  				
 					<p>
-				  	Recall for a moment the section on <a href="sound.html">sound and perception</a>. In that section we mentioned that the range of human hearing runs from about <span class="inlineexample">20 Hz</span> to <span class="inlineexample">20,000 Hz</span>. Since humans can’t actually hear frequency content above <span class="inlineexample">20,000 Hz</span>, frequencies above this limit are actively removed from most audio and music signals before they are sampled. Given what we now know about the Sampling Theorem, you won’t be surprised to hear that the most common sampling rate for audio and music signals is around <span class="inlineexample">40,000 Hz</span>, or twice the highest audible frequency.<sup>3</sup>
+				  	Recall for a moment the section on <a href="sound.html">sound and perception</a>. In that section we mentioned that the range of human hearing runs from about <span class="inlineexample">20 Hz</span> to <span class="inlineexample">20,000 Hz</span>. Since humans can’t actually hear frequency content above <span class="inlineexample">20,000 Hz</span>, frequencies above this limit are actively removed from most audio and music signals before they are sampled. Given what we now know about the Sampling Theorem, you won’t be surprised to hear that the most common sampling rate for audio and music signals is around <span class="inlineexample">40,000 Hz</span>, or twice the highest audible frequency.<sup>2</sup>
 				  	</p> 
 	  			</td>
 				<td class="figureExplanation" style="">
 					<b>1.</b>
 						Claude Shannon is a really interesting guy. He wrote equations for juggling, invented the Most Useless Machine Ever, and even built a flame-throwing trumpet. Interestingly, he was also the thesis advisor to Ivan Sutherland, creator of the famous <a href="http://youtu.be/USyoT_Ha_bA">Sketchpad</a> computing environment. When you’re sick of DSP, you should watch Claude Shannon demo <a href="http://youtu.be/vPKkXibQXGA">Theseus</a> and watch Alan Kay talk about <a href="http://youtu.be/495nCzxM9PI">Sketchpad</a>. <br/><br/>
-					<b>2.</b>
 						Sampling is exceptionally tricky, and as with anything, there is more to the story than meets the eye. I recommend <a href="http://www.wescottdesign.com/articles/Sampling/sampling.pdf">this article</a> by Tim Wescott for a more in-depth and pragmatic approach to thinking about the Nyquist Limit and sampling in general. <br/><br/>
 					
 					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-					<b>3.</b>
+					<b>2.</b>
 						The sampling rate is actually 44,100 Hz. This is for purely historical reasons which are largely related to broadcasting. <br/><br/>
 				</td>
 			</tr>

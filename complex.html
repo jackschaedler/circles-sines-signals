@@ -83,7 +83,7 @@
 
 				<div class="text" style="margin-left: 0px">
 				<p>
-				You only need a cursory<sup>1</sup> understanding of <i>imaginary</i> and <i>complex</i> numbers to be able to understand the Discrete Fourier Transform. While it is true that the output of the DFT is always given in <i>complex</i> numbers, and the formula itself contains a particularly abstruse bit involving the imaginary number <span class="inlineexample">i</span>,
+				You only need a cursory understanding of <i>imaginary</i> and <i>complex</i> numbers to be able to understand the Discrete Fourier Transform.<sup>1</sup> While it is true that the output of the DFT is always given in <i>complex</i> numbers, and the formula itself contains a particularly abstruse bit involving the imaginary number <span class="inlineexample">i</span>,
 				</p>
 
 				<div style="font-size: 25px">
@@ -131,7 +131,7 @@
 
   				<p>
 				If you’re thinking of using zero to perform the rotation, that’s a good idea but it wont work. We need to ensure that the number we use to rotate by 90° can also be used to rotate by 180°. In other words, we should be able to rotate 180° by first rotating 90°, and then rotating by 90° again. If we use zero, we cannot perform multiple rotations. Once we multiply once by zero, we can never recover the original number. After ruling out zero, you can try a zillion other “normal” numbers but you’ll never find one that performs this special rotation of 90°. The number simply doesn't exist.
-  				This is where the number <span class="inlineexample">i</span> comes in. The number <span class="inlineexample">i</span> is an <i>invention</i>. It’s specially constructed to perform this 90° rotation and is defined as,<sup>2</sup>
+  				This is where the number <span class="inlineexample">i</span> comes in. The number <span class="inlineexample">i</span> is an <i>invention</i>. It’s specially constructed to perform this 90° rotation and is defined as,
   				</p>
   				<div style="font-family: lato; color: #333; padding-left: 20px; text-align: center; font-size: 19px; font-weight: bold">
   				i<sup>2</sup> = -1
@@ -216,7 +216,7 @@
 				<span id="ysign" style="font-size: 18; font-family: Lato; font-weight: normal; color: #333; display: inline-block; width: 17px;"> + </span>
 				<span id="ycomp" style="font-size: 18; font-family: Lato; font-weight: bold; color: green; opacity: 0.8">  </span>
 				<br/><br/>
-				The <i>magnitude</i> of a complex number is the length of a line which runs from the origin to the point. If you view the whole thing as a right triangle, the magnitude corresponds to the length of the hypotenuse of the triangle. Its length can be calculated using the Pythagorean theorem<sup>1</sup>.
+				The <i>magnitude</i> of a complex number is the length of a line which runs from the origin to the point. If you view the whole thing as a right triangle, the magnitude corresponds to the length of the hypotenuse of the triangle. Its length can be calculated using the Pythagorean theorem.<sup>2</sup>
 				<br/>
 				<br/>
 				<span id="" style="font-size: 18; font-family: Lato; color: steelblue; font-weight: normal; opacity: 0.8">Magnitude<sup>2</sup> </span> 
@@ -233,7 +233,7 @@
 			<td class="figureExplanation" style="">
 				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 				<br/><br/><br/><br/><br/><br/><br/><br/><br/>
-				<b>1.</b>
+				<b>2.</b>
 					Recall, A<sup>2</sup> + B<sup>2</sup> = B<sup>2</sup>, where C is the length of the hypotenuse and A and B are the lengths of the other two sides of a right triangle.
 			</td>
 		</tr>

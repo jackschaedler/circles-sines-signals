@@ -84,7 +84,7 @@
 					<div class="text" style="margin-left: 0px">
 
 					<p>
-						You must always avoid the temptation to “connect the dots” (to naively interpolate between samples) when working with discrete signals<sup>1</sup>. Let’s recall the example from the <a href="discreteSignals.html">previous section</a>, and see how connecting the dots can get us into trouble.
+						You must always avoid the temptation to “connect the dots” (to naively interpolate between samples) when working with discrete signals.<sup>1</sup> Let’s recall the example from the <a href="discreteSignals.html">previous section</a>, and see how connecting the dots can get us into trouble.
 					</p>
 					<p>
 						Imagine someone asks you what the altitude of the plane was at 65 minutes into the flight. How should you respond? You don’t actually have a sample for the altitude at 65 minutes, but you <i>do</i> have measurements for the altitude at 60 minutes and 70 minutes. You might feel tempted to draw a line between these two samples, perform some simple linear interpolation, and infer that the altitude was about 31,000 feet. This sort of temptation is completely natural, but <i>really unhealthy</i> when working with discrete signals. The most appropriate response is simply to say, “I don’t know”. Anything else would be a fib.
@@ -159,7 +159,7 @@
 	  				</table>
 
 	  				<p>
-	  				Unfortunately, there is a cost associated with sampling. Each sample must be stored somewhere, and space (e.g. memory) is not free. We cannot reduce our sampling period without incurring some overhead. The fundamental trick to sampling is understanding <i>precisely</i> how often you must sample in order to avoid information loss. When we sample more often than is necessary, we say that we are <i>oversampling</i>. Generally, oversampling implies that memory or computational resources are being wasted <sup>2</sup>. When we sample too infrequently and lose information we say that we are <i>undersampling</i>.
+	  				Unfortunately, there is a cost associated with sampling. Each sample must be stored somewhere, and space (e.g. memory) is not free. We cannot reduce our sampling period without incurring some overhead. The fundamental trick to sampling is understanding <i>precisely</i> how often you must sample in order to avoid information loss. When we sample more often than is necessary, we say that we are <i>oversampling</i>. Generally, oversampling implies that memory or computational resources are being wasted.<sup>2</sup> When we sample too infrequently and lose information we say that we are <i>undersampling</i>.
 	  				</p>
 	  				<p>
 	  				Proper understanding of sampling theory is much easier when we understand the notion of <i>frequency</i>. In the next few sections we'll leave altitudes behind and look at a class of signals for which frequency is a more natural concept. Sound waves.
