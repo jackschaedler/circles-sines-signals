@@ -28,7 +28,7 @@ var menuoptions =
   ["Zero Padding", "zeropadding.html"],
   ["Sine Wave Properties", "sine_wave_properties.html"],
   //["Convolution", "convolution.html"],
-  ["The Fast Fourier Transform", "fft.html"],
+  ["Using FFT Libraries", "fft.html"],
   ["Conclusion", "conclusion.html"]
 ];
 
