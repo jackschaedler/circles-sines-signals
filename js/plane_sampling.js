@@ -9,7 +9,7 @@ var lineData = [
 , {x: 60, y: 31000}
 , {x: 65, y: 28000}
 , {x: 70, y: 31000}
-, {x: 80, y: 28000}
+, {x: 80, y: 27000}
 , {x: 90, y: 12000}
 , {x: 100, y: 3500}
 , {x: 110, y: 1200}
@@ -44,7 +44,7 @@ var xAxis = d3.svg.axis()
 var yAxis = d3.svg.axis()
   .scale(yRange)
   .tickSize(1)
-  .ticks(3)
+  .tickValues([10000, 20000, 30000])
   .orient('left')
   .tickSubdivide(true);
 
@@ -96,6 +96,26 @@ vis.append("text")
   .attr("y", 175)
   .style('opacity', 0.6)
   .text("Time (minutes)");
+
+var sampleValues = [];
+
+for (var i = 0; i < lineData.length; i++)
+{
+  if (lineData[i].y === 28000)
+  {
+    continue;
+  }
+
+  sampleValues.push(
+    vis.append("text")
+      .attr("text-anchor", "start")
+      .attr("x", xRange(lineData[i].x) + 5)
+      .attr("y", yRange(lineData[i].y) + 5)
+      .style("fill", "steelblue")
+      .style("stroke", "none")
+      .style("opacity", 0.0)
+      .text(lineData[i].y + "'"));
+}
 
 
 
@@ -182,6 +202,13 @@ function handlePlay()
     return;
   }
 
+ for (var i = 0; i < sampleValues.length; i++)
+  {
+    sampleValues[i].transition()
+      .duration(0)
+      .style("opacity", 0.0);
+  }
+
   points
     .style('opacity', 0.0)
       .transition()
@@ -236,9 +263,16 @@ function finish()
 {
   path
     .transition()
-      .duration(2000)
+      .duration(2100)
       .style("opacity", 0)
       .each("end", prepareForRestart);
+
+  for (var i = 0; i < sampleValues.length; i++)
+  {
+    sampleValues[i].transition()
+      .duration(2000)
+      .style("opacity", 1.0);
+  }
 }
 
 function prepareForRestart()
