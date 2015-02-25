@@ -1,27 +1,32 @@
 var menuoptions =
 [
+  ["Intro, Signals and Sound", "index.html", "---"],
   ["Introduction", "index.html"],
   ["Signals", "signals.html"],
   ["Discrete Signals", "discrete_signals.html"],
-  ["Aliasing", "aliasing.html"],
-  ["Sound", "sound.html"],
+  ["Sampling & Aliasing", "aliasing.html"],
+  ["Sound Waves", "sound.html"],
   ["Timbre", "sound2.html"],
+  ["Sines and Sampling", "part2.html", "---"],
   ["Sine & Cosine", "sincos.html"],
   ["Trigonometry Review", "trig_review.html"],
   ["The Sampling Theorem", "sampling.html"],
   ["Nyquist Frequency", "sampling2.html"],
   ["Wagon Wheel Effect", "sampling4.html"],
   ["Sine Wave Aliasing", "sampling3.html"],
-  ["Representation & Transforms", "coordinates.html"],
+  ["Transforms and Notation", "part3.html", "---"],
+  ["Representations & Transforms", "coordinates.html"],
   ["The Fourier Transform", "dft_introduction.html"],
   ["Notation", "notation.html"],
   ["Complex Numbers", "complex.html"],
   ["Euler’s Formula", "euler.html"],
+  ["Inside the DFT", "part4.html", "---"],
   ["The Dot Product", "dotproduct.html"],
   ["Correlation", "dotproduct2.html"],
   ["Correlation With Sine", "dotproduct3.html"],
   ["Correlation With Sine and Cosine", "dotproduct4.html"],
   ["Discrete Fourier Transform Example", "dft_walkthrough.html"],
+  ["USAGE and INTERPRETATION", "part5.html", "---"],
   ["Digging Deeper", "dft_deeper.html"],
   ["The DFT & Frequency", "dft_frequency.html"],
   ["Leakage", "dft_leakage.html"],
@@ -32,25 +37,39 @@ var menuoptions =
   ["Conclusion", "conclusion.html"]
 ];
 
+
 var currentIndex;
+var currenttd;
+
 for (var i = 0; i < menuoptions.length; i++)
 {
+  var ispartheader = menuoptions[i].length === 3;
   var pathArray = location.pathname.substring(1).split("/");
   var currentPage = pathArray[pathArray.length - 1];
-  var className = currentPage === menuoptions[i][1]
+  var className = currentPage === menuoptions[i][1] && i != 0
     ? 'sectionButton current'
     : 'sectionButton';
 
-  var style = currentPage === menuoptions[i][1]
-    ? "color: #bbb"
+  var style = currentPage === menuoptions[i][1] && !ispartheader && i != 0
+    ? "color: #bbb;"
     : "";
+
+  style += ispartheader
+    ? "font-size: 9.5px; color: rgb(200,200,200); font-weight:bold; opacity: 1.0"
+    : "";
+
+  if (ispartheader)
+  {
+    currenttd = d3.select("#menurow").append("td")
+      .attr('class', "partdata");
+  }
 
   if (currentPage === menuoptions[i][1])
   {
     currentIndex = i;
   }
 
-  var divvy = d3.select("#menu").append("div")
+  currenttd.append("div")
     .attr('class', className)
       .append("a")
       .attr('href', menuoptions[i][1])

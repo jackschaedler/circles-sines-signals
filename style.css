@@ -15,6 +15,11 @@ p {
     text-indent: 25px;
 }
 
+.partdata {
+	vertical-align: top;
+	width: 170px;
+}
+
 p::first-letter { 
 /*    font-size: 110%;
     font-weight: bold;*/
@@ -200,6 +205,25 @@ a:active {
 	font-weight: 400;
 }
 
+.partheader {
+	font-family: 'Lato', sans-serif;
+	width: 88%;
+	font-size: 23;
+	color: rgb(39, 40, 34);
+	text-align:center;
+	font-weight: 400;
+	margin-top: 100px;
+}
+
+.partsubheader {
+	font-family: 'Lato', sans-serif;
+	width: 88%;
+	font-size: 16;
+	color: #777;
+	font-weight: 400;
+	text-align:center;
+}
+
 .figureExplanation {
 	font-family: 'Lato', sans-serif;
 	font-size: 11;
@@ -326,6 +350,7 @@ a:active {
 	font-size: 11;
 	color: #666;
 	float: left;
+	clear: both;
 	padding: 5px;
 	margin-right: 10px;
 	/*border: solid 1px #333;*/
