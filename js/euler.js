@@ -184,14 +184,14 @@ var ejpiText = vis.append("text")
 
 
 var sinePoint = vis.append('svg:circle')
-  .attr('r', 3)
+  .attr('r', 3.5)
   .attr('stroke-width', 1.5)
   .attr('stroke', '#eee')
   .attr('fill', 'black')
   .attr('opacity', 0.9);
 
 var cosinePoint = vis.append('svg:circle')
-  .attr('r', 3)
+  .attr('r', 3.5)
   .attr('stroke-width', 1.5)
   .attr('stroke', '#eee')
   .attr('fill', 'black')
@@ -201,11 +201,14 @@ var phase = 0;
 
 var sine = d3.svg.line()
   .x(function (d, i) { return xRangeSine(d)})
-  .y(function (d, i) { return yRangeSine(Math.sin(d + phase)); });
+  .y(function (d, i) { return yRangeSine(Math.sin(d)); });
 
 var cosFunc = d3.svg.line()
   .x(function (d, i) { return xRangeSine(d)})
-  .y(function (d, i) { return yRangeCos(Math.cos(d + phase)); });
+  .y(function (d, i) { return yRangeCos(Math.cos(d)); });
+
+sinePath.attr("d", sine(d3.range(0, 2 * Math.PI, 0.1)));
+cosPath.attr("d", cosFunc(d3.range(0, 2 * Math.PI, 0.1)));
 
 var xComponent = xRange(Math.cos(phase));
 var yComponent = yRange(Math.sin(phase));
@@ -226,9 +229,6 @@ var Re = vis.append("text")
 
 
 function draw() {
-
-  sinePath.attr("d", sine(d3.range(0, 2 * Math.PI, 0.1)));
-  cosPath.attr("d", cosFunc(d3.range(0, 2 * Math.PI, 0.1)));
 
   phase += 0.01;
   if (phase > 2 * Math.PI)
@@ -267,11 +267,11 @@ function draw() {
     .attr('y', yComponent - 4);
 
  sinePoint
-    .attr("cx", xRangeSine(0))
+    .attr("cx", xRangeSine(phase))
     .attr("cy", yRangeSine(Math.sin(phase)));
 
   cosinePoint
-    .attr("cx", xRangeSine(0))
+    .attr("cx", xRangeSine(phase))
     .attr("cy", yRangeCos(Math.cos(phase)));
 
   arcPhase = Math.atan2(yRange.invert(yComponent), yRange.invert(xComponent));
