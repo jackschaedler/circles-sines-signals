@@ -87,7 +87,7 @@
 				</p>
 
 				<div style="font-size: 25px">
-				$$e^{\varphi \mathrm{i}}$$ 
+				$$e^{-\varphi \mathrm{i}}$$ 
 				</div>
 
 				<p>
@@ -95,7 +95,7 @@
 				</p>
 
 				<div class='' style="font-size: 20px">
-					$$ e^{\varphi \mathrm{i}} = cos(\varphi) - sin(\varphi) i$$
+					$$ e^{\varphi \mathrm{i}} = cos(\varphi) + sin(\varphi) i$$
 				</div>
 
 				<p>
@@ -129,13 +129,13 @@
 						Let’s recall the definition of the Discrete Fourier Transform and see how we might simplify it given our awareness of Euler’s Formula. Recall that the classical notation is written as,
 						<div class='fourierEquation'>
 							$$ \mathrm{DFT}[k] = \sum_{n=0}^{N-1} \mathrm{x}[n] \cdot
-							e^{\mathrm{j} \varphi}
+							e^{-\varphi\mathrm{i}}
 							$$
 						</div>
 
-						When we perform a simple substitution using Euler’s Formula,
+						When we invoke Euler's formula to perform a simple substitution,
 						<div class='fourierEquation' style="">
-							$$ e^{\mathrm{j} \varphi} = cos(\varphi) - sin(\varphi)i$$
+							$$ e^{-\varphi\mathrm{i} } = cos(\varphi) - sin(\varphi)i$$
 						</div>
 
 						We arrive at a formula which is considerably less esoteric, and imminently more understandable given our familiarity with sine and cosine. We now see that the DFT is somehow all about performing dot products on an input signal with sine and cosine waves which vary in frequency.

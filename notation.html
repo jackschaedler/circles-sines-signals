@@ -90,7 +90,7 @@
 				  			<td>
 							  	<div class='fourierEquation' style="font-size: 110%">
 									$$ \mathrm{DFT}[k] = \sum_{n=0}^{N-1} \mathrm{x}[n] \cdot
-									e^{\mathrm{j} \varphi} \\
+									e^{-\varphi\mathrm{i}} \\
 									where \quad \varphi = k \frac{n}{N} 2\pi
 									$$
 								</div>
@@ -126,7 +126,7 @@
 				<span class="inlineexample">x[n]</span> Is an arbitrary time-domain signal with a length of <span class="inlineexample">N</span> samples. It’s the <i>input</i> to the Discrete Fourier Transform. It's written as <span class="inlineexample">x</span> and not <span class="inlineexample">signal</span> or <span class="inlineexample">input</span> because mathematicians are enamored with abstraction and brevity.
 
 				<div style="font-size: 25px">
-					$$e^{\mathrm{j} \varphi}$$ 
+					$$e^{-\varphi\mathrm{i}}$$ 
 				</div>
 
 				<span class="inlineexample"><b>e<sup>jφ</sup></b></span> Is a compact way of describing a pair of sine and cosine waves. Beyond being succinct, this representation is exceptionally fascinating, and relates to Euler’s formula. More on <i>that</i> later.
