@@ -941,7 +941,9 @@ dpAreaPath
 }
 
 function update()
-{
+{  
+  document.getElementById("phaseShift").innerHTML = "Phase Shift: &nbsp; <b>" + (PHASE * 180 / Math.PI).toFixed(2) + "°</b>";
+
   updateSignals();
   doMultiply();
 }

@@ -940,6 +940,8 @@ dpAreaPath
 
 function update()
 {
+  document.getElementById("frequency").innerHTML = "Input Frequency: &nbsp; <b>" + (FREQUENCY * 1.0).toFixed(2) + "</b> Hz";
+
   updateSignals();
   doMultiply();
 }

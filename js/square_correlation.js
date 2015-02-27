@@ -255,6 +255,9 @@ function draw() {
   signalPhase = SIMPLE_CORRELATION_OFFSET;
   signalFreq = SIMPLE_CORRELATION_FREQ;
 
+  document.getElementById("frequency").innerHTML = "Frequency: &nbsp; <b>" + signalFreq + "</b> Hz";
+  document.getElementById("phaseShift").innerHTML = "Phase Shift: &nbsp; <b>" + (signalPhase * 180 / Math.PI).toFixed(2) + "°</b>";
+
   sig2Text.text(signalFreq * 2 + "Hz Sine")
 
   samples1.data(corrSigSampleData)

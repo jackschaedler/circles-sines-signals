@@ -135,13 +135,13 @@
 								<svg id="sigCorrelationInteractiveSinCos" class="svgWithText" width="500" height="250" style="margin-left: 140px; margin-right: 150px; padding: 0px;"></svg>
 								<script type="text/javascript" src="js/sine_orthogonality.js"></script><br/><br/>
 								<div class="controls" style="margin-top: 25px;">
-									<label for=simpleCorrelationOffsetTwo>Phase Shift</label><br/>
+									<label id="phaseShift" for=simpleCorrelationOffsetTwo>Phase Shift</label><br/>
 									<input type=range min=0 max=100 value=0 id=simpleCorrelationOffsetTwo step=1 oninput="updateSimpleCorrelationOffset2(value);"
 									onMouseDown="" onMouseUp="" style="width: 150px"><br/>
-									<label for=frequencyBasisOne>Upper Frequency</label><br/>
+									<label id="upperFreq" for=frequencyBasisOne>Upper Frequency</label><br/>
 									<input type=range min=1 max=6 value=1 id=frequencyBasisOne step=1 oninput="updateBasisFrequency1(value);"
 									onMouseDown="" onMouseUp="" style="width: 150px"><br/>
-									<label for=frequencyBasisTwo>Lower Frequency</label><br/>
+									<label id="lowerFreq" for=frequencyBasisTwo>Lower Frequency</label><br/>
 									<input type=range min=1 max=6 value=1 id=frequencyBasisTwo step=1 oninput="updateBasisFrequency2(value);"
 									onMouseDown="" onMouseUp="" style="width: 150px">
 								</div>

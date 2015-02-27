@@ -431,6 +431,10 @@ function draw() {
   inputFrequency = BASIS_FREQUENCY_1;
   basisFrequency = BASIS_FREQUENCY_2;
 
+  document.getElementById("phaseShift").innerHTML = "Phase Shift: &nbsp; <b>" + (signalPhase * 180 / Math.PI).toFixed(2) + "°</b>";
+  document.getElementById("upperFreq").innerHTML = "Upper Frequency: &nbsp; <b>" + inputFrequency + " Hz</b>";
+  document.getElementById("lowerFreq").innerHTML = "Lower Frequency: &nbsp; <b>" + basisFrequency + " Hz</b>";
+
 
   samples1.data(corrSigSampleData)
     .attr("cx", function(d, i) { return xRangeCorr(d); })
