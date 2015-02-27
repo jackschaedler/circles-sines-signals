@@ -98,7 +98,7 @@ var circle = vis.append('svg:circle')
   .attr('opacity', 0.5);
 
 var unitPoint = vis.append('svg:circle')
-  .attr('r', 3)
+  .attr('r', 3.5)
   .attr('stroke-width', 1.5)
   .attr('stroke', '#eee')
   .attr('fill', 'black')
@@ -171,13 +171,6 @@ var cosText = vis.append("text")
   .attr("y", yRangeCos(1.25))
   .text("Cosine");
 
-// vis.append("text")
-//   .attr("text-anchor", "begin")
-//   .attr("font-size", 12)
-//   .attr("x",  xRange(Math.cos(Math.PI / 4)) + 3)
-//   .attr("y", yRange(Math.sin(Math.PI / 4)) - 3)
-//   .text("𝛑/4");
-
 vis.append("text")
   .attr("text-anchor", "middle")
   .attr("font-size", 11)
@@ -185,12 +178,6 @@ vis.append("text")
   .attr("y", yRange(Math.sin(Math.PI / 2)) - 3)
   .text("𝛑/2");
 
-// vis.append("text")
-//   .attr("text-anchor", "end")
-//   .attr("font-size", 12)
-//   .attr("x",  xRange(Math.cos(3 * Math.PI / 4)) -3)
-//   .attr("y", yRange(Math.sin(3 * Math.PI / 4)) - 3)
-//   .text("3𝛑/4");
 
 vis.append("text")
   .attr("text-anchor", "end")
@@ -215,53 +202,20 @@ vis.append("text")
 
 var phase = Math.PI / 4;
 
-// var intersect1 = vis.append("line")
-//   .attr("x1", xRangeSine(Math.PI/2 - phase))
-//   .attr("y1", yRangeSine(1.25))
-//   .attr("x2", xRangeSine(Math.PI/2 - phase))
-//   .attr("y2", yRangeCos(-1.25))
-//   .attr("stroke-width", 1.0)
-//   .attr("stroke", "black")
-//   .style('opacity', 0.25);
-
-// var intersect2 = vis.append("line")
-//   .attr("x1", xRangeSine(Math.PI - phase))
-//   .attr("y1", yRangeSine(1.25))
-//   .attr("x2", xRangeSine(Math.PI - phase))
-//   .attr("y2", yRangeCos(-1.25))
-//   .attr("stroke-width", 1.0)
-//   .attr("stroke", "black")
-//   .style('opacity', 0.25);
-
-// var intersect3 = vis.append("line")
-//   .attr("x1", xRangeSine(3 * Math.PI / 2 - phase))
-//   .attr("y1", yRangeSine(1.25))
-//   .attr("x2", xRangeSine(3 * Math.PI / 2 - phase))
-//   .attr("y2", yRangeCos(-1.25))
-//   .attr("stroke-width", 1.0)
-//   .attr("stroke", "black")
-//   .style('opacity', 0.25);
-
-// var intersect4 = vis.append("line")
-//   .attr("x1", xRangeSine(2 * Math.PI - phase))
-//   .attr("y1", yRangeSine(1.25))
-//   .attr("x2", xRangeSine(2 * Math.PI - phase))
-//   .attr("y2", yRangeCos(-1.25))
-//   .attr("stroke-width", 1.0)
-//   .attr("stroke", "black")
-//   .style('opacity', 0.25);
-
-
 var sine = d3.svg.line()
   .x(function (d, i) { return xRangeSine(d)})
-  .y(function (d, i) { return yRangeSine(Math.sin(d + phase)); });
+  .y(function (d, i) { return yRangeSine(Math.sin(d)); });
 
 var cosFunc = d3.svg.line()
   .x(function (d, i) { return xRangeSine(d)})
-  .y(function (d, i) { return yRangeCos(Math.cos(d + phase)); });
+  .y(function (d, i) { return yRangeCos(Math.cos(d)); });
 
 var xComponent = xRange(Math.cos(phase));
 var yComponent = yRange(Math.sin(phase));
+
+
+sinePath.attr("d", sine(d3.range(0, 2 * Math.PI, 0.05)));
+cosPath.attr("d", cosFunc(d3.range(0, 2 * Math.PI, 0.05)));
 
 var phaseText = vis.append("text")
   .attr("text-anchor", "end")
@@ -276,14 +230,14 @@ var phaseTextRad = vis.append("text")
   .text("rad");
 
 var sinePoint = vis.append('svg:circle')
-  .attr('r', 3)
+  .attr('r', 3.5)
   .attr('stroke-width', 1.5)
   .attr('stroke', '#eee')
   .attr('fill', 'black')
   .attr('opacity', 0.9);
 
 var cosinePoint = vis.append('svg:circle')
-  .attr('r', 3)
+  .attr('r', 3.5)
   .attr('stroke-width', 1.5)
   .attr('stroke', '#eee')
   .attr('fill', 'black')
@@ -291,9 +245,6 @@ var cosinePoint = vis.append('svg:circle')
 
 function draw() {
   phase = GET_TRIG_PHASE() * 2 * Math.PI;
-
-  sinePath.attr("d", sine(d3.range(0, 2 * Math.PI, 2 * Math.PI / 50)));
-  cosPath.attr("d", cosFunc(d3.range(0, 2 * Math.PI, 2 * Math.PI / 50)));
 
   xComponent = xRange(Math.cos(phase));
   yComponent = yRange(Math.sin(phase));
@@ -323,29 +274,12 @@ function draw() {
     .attr("cy", yComponent);
 
   sinePoint
-    .attr("cx", xRangeSine(0))
+    .attr("cx", xRangeSine(phase))
     .attr("cy", yRangeSine(Math.sin(phase)));
 
   cosinePoint
-    .attr("cx", xRangeSine(0))
+    .attr("cx", xRangeSine(phase))
     .attr("cy", yRangeCos(Math.cos(phase)));
-
- // intersect1
- //  .attr("x1", xRangeSine(Math.PI/2 - phase))
- //  .attr("x2", xRangeSine(Math.PI/2 - phase));
-
- // intersect2
- //  .attr("x1", xRangeSine(Math.PI - phase))
- //  .attr("x2", xRangeSine(Math.PI - phase));
-
- // intersect3
- //  .attr("x1", xRangeSine(3 * Math.PI / 2 - phase))
- //  .attr("x2", xRangeSine(3 * Math.PI / 2 - phase));
-
- // intersect4
- //  .attr("x1", xRangeSine(2 * Math.PI - phase))
- //  .attr("x2", xRangeSine(2 * Math.PI - phase));
-
 
   TRIG_PHASE_INTERPOLATION += 0.1;
 }
