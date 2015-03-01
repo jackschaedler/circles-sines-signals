@@ -101,11 +101,11 @@
   				</table>
 
   				<p>
-  				The square wave in Figure 1 can be thought of as a <i>compound</i> waveform since it’s composed of three sinusoidal components. In fact, <i>any</i> waveform can be thought of as an aggregation of one or more sine waves. In this section we’ll utilize the dot product to construct a "detector" which is capable of measuring the presence or absence of a given sine wave within a compound waveform.
+  				The square wave in Figure 1 can be thought of as a <i>compound</i> waveform since it’s composed of three sinusoidal components. In fact, <i>any</i> waveform can be thought of as an aggregation of one or more sine waves. In this section we’ll utilize the dot product to construct a “detector” which is capable of measuring the presence or absence of a given sine wave within a compound waveform.
   				</p>
 
   				<p>
-  				The "detector" is actually quite simple. It works by computing the dot product of the compound waveform with a pure sinusoid. If the resulting dot product is non-zero (the two signals are correlated), we know that the sinusoid is present in the compound waveform. The magnitude of the dot product tells us <i>how much</i> of that sinusoid is present. We can derive the "formula" or "recipe" for the compound waveform by running it through the detector over and over again while adjusting the  frequency of the sine wave. Whenever the dot product is non-zero, we know that that frequency is present in the "recipe". A basic schematic for this detector is shown in <i>Figure 2</i>. Use the Frequency slider to adjust the target frequency of the detector.
+  				The “detector” is actually quite simple. It works by computing the dot product of the compound waveform with a pure sinusoid. If the resulting dot product is non-zero (the two signals are correlated), we know that the sinusoid is present in the compound waveform. The magnitude of the dot product tells us <i>how much</i> of that sinusoid is present. We can derive the “formula” or “recipe” for the compound waveform by running it through the detector over and over again while adjusting the  frequency of the sine wave. Whenever the dot product is non-zero, we know that that frequency is present in the “recipe”. A basic schematic for this detector is shown in <i>Figure 2</i>. Use the Frequency slider to adjust the target frequency of the detector.
   				</p>
 
   				<br/>
@@ -148,11 +148,11 @@
   				</table><br/>
 
   			<p>
-  			As you play with the frequency control, you’ll notice that the detector will register the presence of sinusoidal components at <span class="inlineexample">2</span>, <span class="inlineexample">6</span>, and <span class="inlineexample">10 hertz</span> (the 1<sup>st</sup>, 3<sup>rd</sup>, and 5<sup>th</sup> harmonics of <span class="inlineexample">2 hertz</span>). In addition, the magnitude of the dot product at these frequencies corresponds perfectly with the relative sizes of the phasors in <i>Figure 1</i>. It seems like our detector is working. Using this construction we’re able to specify the frequency and radius of the three phasors which generate our square wave using only the time-domain representation of our square wave. In actuality, we’ve just performed a very simple Fourier Transform!
+  			As you play with the frequency control, you’ll notice that the detector will register the presence of sinusoidal components at <span class="inlineexample">2</span>, <span class="inlineexample">6</span>, and <span class="inlineexample">10 hertz</span> (the 1<sup>st</sup>, 3<sup>rd</sup>, and 5<sup>th</sup> harmonics of <span class="inlineexample">2 hertz</span>). In addition, the magnitude of the dot product at these frequencies corresponds perfectly with the relative sizes of the phasors in <i>Figure 1</i>. It seems like our detector is working! Using this construction we’re able to specify the frequency and radius of the three phasors which generate our square wave using only the time-domain representation of our square wave. In actuality, we’ve just performed a very simple Fourier Transform.
   			</p>
 
   			<p>
-  			Unfortunately, our detector is flawed. you’ll notice that the detector will completely miss frequency components if the square wave is phase shifted 90 degrees in relation to the sinusoid (adjust the phase slider until the dot product is zero for all target frequencies). Our detector <i>should</i> be robust enough to handle inputs with arbitrary phase shifts. We’ll address this problem in the next section, and fix our detector through the clever use of sine and cosine.
+  			Unfortunately, our detector is flawed. you’ll notice that the detector will completely miss frequency components if the square wave is phase shifted 90 degrees in relation to the sinusoid. Our detector <i>should</i> be robust enough to handle inputs with arbitrary phase shifts. We’ll address this problem in the next section, and fix our detector through the clever use of sine and cosine.
   			</p> <br/>
   			</td>
 

@@ -154,11 +154,41 @@ var ZEROPADDING = (function() {
     vis.append("text")
       .attr("text-anchor", "middle")
       .attr("x", xRange(signalLength / 2) + 5)
-      .attr("y", yRange(-0.8))
+      .attr("y", yRange(-1.0))
       .style("font-size", "11px")
       .style("font-weight", "normal")
       .style("opacity", 0.7)
       .text("Nyquist Limit");
+
+
+    var startPix = xRange(0);
+    var endPix = xRange(signalLength);
+    var inc = (endPix - startPix) / 8;
+    var freq = 0;
+
+    for (var i = startPix; i < endPix; i += inc)
+    {
+      vis.append("svg:line")
+        .attr("x1", i)
+        .attr("y1", yRange(0))
+        .attr("x2", i)
+        .attr("y2", yRange(0) + 4)
+        .attr("stroke-width", 1)
+        .attr("stroke", "grey")
+        .style("opacity", 0.8)
+        ;
+
+      vis.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", i)
+        .attr("y", yRange(0) + 15)
+        .style("font-size", "10px")
+        .attr("stroke", "none")
+        .attr("fill", "#666")
+        .text(freq + "Hz");
+
+      freq += 1;
+    }
 
     ///////////////////////////////////////
 
@@ -262,12 +292,12 @@ var ZEROPADDING = (function() {
 
   updateMagnitudes();
 
-  vis.append("text")
-    .attr("text-anchor", "end")
-    .attr("x", plotWidth)
-    .attr("y", yRange(-0.5))
-    .style("font-size", "11px")
-    .text("Frequency (Hz)");
+  // vis.append("text")
+  //   .attr("text-anchor", "end")
+  //   .attr("x", plotWidth)
+  //   .attr("y", yRange(-0.5))
+  //   .style("font-size", "11px")
+  //   .text("Frequency (Hz)");
 
   vis.append("text")
     .attr("text-anchor", "begin")
