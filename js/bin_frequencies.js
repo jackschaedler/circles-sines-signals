@@ -1,7 +1,6 @@
 var BIN_FREQUENCIES = (function() {
 
-  var signalLength = N;
-
+    var signalLength = N;
 
     var canvasWidth = 700;
     var canvasHeight = 125;
@@ -94,16 +93,6 @@ var BIN_FREQUENCIES = (function() {
     .style("font-size", "11px")
     .text("Frequency (Hz)");
 
-  var NText = vis.append("text")
-    .attr("text-anchor", "begin")
-    .attr("x", xRange(0))
-    .attr("y", yRange(3.0))
-    .style("font-size", "12px")
-    .style("font-weight", "bold")
-    .attr("stroke", "none")
-    .attr("fill", "#333")
-    .text("N = " + signalLength);
-
 
 function update()
 {
@@ -111,7 +100,7 @@ function update()
   {
     signalLength = N;
 
-    NText.text("N = " + signalLength);
+    document.getElementById("inputSamples").innerHTML = "N = <b>" + signalLength + "</b><br/><sub>(Number of Input Samples)</sub>";
 
     for (var i = 0; i < freqPoints.length; i++)
     {
