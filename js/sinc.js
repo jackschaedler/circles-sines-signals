@@ -25,7 +25,7 @@ var data = d3.range(-8 * Math.PI, 8 * Math.PI, 0.01);
 
 var signal = d3.svg.line()
   .x(function (d, i) { return xRangeTime(d) + 1; })
-  .y(function (d, i) { return yRangeTime(Math.sin(d) / (d + 0.00001))} );
+  .y(function (d, i) { return yRangeTime(Math.sin(d) / (d + 0.00000001))} );
 
 
 var xAxis = d3.svg.axis()
@@ -44,7 +44,7 @@ var path = vis.append('svg:path')
   .attr("stroke-width", 2.0)
   .attr("stroke", "steelblue")
   .attr("fill", "none")
-  .attr("opacity", 1.0)
+  .attr("opacity", 0.7)
   .attr("d", signal(data));
 
 }) ();

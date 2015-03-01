@@ -3,6 +3,8 @@
  		<title>Circles Sines and Signals - Frequency Interpretation</title>
 	  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	  	<script type="text/javascript" src="third_party/d3/d3.min.js"></script>
+	  	<script type="text/javascript" src="third_party/jsfft/lib/complex_array.js"></script>
+	  	<script type="text/javascript" src="third_party/jsfft/lib/fft.js"></script>
 
 		<script type="text/x-mathjax-config">
 			MathJax.Hub.Config({
@@ -73,7 +75,7 @@
 	 	</table>
   	</div>
 
-	<div class="littleheader"> FREQUENCY-BASED INTERPRETATION
+	<div class="littleheader"> FREQUENCY RESOLUTION OF THE DFT
 		<div class="subheader" style="font-size: 14px"> FREQUENCY LAYOUT OF THE DFT BINS </div>
 	</div>
 
@@ -132,76 +134,114 @@
   				</table>
 
   				<p>
-  				Notice that the bins are always evenly distributed across the frequency spectrum from <span class="inlineexample">0Hz</span> up to the sampling rate. In addition, the bins are always harmonically related. In other words, all bin frequencies are multiples of the frequency of the second bin (the bin right after the DC bin). You can think of this frequency as the <i>fundamental</i> frequency of the DFT, and calculate it as <span style="font-family: lato; color: #333; font-weight: bold"> (N / sampling rate)</span> hertz.
+  				Notice that the bins are always evenly distributed across the frequency spectrum from <span class="inlineexample">0Hz</span> up to the sampling rate. Notice too, that the bins are always harmonically related. In other words, all bin frequencies are multiples of the second bin frequency (the bin right after the DC bin). You can think of this frequency as the <i>fundamental</i> frequency of the DFT, and calculate it as <span style="font-family: lato; color: #333; font-weight: bold"> (sampling rate / N)</span> hertz.
   				</p>
+  			</td>
+			<td class="figureExplanation" style="">
+			</td>
+		</tr>
+	</table><br/>
 
+	<div class="littleheader"> INCREASING THE FREQUENCY RESOLUTION
+		<div class="subheader" style="font-size: 14px"> COLLECTING MORE SAMPLES </div>
+	</div>
 
-				<div class="littleheader" style="margin-left: 0px"> FREQUENCY AND THE DFT
-					<div class="subheader" style="font-size: 14px"> THE CURIOUS CASE OF LEAKAGE </div>
-				</div>
+	<script>
+		var FFT_SIZE = 8;
+		function updateSize(value) {
+			if (value == 1)
+			{
+				FFT_SIZE = 8;
+			}
+			else if (value == 2)
+			{
+				FFT_SIZE = 16;
+			}
+			else if (value == 3)
+			{
+				FFT_SIZE = 32;
+			}
+			else if (value == 4)
+			{
+				FFT_SIZE = 64;
+			}
+			else if (value == 5)
+			{
+				FFT_SIZE = 128;
+			}
+		}
+	</script>
+
+  	<table class="figureTable">
+		<tr>
+			<td style="vertical-align: top;">
+				<div class="text" style="margin-left: 0px">
 
 				<p>
-				Up until now, we’ve seen contrived signals which produce "clean" DFT results. As it turns out, most signals that you’ll process using the DFT will produce quite messy results. If some frequency component of the input signal does not <i>perfectly</i> match up with an available bin frequency, the energy related to that frequency component will "spill" out into all of the other bins. This is a phenomenon known as <i>frequency leakage</i>.
+				As the number of input samples increases, we can see that the <i>resolution</i> of the DFT output will also increase. If you need a higher resolution in the DFT output, you simply provide a longer input signal to the DFT. 
 				</p>
 
 				<p>
-				<i>Figure 2</i> Allows you to see the effect of altering the frequency of the input signal. The slider allows you to change the input frequency smoothly from <span class="inlineexample">1Hz</span> to <span class="inlineexample">3Hz</span>. Notice that when the frequency of the input signal perfectly matches one of the bin frequencies, there is no leakage. As soon as the frequency varies <i>all</i> of the other bins will assume a non-zero magnitude.
+				We often choose a DFT resolution which is high enough to allow us to distinguish between sinusoidal components which are close to one another in frequency.
+				For example, let’s suppose that we’re trying to analyze a signal which is composed of two sinusoids. One of the sinusoids has a frequency of <span class="inlineexample">5 Hz</span> and the other has a frequency of <span class="inlineexample">6 Hz</span>. <i>Figure 2</i> shows the composition of this compound signal. The <span class="inlineexample">5 Hz</span> phasor is shown in blue, and the <span class="inlineexample">6 Hz</span> phasor is shown in orange.
 				</p>
-
-
-				<script>
-					var PHASE = 0.0;
-					var FREQUENCY = 1;
-					function updatePhase(value) {
-						PHASE = Math.PI * 2 * (value / 100);
-					}
-					function updateFreq(value) {
-						FREQUENCY = value;
-					}
-				</script>
 
 				<br/>
-				<table>
+				<table style="">
 						<tr class="figureCaption">
 							<td width="100%">
-							<b>Figure 2.</b>&nbsp; DFT Response to Different Input Frequencies<br/><br/>
+							<b>Figure 2.</b>&nbsp; A Compound Waveform Composed of Two Sinusoids<br/>At 5 Hz and 6 Hz
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<div id="animatedDftWrapper" class="animation" style="width:750px; margin-left: auto; margin-right: auto; position: relative; ">
+								<svg id="phasorSumSquare" class="svgWithText" width="700" height="220" style="padding: 20px; margin-left: 0px;"></svg>
+								<script type="text/javascript" src="js/res_phasors.js"></script>
+  							</td>
+						</tr>
+  				</table>
 
-									<table>
-										<tr style="">
-											<td>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div id="fourierEquations" style="width: 50%; margin-right: 0px; margin-left: auto; display: inline;">
-												</div>
-											</td>
-										</tr>
-									</table>
+  				<p>
+  				Since this signal is composed of two sinusoids, we would expect to see two peaks in the DFT output. One of these peaks should appear at <span class="inlineexample">5 Hz</span>, and one at <span class="inlineexample">6 Hz</span>. Since both of the circles have the same size (magnitude), we would also expect the two peaks to have the same height.
+  				</p>
+  				<p>
+  				In order to properly identify these two individual peaks, we must increase the frequency resolution of the DFT output. This is accomplished by increasing the number of input samples which are fed to the DFT. <i> Figure 3</i> allows you to vary the length of the input signal in order to see the effect on the DFT output. The two “expected” peaks are shown in red. Drag the slider at the bottom of <i>Figure 3</i> to increase or decrease the number of samples used as input to the DFT. 
+  				</p>
 
-									<br/><br/>
-									<div class="controls" style="margin-top: 15px;">
-										<label id="frequency" for=frequencyBasisOne>Input Frequency</label><br/>
-										<input type=range min=1 max=3 value=1 id=frequencyBasisOne step=0.01 oninput="updateFreq(value);"
-										onMouseDown="" onMouseUp="" style="width: 150px"><br/>
-									</div>
-									<svg id="dftDeeper" class="svgWithText" width="705" height="380" style="margin-top:30px; padding-left: 10px; padding-bottom: 10px;"></svg>
-									<script type="text/javascript" src="js/dft_deeper_2.js"></script>
-									<div class="controls" style="margin-top: 25px;">
+				<br/><br/>
+				<table>
+						<tr class="figureCaption">
+							<td width="100%">
+							<b>Figure 3.</b>&nbsp; Increasing DFT Resolution by Collecting More Input Samples
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id="wrapper" class="animation" style="position:relative">
+									<svg id="dftresolution" class="svgWithText" width="740" height="400" style="margin-left: 0px; margin-right: 0px; padding-top: 0px; padding-left: 20px;"></svg>
+									<script type="text/javascript" src="js/dft_resolution1.js"></script>
+
+									<div class="controls" style="margin-top: 5px">
+											<label for=size>Input Samples</label><br/>
+											<input type=range min=1 max=5 value=1 id=size step=1 oninput="updateSize(value);"
+											onMouseDown="" onMouseUp="" style="width: 150px"><br/>
 									</div>
 								</div>
   							</td>
 						</tr>
   				</table>
+  				<br/>
+  				<p>
+  				There’s a very fundamental trade-off being demonstrated in <i>Figure 3</i>. In order to achieve high-resolution in the frequency domain, we must collect <i>many</i> samples in the time domain. The resolution of our DFT output is directly proportional to the length of the input signal we feed it.
+  				</p>
+
+  				<p>
+  				This idea has big implications if we’re interested in performing high-resolution frequency analysis in real-time. The more input signals we need, the longer we have to wait for them. The longer we wait, the more latency we introduce into our analysis process. High resolution in the frequency domain implies a decrease in our time-domain resolution.
+  				</p>
+  				<br/>
+
   			</td>
 			<td class="figureExplanation" style="">
-<!-- 				<b>1.</b>
-					It's also possible to sample a discrete signal. This process is called re-sampling. Discrete signals may also be synthesized or constructed, which is what your digital synthesizer is doing. Just rememebr that a discrete signal is fundamentally just a list of numbers. <br/><br/> -->
 			</td>
 		</tr>
 	</table><br/>

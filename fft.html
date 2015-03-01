@@ -72,7 +72,7 @@
 	 	</table>
   	</div>
 
-	<div class="littleheader"> USING THE <i>FAST</i> FOURIER TRANSFORM
+	<div class="littleheader"> USING FFT SOFTWARE LIBRARIES
 		<div class="subheader" style="font-size: 14px"> OUTPUT FORMATS AND SCALING FACTORS </div>
 	</div>
 
@@ -84,17 +84,21 @@
 					
 					<p>
 					The <i>Fast</i> Fourier Transform is literally just a <i>faster</i> version of the Discrete Fourier Transform. In its naive form, the Discrete Fourier Transform is quite costly to compute, especially if you are interested in computing it in real-time. The FFT is an algorithmic optimization of the DFT which makes fast, real-time computation of the DFT possible on consumer grade hardware.
-					I don't want to go into the details of the FFT, but I feel obliged to share some quirks and gotchas you might encounter when using FFT libraries to develop software.
+					I don’t want to go into the details of the FFT, but I feel obliged to share some quirks and gotchas you might encounter when using FFT libraries to develop software.
 					</p>
 
 					<div style="color: #999">
-					<span class="icon-attention-1 bigicon" style="color: #999; font-size: 15px"></span> This rest of this section is esoteric and technical and there's no need to read any further unless you're interested in writing software which uses the DFT/FFT.
+					<span class="icon-attention-1 bigicon" style="color: #999; font-size: 15px"></span> This rest of this section is esoteric and technical and there’s no need to read any further unless you’re interested in writing software which uses the DFT/FFT.
 					</div>
 					<br/>
 
 					<p>
-					The first eccentricity you’ll notice is that not all libraries output their data in the same format. All good libraries will output a set of complex numbers, but the layout and ordering of these complex numbers may differ depending upon the library that you use.<sup>1</sup> My suggestion is to familiarize yourself with the open-source package Octave, and use Octave’s implementation of the FFT as your ground-truth when comparing different FFT implementations.<sup>2</sup> You can compute the FFT of an 8-sample sine wave in Octave using the following commands,
+					When you start developing software which incorporates an FFT library, the first eccentricity you’ll probably notice is that not all libraries output their data in the same format. All good libraries will give you a set of complex numbers, but the layout and ordering of these complex numbers may differ depending upon the library that you use.<sup>1</sup> My suggestion is to familiarize yourself with the open-source package Octave, and use Octave’s implementation of the FFT as your ground-truth when comparing different FFT implementations.<sup>2</sup>
 					</p>
+
+					You can compute the FFT of an 8-sample sine wave in Octave using the following commands,
+					<br/><br/>
+					
 
 					<div style="font-weight: bold; font-family: lato; color: #333; padding-left: 20px; text-align: left">
 
@@ -130,7 +134,7 @@
 					</div>
 
 					<br/>
-					Since the bins after the Nyquist bin are complex-conjugate mirrors of the bins before the Nyquist bin, some libraries will omit these bins from the output altogether. For example you might receive your results in a format like this.
+					Since the bins after the Nyquist bin are complex-conjugate mirrors of the bins before the Nyquist bin, some libraries will omit these bins from the output altogether. For example, you might receive your results in a format like this,
 					<br/><br/>
 
 					<div style="font-weight: bold; font-family: lato; color: #333; padding-left: 20px; text-align: left">
@@ -138,12 +142,12 @@
 					</div>
 
 					<br/><br/>
-					<a href="http://linux.iingen.unam.mx/pub/Documentacion/Cluster_TONATIUH/Compiladores/Fortran_y_C_intel_v12/ipp/ipp_manual/IPPS/ipps_ch7/ch7_packed_formats.htm">This page</a> gives a pretty nice overview of the different formats you might encounter when trying to interpret the output of your FFT library. Note too, that the output layout may vary depending upon platform! Good Luck!
+					<a href="http://linux.iingen.unam.mx/pub/Documentacion/Cluster_TONATIUH/Compiladores/Fortran_y_C_intel_v12/ipp/ipp_manual/IPPS/ipps_ch7/ch7_packed_formats.htm">This page</a> gives a pretty nice overview of the different formats you might encounter when trying to interpret the output of your FFT library. Note too, that the output layout may vary depending upon platform. Good Luck!
 
 					<br/><br/>
 					<p>
 					The second eccentricity you’ll encounter is that different FFT libraries apply the <i>scaling factor</i> at different points in the FFT⇄IFFT roundtrip. The scaling factor may be applied during the forward transform, during the inverse transform, or partly in the forward transform and partly in the inverse transform.
-					The <i>scaling factor</i> is used to ensure that when performing an FFT and IFFT (Inverse Fast Fourier Transform) the IFFT will output original signal. For example, try the following in Octave,<sup>4</sup>
+					The <i>scaling factor</i> is used to ensure that when performing an FFT and IFFT (Inverse Fast Fourier Transform) the IFFT will produce the original signal. For example, try the following in Octave,<sup>4</sup>
 					</p>
 
 					<div style="font-weight: bold; font-family: lato; color: #333; padding-left: 20px; text-align: left">
@@ -194,16 +198,16 @@
 					<br/><br/>
 
 
-					<b>Too Lazy, Didn't Read</b><br/>
+					<b>Long Story Short</b><br/>
 					Read the documentation of your library before becoming frustrated and confused by its output. If your output doesn't look like you would expect it to, you should check the <i>output layout</i> and understand how the <i>scaling factor</i> is applied in your library of choice. This stuff is <i>not</i> standardized.
 	  			</td>
 				<td class="figureExplanation" style="">
 					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 					<b>1.</b>
-						Some libraries will only output the bin magnitudes. This sort of output is fine if you’re only interested in creating simple visualizers, but it won't be appropriate if you want to perform any kind of special signal processing or transformations on the signal data.<br/><br/>
+						Some libraries will only output the bin magnitudes. This sort of output is fine if you’re only interested in creating simple visualizers, but it won't be appropriate if you want to perform any kind of serious signal processing or transformations on the signal data.<br/><br/>
 					<b>2.</b>
 						Octave is something like an open-source version of MATLAB.
-						If you’re on a Mac, installing Octave is as easy as installing homebrew and then typing '<b>brew install octave</b>' into your terminal window. <br/><br/>
+						If you’re on a Mac, installing Octave is as easy as installing <a href="http://brew.sh">homebrew</a> and then typing '<b>brew install octave</b>' into your terminal window. <br/><br/>
 					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 					<b>3.</b>
 						You can convince yourself of this fact by revisiting the sine-waves which are used to compute the imaginary component of the DC and Nyquist bins in our <a href="dft_deeper.html">walk-through of the DFT</a>. Note that all of the samples for these sines are zero-valued.<br/><br/

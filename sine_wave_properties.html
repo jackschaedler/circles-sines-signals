@@ -99,12 +99,12 @@
 				<div class="text" style="margin-left: 0px">
 
 				<p>
-				Discussing the Discrete Fourier Transform in terms of physical metaphors like "detectors" and "bins", or even statistical notions like correlation is a bit disingenuous. In some sense, this style of discourse takes a set of fascinating mathematical relationships and reduces them to a set of constructions which are  amenable to thought-by-analogy but are far less mathematically profound.<sup>1</sup> It’s better to recognize that <i>sine waves</i> possess a number of (sometimes stunning) properties which make them particularly well suited for use as the <i>bases</i> of a <i>coordinate system.</i>
+				Discussing the Discrete Fourier Transform in terms of physical metaphors like “detectors” and “bins”, or even statistical notions like correlation is a bit disingenuous. In some sense, this style of discourse takes a bunch of fascinating mathematical relationships and reduces them to a set of constructions which are  amenable to thought-by-analogy but are far less mathematically profound.<sup>1</sup> It’s probably better to recognize that <i>sine waves</i> possess a number of (sometimes stunning) properties which make them particularly well suited for use as the <i>bases</i> of a <i>coordinate system.</i>
 				I don’t want to thoroughly investigate coordinate systems and bases in this primer, but I’d like to provide you with some related visualizations which you generally will not find in the relevant literature.
 				</p>
 
 				<p>
-				<i>Orthogonality</i> is an important property for the basis vectors of a coordinate system. Two vectors (signals) are orthogonal to one another if their dot product is zero. Geometrically, we’d say that the two vectors are pointing at right angles to one another when their dot product is zero. The <i>natural</i> bases - the default bases for the Cartesian system - are orthogonal to one another. If we have a 3-dimensional Cartesian system, the three natural basis vectors are,
+				<i>Orthogonality</i> is an important property for the basis vectors of a coordinate system. Two vectors (signals) are orthogonal to one another if their dot product is zero. Geometrically, when two vectors are orthogonal, they point at right angles to one another. The <i>natural</i> bases - the default bases for the Cartesian system - are orthogonal to one another. If we have a 3-Dimensional Cartesian system, the three natural basis vectors are,
 				</p>
 
 				<div style="font-family: lato; color: #333; padding-left: 20px; text-align: center">
@@ -115,10 +115,10 @@
 				</b>
 				</div><br/>
 
-				It's easy to show that these vectors are orthogonal to one another. We can prove that by writing out all of the dot products, or simply by noticing that the dot product between any of the two vectors <i>must</i> be zero since every <span class="inlineexample">1</span> will be multiplied by a <span class="inlineexample">0</span>.
+				It’s easy to show that these vectors are orthogonal to one another. We can prove that by writing out all of the dot products, or simply by noticing that the dot product between any of the two vectors <i>must</i> be zero since every <span class="inlineexample">1</span> will be multiplied by a <span class="inlineexample">0</span>.
 
 				<p>
-				Rather surprisingly, any two <i>sine waves</i> whose frequencies are multiples of one another are also orthogonal, <i>regardless of the phase</i> of each sine. This statement is a bit harder to mentally validate. You can take it on faith, or <i>see</i> a few examples to convince yourself that this is true.
+				A bit more surprisingly, it can be shown that any two <i>sine waves</i> whose frequencies are multiples of one another are also orthogonal, <i>regardless of their phases</i>. This statement is a bit harder to mentally validate. You can take it on faith, or see a few examples before digging into a proof.
 				<i>Figure 1</i> allows you to compute the dot product between two sine and cosine pairs at different frequencies. Notice that the dot product is always zero unless the two waves are at the exact same frequency. 
 				</p>
 
@@ -159,7 +159,7 @@
 
 
 		<div class="littleheader"> SUMMING SINE WAVES
-			<div class="subheader" style="font-size: 14px"> A CURIOUS PROPERTY </div>
+			<div class="subheader" style="font-size: 14px"> ANOTHER CURIOUS PROPERTY </div>
 		</div>
 
 	  	<table class="figureTable">
@@ -172,7 +172,7 @@
 					</p>
 
 					<p>
-					<i>Figure 2</i> demonstrates the summing of two sine-waves at equal frequency. You can use the sliders to adjust the phase and amplitude of the second sine wave. Notice that the frequency of the summation is always equal to the frequency of the two input sines.
+					<i>Figure 2</i> demonstrates the summing of two sine-waves with equal frequency. You can use the sliders to adjust the phase and amplitude of the second sine wave. Notice that the frequency of the summation is always equal to the frequency of the two input sines.
 					</p>
 
 					<table>
@@ -214,8 +214,8 @@
 	  				<br/>
 
 	  				<p>
-					Sine waves are utterly fascinating. Their peculiar nature makes them particularly suitable for acting as the "atomic" components for composing signals.
-					</p><br/>
+					Sine waves are utterly fascinating. Their peculiar nature makes them particularly well suited to act as the “atomic” components of complex signals. I'd encourage you to play around with sinusoids and the the trigonometric identities. Successful signal processing practice requires being somewhat intellectually intimate with sine waves. You'll constantly use them as test signals and ground-truths when writing and reasoning about signal processing algorithms.
+					</p>
 	  			</td>
 				<td class="figureExplanation" style="">
 				</td>

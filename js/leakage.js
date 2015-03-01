@@ -33,7 +33,7 @@ vis.append('svg:g')
   .style("opacity", 0.35)
   .call(xAxisTime);
 
-var currentFrequency = FREQUENCY;
+var currentFrequency = LEAK_FREQUENCY;
 
 var signal = d3.svg.line()
   .x(function (d, i) { return xRangeTime(d)})
@@ -168,12 +168,16 @@ var waitCycles = 0;
 
 function updateFrequency()
 {
-  if (currentFrequency === FREQUENCY)
+  document.getElementById("leakFreq").innerHTML = "Input Frequency: &nbsp; <b>" + (currentFrequency * 1.0).toFixed(2) + " Hz</b>";
+
+  if (currentFrequency === LEAK_FREQUENCY)
   {
     return false;
   }
 
-  currentFrequency = FREQUENCY;
+  currentFrequency = LEAK_FREQUENCY;
+
+  document.getElementById("leakFreq").innerHTML = "Input Frequency: &nbsp; <b>" + (currentFrequency * 1.0).toFixed(2) + " Hz</b>";
 
   points
     .data(frequencies)

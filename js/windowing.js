@@ -398,6 +398,9 @@ var waitCycles = 0;
 
 function updateFrequency()
 {
+
+  document.getElementById("leakFreq2").innerHTML = "Input Frequency: &nbsp; <b>" + (currentFrequency * 1.0).toFixed(2) + " Hz</b>";
+
   if (currentFrequency === DIS_FREQUENCY)
   {
     return false;

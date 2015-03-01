@@ -74,14 +74,93 @@
   	</div>
 
 
+  	<table class="figureTable">
+		<tr>
+			<td style="vertical-align: top;">
+				<div class="text" style="margin-left: 0px">
+
+
+				<div class="littleheader" style="margin-left: 0px"> WHEN THE INPUT DOESN’T “FIT”
+					<div class="subheader" style="font-size: 14px"> THE PHENOMENON OF LEAKAGE </div>
+				</div>
+
+				<p>
+				Up until now, I’ve tried to contrive signals which will produce clean DFT output. Unfortunately, almost every “real-world” signal that you’ll process using the DFT will produce somewhat messy results. You probably noticed in the last section that signals which were composed of only one sinusoid were capable of producing spectra with many strange peaks and valleys when we started zero-padding them.
+				</p>
+
+				<p>
+				As it turns out, when any frequency component of the input signal does not <i>perfectly</i> match up with an available bin frequency, the energy related to that frequency component will "spill" out into <i>all</i> of the other bins. This is a phenomenon known as <i>spectral leakage</i>.
+				</p>
+
+				<p>
+				<i>Figure 1</i> Allows you to see the effect of spectral leakage by altering the frequency of the input signal. The slider at the top of the figure allows you to change the input frequency smoothly from <span class="inlineexample">1Hz</span> to <span class="inlineexample">3Hz</span>. Notice that when the frequency of the input signal perfectly matches one of the available bin frequencies, there is no leakage. As soon as the frequency varies even slightly from a bin frequency, <i>all</i> of the other bins will assume a non-zero magnitude.
+				</p>
+
+
+				<script>
+					var PHASE = 0.0;
+					var FREQUENCY = 1;
+					function updatePhase(value) {
+						PHASE = Math.PI * 2 * (value / 100);
+					}
+					function updateFreq(value) {
+						FREQUENCY = value;
+					}
+				</script>
+
+				<br/>
+				<table>
+						<tr class="figureCaption">
+							<td width="100%">
+							<b>Figure 1.</b>&nbsp; DFT Response to Different Input Frequencies<br/><br/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id="animatedDftWrapper" class="animation" style="width:750px; margin-left: auto; margin-right: auto; position: relative; ">
+
+									<table>
+										<tr style="">
+											<td>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div id="fourierEquations" style="width: 50%; margin-right: 0px; margin-left: auto; display: inline;">
+												</div>
+											</td>
+										</tr>
+									</table>
+
+									<br/><br/>
+									<div class="controls" style="margin-top: 15px;">
+										<label id="frequency" for=frequencyBasisOne>Input Frequency</label><br/>
+										<input type=range min=1 max=3 value=1 id=frequencyBasisOne step=0.01 oninput="updateFreq(value);"
+										onMouseDown="" onMouseUp="" style="width: 150px"><br/>
+									</div>
+									<svg id="dftDeeper" class="svgWithText" width="705" height="380" style="margin-top:30px; padding-left: 10px; padding-bottom: 10px;"></svg>
+									<script type="text/javascript" src="js/dft_deeper_2.js"></script>
+									<div class="controls" style="margin-top: 25px;">
+									</div>
+								</div>
+  							</td>
+						</tr>
+  				</table>
+  			</td>
+			<td class="figureExplanation" style="">
+			</td>
+		</tr>
+	</table><br/>
+
+
 	<div class="littleheader"> LEAKAGE
 		<div class="subheader" style="font-size: 14px"> SAMPLING A CONTINUOUS SPECTRUM </div>
 	</div>
 
 	<script>
-		var FREQUENCY = 6;
+		var LEAK_FREQUENCY = 6;
 		function updateFrequency(value) {
-			FREQUENCY = value;
+			LEAK_FREQUENCY = value;
 		}
 	</script>
 
@@ -89,22 +168,33 @@
 		<tr>
 			<td style="vertical-align: top;">
 				<div class="text" style="margin-left: 0px">
-
 					<p>
-					In the last section we saw the phenomenon of <i>leakage</i> which occurred when some frequency components of our input signal did not align perfectly with the available bin frequencies. When this happens, <i>every</i> bin will assume a non-zero magnitude. This behavior can be quite confusing, and in this section we’ll try to think a bit more rigorously about the root cause of leakage.
-					</p>
-					<p>
-					The <i>continuous</i> frequency spectrum of a sampled sine wave is approximated by the blue curve shown in <i>Figure 1</i>. The Discrete Fourier Transform actually gives us a <i>sampled</i> version of this continuous spectrum. Each sample of the DFT is plotted as a blue square on the continuous curve. When the input signal has an integral number of periods, all of the DFT samples will lie  at either zero magnitude or the tip of the continuous curve’s main "bump". As soon as the frequency of the input signal drifts away from a given bin frequency, we see the other bins assume a non-zero magnitude due to the shape of the continuous curve.   
-					</p>
-					<p>
-					You’ll notice that the effect of leakage is most pronounced when the frequency of the input signal lies directly in-between two bin frequencies. The effect is less pronounced when the input signal has a frequency which is very close to a bin frequency.
+					To understand leakage, we must appreciate that the Discrete Fourier Transform actually produces a <i>sampled</i> version of a Continuous Fourier Transform. The continuous frequency spectrum of a sampled sine wave is approximated by the <i>Sinc</i> function shown in <i>Figure 2</i>.<sup>1</sup>
 					</p>
 
+	  				<br/><br/>
+	  				<table>
+							<tr class="figureCaption">
+								<td width="100%">
+								<b>Figure 2.</b>&nbsp; The <i>Sinc</i> Function.<br/> <sub>The DFT of a Sampled Sine Wave is Approximated by the Sinc Function.</sub>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<svg id="sinc" class="svgWithText" width="700" height="200" style="padding: 5px; margin-left: 0px"></svg>
+									<script type="text/javascript" src="js/sinc.js"></script>
+	  							</td>
+							</tr>
+	  				</table>
+
+	  				<p>
+					The Discrete Fourier Transform actually gives us a <i>sampled</i> version of this continuous spectrum. In <i>Figure 3</i>, each sample of the DFT output is plotted as a blue square on this continuous curve. When the input signal has an integral number of periods, all of the DFT samples will lie at either zero magnitude or on the very tip of the continuous curve’s main “bump”. As soon as the frequency of the input signal drifts away from an available bin frequency, the other bins assume a non-zero magnitude due to the shape of the continuous curve.   
+					</p>
 				<br/>
 				<table>
 						<tr class="figureCaption">
 							<td width="100%">
-							<b>Figure 1.</b>&nbsp; Viewing Leakage as the Sampling of a Continuous Spectrum
+							<b>Figure 3.</b>&nbsp; Viewing Leakage as the Sampling of a Continuous Spectrum
 							</td>
 						</tr>
 						<tr>
@@ -112,15 +202,21 @@
 								<svg id="sinc2" class="svgWithText" width="610" height="390" style="margin-left: 60px; margin-right: 75px"></svg>
 								<script type="text/javascript" src="js/leakage.js"></script>
 									<div class="controls" style="margin-top: 5px">
-										<label for=frequency>Frequency</label><br/>
+										<label id="leakFreq" for=frequency>Frequency</label><br/>
 										<input type=range min=5 max=7 value=6 id=frequency step=0.001 oninput="updateFrequency(value);"
 										onMouseDown="" onMouseUp="" style="width: 150px"><br/>
 									</div>
   							</td>
 						</tr>
   				</table>
-  						</td>
+
+  				<p>
+				Now that we understand the sampled nature of the DFT, the results we saw when zero-padding our signal in the <a href="zeropadding.html">previous section</a> might make a bit more sense.   
+				</p>
+  			</td>
 			<td class="figureExplanation" style="">
+				<b>1.</b>
+					The continuous curve has this distinct shape because we’re actually sort of misusing the Fourier Transform. The Fourier Transform assumes that the input signal is periodic and infinitely long. When we feed a finite-length input signal into the Fourier Transform we are actually <i>implicitly</i> multiplying the input signal with a <i>rectangular</i> window (A rectangular window is just a signal with ones for each its samples) The spectrum of a rectangular window is approximated by the so-called <i>sinc</i> function which is defined as, <span class="inlineexample">sin(x) / x</span> (shown in Figure 2). When we multiply our input signal with this rectangular window, the DFT output will be affected. Specifically, the output spectra of our signal will be <i>convolved</i> with the spectra of a rectangular window. When we convolve the two signals we are left with this characteristic sinc spectrum. To <i>really</i> understand this phenomenon, we need to introduce and understand the notion of convolution. If there's enough interest, I'll create a section on convolution and attempt to dig further into this topic. In the meantime, let's slowly back away and go read Wikipedia's page on the convolution theorem.
 			</td>
 		</tr>
 	</table><br/>
@@ -142,16 +238,16 @@
 				<div class="text" style="margin-left: 0px">
 
 				<p>
-				A first step towards understanding leakage is to think about the discontinuities that would exist at the endpoints of our input signal if we were to loop it. <i>Figure 2</i> shows an imaginary "unrolling" of our input signal in the top row of the figure. Discontinuities (instantaneous jumps) are shown in red. Notice that whenever leakage occurs, there are discontinuities present. When the leakage is at its worst, there is no jump, but rather a very sharp v-shaped corner in the waveform.
+				A first step towards understanding leakage is to think about the discontinuities that would exist at the endpoints of our input signal if we were to loop it. <i>Figure 4</i> shows an imaginary “unrolling” of our input signal in the top row of the figure.<sup>2</sup> Discontinuities (instantaneous jumps) are shown in red. Notice that whenever leakage occurs, there are discontinuities present. When the leakage is at its worst, there is no jump, but rather a very sharp V-shaped corner in the waveform.
 				</p>
 				<p>
-				We might assume that these discontinuities are the cause of the leakage. In order to remove the discontinuities, we can <i>window</i> our signal.<sup>1</sup> Windowing is a fancy term for multiplying the input signal with a "window" signal. We can craft a window signal which tapers off to zero at its ends in order to remove the discontinuities in our looped signal. In <i>Figure 2</i>, the window is shown in grey. You can see that the windowed signal loops smoothly without discontinuities and ugly corners. The continuous spectrum of a this windowed sine wave is shown in green. you’ll notice that the height or magnitude of the resulting bin samples is less pronounced than in the un-windowed signal. In other words, fading our signal out at its edges before performing the DFT will reduce the effects of leakage.
+				We might assume that these discontinuities are the cause of the leakage. In order to remove the discontinuities, we can <i>window</i> our signal.<sup>3</sup> Windowing is a fancy term for multiplying the input signal with a “window” signal. We can craft a window signal which tapers off to zero at its ends in order to remove the discontinuities in our looped signal. In <i>Figure 4</i>, the window is shown in grey. You can see that the windowed signal loops smoothly without discontinuities and ugly corners. The continuous spectrum of a this windowed sine wave is shown in green. you’ll notice that the effect of leakage would be less pronounced if we chose to sample the windowed curve.
 				</p>
 				<br/>
 				<table>
 						<tr class="figureCaption">
 							<td width="100%">
-							<b>Figure 2.</b>&nbsp; Sampling the Altitude of a Plane as it Travels from Paris to Berlin
+							<b>Figure 4.</b>&nbsp; Windowing The DFT's Input Signal
 							</td>
 						</tr>
 						<tr>
@@ -159,69 +255,35 @@
 								<svg id="windowing1" class="svgWithText" width="610" height="500" style="margin-left: 60px; margin-right: 75px"></svg>
 								<script type="text/javascript" src="js/windowing.js"></script>
 									<div class="controls" style="margin-top: 5px">
-										<label for=disFrequency>Frequency</label><br/>
+										<label id="leakFreq2" for=disFrequency>Frequency</label><br/>
 										<input type=range min=1 max=2 value=1 id=disFrequency step=0.001 oninput="updateDisFrequency(value);"
 										onMouseDown="" onMouseUp="" style="width: 150px"><br/>
 									</div>
   							</td>
 						</tr>
-  				</table>
-  				<br/><br/><br/>
-  				<p>
-  				The better way to think about leakage is to notice that we’ve <i>implicitly</i> windowed our signal just by choosing to compute its DFT. We’ve implicitly windowed the input signal with a <i>rectangular</i> window. A rectangular window is just a signal with ones for each its samples. The DFT of a rectangular window is approximated by the so-called <i>sinc</i> function which is defined as, <span class="inlineexample">sin(x) / x</span>. When we multiply our input signal with this rectangular window, the DFT output will be affected. To <i>really</i> understand this phenomenon, we need to introduce and understand the idea of convolution. If there's enough interest, I'll create a section on convolution and attempt to demystify this topic.
-  				</p>
-  				 <br/><br/>
-
-  				<br/><br/>
-  				<table>
-						<tr class="figureCaption">
-							<td width="100%">
-							<b>Figure 3.</b>&nbsp; The <i>Sinc</i> Function.<br/> The DFT of a Rectangular Window is Approximated by the Sinc Function.
-							</td>
-						</tr>
+  				</table><br/>
+				<p>
+				You should be aware that there are many types of windows, and each can be appropriate depending upon the circumstances and needs of your analysis task. I suggest that you refer to the Wikipedia <a href="http://en.wikipedia.org/wiki/Window_function">article on windowing</a> if you want to know more about the various window functions and their properties.
+				</p>
+				<table>
 						<tr>
 							<td>
-								<svg id="sinc" class="svgWithText" width="700" height="200" style="padding: 5px; margin-left: 0px"></svg>
-								<script type="text/javascript" src="js/sinc.js"></script>
+								<svg id="windowTypes" class="svgWithText" width="700" height="330" style="margin-left: 40px; margin-right: 0px;"></svg>
+								<script type="text/javascript" src="js/window_types.js"></script>
   							</td>
 						</tr>
   				</table>
   			</td>
 			<td class="figureExplanation" style="">
-				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-				<b>1.</b>
+				<br/><br/><br/>
+				<b>2.</b>
+				To accommodate the visualization of the looping, please note that I’ve reduced the frequency of the input signal to the range between 1 and 2 Hz.<br/><br/>
+				<b>3.</b>
 					Windowing isn’t a panacea. For example, windowing can be very destructive to low frequency signals.<br/><br/>
 			</td>
 		</tr>
 	</table><br/>
 
-
-	<div class="littleheader"> WINDOW FAMILIES
-		<div class="subheader" style="font-size: 14px"> CHOOSING THE RIGHT WINDOW </div>
-	</div>
-
-
-  	<table class="figureTable">
-		<tr>
-			<td style="vertical-align: top;">
-				<div class="text" style="margin-left: 0px">
-
-				<p>
-				You should be aware that there are many types of windows, and each has its own characteristics. I suggest that you refer to the <a href="http://en.wikipedia.org/wiki/Window_function">wikipedia article on windowing</a> if you want to know about the various window functions and their properties. In general, just know that there are many different shapes of windows, and they all have different frequency-domain characteristics which can be useful in certain circumstances.
-				</p>
-				<table>
-						<tr>
-							<td>
-								<svg id="windowTypes" class="svgWithText" width="700" height="330" style="margin-left: 0px; margin-right: 0px;"></svg>
-								<script type="text/javascript" src="js/window_types.js"></script>
-  							</td>
-						</tr>
-  				</table>
-  						</td>
-			<td class="figureExplanation" style="">
-			</td>
-		</tr>
-	</table><br/>
 
   	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
 </html>

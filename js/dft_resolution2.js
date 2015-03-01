@@ -1,25 +1,32 @@
 var ZEROPADDING = (function() {
 
-  var signalLength = FFT_SIZE;
+  var ZERO_PADDING = true;
+  var signalLength = FFT_SIZE2;
+
+  var sineSignal = [];
+  var phaseInc = 2 * Math.PI / 128;
+  var phase = 0;
+  var schedule_update = false;
+
+  for (var i = 0; i < 128; i++, phase += phaseInc)
+  {
+    sineSignal[i] = Math.sin(5.0 * phase); 
+  }
 
   function drawEverything()
   {
-    signalLength = FFT_SIZE;
+    signalLength = FFT_SIZE2;
     var signalFFTData = new complex_array.ComplexArray(signalLength);
 
     var signal = [];
-    var sigRange = [];
 
-    var phase = 0;
-    var phaseInc = 2 * Math.PI / 8;
-    for (var i = 0; i < 8; i++, phase += phaseInc)
-    {
-      sigRange.push(phase);
-    }
+    var upperLimit = ZERO_PADDING
+      ? 8
+      : signalLength;
 
-    for (var i = 0; i < sigRange.length; i++)
+    for (var i = 0; i < upperLimit; i++)
     {
-      signal[i] = Math.sin(2 * sigRange[i]);
+      signal.push(sineSignal[i]);
     }
 
     function fillFFTBuffer()
@@ -75,7 +82,7 @@ var ZEROPADDING = (function() {
         left: 0
       };
 
-    var vis = d3.select('#zeropadding');
+    var vis = d3.select('#dftresolution');
 
     var plotWidth = canvasWidth - MARGINS.left - MARGINS.right;
     var plotHeight = canvasHeight - MARGINS.top - MARGINS.bottom;
@@ -89,7 +96,7 @@ var ZEROPADDING = (function() {
     var yRange = d3.scale.linear().range([400 - 40, 280 - 40]);
 
     xRange.domain([0, signalLength]);
-    yRange.domain([0.0, 4]);
+    yRange.domain([0.0, 5]);
 
     var xAxisTime = d3.svg.axis()
       .scale(xRange)
@@ -135,7 +142,7 @@ var ZEROPADDING = (function() {
       .style("opacity", 0.65)
       .call(xAxis);
      
-    vis.append('svg:g')
+    var magAxis = vis.append('svg:g')
       .attr('class', 'y axis')
       .attr('transform', 'translate(' + 0 + ',0)')
       .style("opacity", 0.65)
@@ -160,6 +167,47 @@ var ZEROPADDING = (function() {
       .style("opacity", 0.7)
       .text("Nyquist Limit");
 
+    vis.append("svg:line")
+      .attr("x1", 27)
+      .attr("y1", yRange(0))
+      .attr("x2", 27)
+      .attr("y2", 242)
+      .attr("stroke-width", 2)
+      .attr("stroke", "red")
+      .style("opacity", 0.3)
+      ;
+
+    vis.append("svg:rect")
+      .attr("stroke", "red")
+      .style("stroke-width", 1)
+      .attr("fill",  "red")
+      .attr("x", 25.5)
+      .attr("y", 239)
+      .attr("width", 3)
+      .attr("height", 3)
+      .style("opacity", 0.3)
+
+    vis.append("svg:line")
+      .attr("x1", 33)
+      .attr("y1", yRange(0))
+      .attr("x2", 33)
+      .attr("y2", 242)
+      .attr("stroke-width", 2)
+      .attr("stroke", "red")
+      .style("opacity", 0.3)
+      ;
+
+    vis.append("svg:rect")
+      .attr("stroke", "red")
+      .style("stroke-width", 1)
+      .attr("fill",  "red")
+      .attr("x", 31.5)
+      .attr("y", 239)
+      .attr("width", 3)
+      .attr("height", 3)
+      .style("opacity", 0.3)
+
+
     ///////////////////////////////////////
 
     signalPoints = [];
@@ -183,11 +231,22 @@ var ZEROPADDING = (function() {
 
     ///////////////////////////////////////
 
-    freqPoints = [];
-    freqSticks = [];
+    var freqPoints = [];
+    var freqSticks = [];
 
     for (var i = 0; i < signalLength; i++)
     {
+      freqSticks.push(
+        vis.append("svg:line")
+          .attr("x1", xRange(i))
+          .attr("y1", yRange(0))
+          .attr("x2", xRange(i))
+          .attr("y2", yRange(1))
+          .attr("stroke-width", 2)
+          .attr("stroke", "lightgrey")
+          .style("opacity", 1.00)
+      );
+
       freqPoints.push(
         vis.append("svg:rect")
           .attr("stroke", "black")
@@ -199,17 +258,6 @@ var ZEROPADDING = (function() {
           .attr("height", 3)
           .style("opacity", 1.0)
         );
-
-      freqSticks.push(
-        vis.append("svg:line")
-          .attr("x1", xRange(i))
-          .attr("y1", yRange(0))
-          .attr("x2", xRange(i))
-          .attr("y2", yRange(1))
-          .attr("stroke-width", 2)
-          .attr("stroke", "black")
-          .style("opacity", 0.20)
-      );
     }
 
 
@@ -227,24 +275,16 @@ var ZEROPADDING = (function() {
 
     updateSignal();
 
-    var signalFx = d3.svg.line()
-      .x(function (d, i) { return xRange(i)})
-      .y(function (d, i) { return yRangeTime(Math.sin(d * 2) * 1.5); })
-      .interpolate('basis');
-
-    sigRange.push(0);
-
-    var signalPath = vis.append('svg:path')
-      .attr("stroke-width", 2.0)
-      .attr("stroke", "black")
-      .attr("fill", "none")
-      .attr("opacity", 0.3)
-      .attr("d", signalFx(sigRange));
-
-
     function updateMagnitudes()
     {
       var magnitudes = doFFT();
+
+      var maxMagnitude = ZERO_PADDING
+        ? 5
+        : d3.max(magnitudes);
+
+      yRange.domain([0, maxMagnitude]);
+      magAxis.call(yAxis);
 
       for (var i = 0; i < signalLength; i++)
       {
@@ -257,6 +297,8 @@ var ZEROPADDING = (function() {
           .attr("y1", yRange(0))
           .attr("x2", xRange(i))
           .attr("y2", yRange(magnitudes[i]));
+
+        maxMagnitude = Math.max(maxMagnitude, magnitudes[i]);
       }
     }
 
@@ -265,44 +307,52 @@ var ZEROPADDING = (function() {
   vis.append("text")
     .attr("text-anchor", "end")
     .attr("x", plotWidth)
-    .attr("y", yRange(-0.5))
+    .attr("y", 375)
     .style("font-size", "11px")
     .text("Frequency (Hz)");
 
   vis.append("text")
-    .attr("text-anchor", "begin")
-    .attr("x", 10)
+    .attr("text-anchor", "middle")
+    .attr("x", 350)
     .attr("y", yRangeTime(1.5))
     .style("font-size", "11px")
-    //.style("font-weight", "bold")
     .text("Time Domain");
 
   vis.append("text")
-    .attr("text-anchor", "begin")
-    .attr("x", 10)
-    .attr("y", yRange(4.3))
-    .style("font-size", "11px")
-    //.style("font-weight", "bold")
-    .text("Frequency Domain");
-
-  vis.append("text")
-    .attr("text-anchor", "begin")
-    .attr("x", 10)
-    .attr("y", yRange(3.9))
+    .attr("text-anchor", "middle")
+    .attr("x", 350)
+    .attr("y", yRangeTime(1.2))
     .style("font-size", "11px")
     .style("stroke", "none")
     .style("fill", "#666")
-    .text("FFT of Input Signal");
+    .text("Input Signal");
+
+  vis.append("text")
+    .attr("text-anchor", "middle")
+    .attr("x", 350)
+    .attr("y", 220)
+    .style("font-size", "11px")
+    .text("Frequency Domain");
+
+  vis.append("text")
+    .attr("text-anchor", "middle")
+    .attr("x", 350)
+    .attr("y", 233)
+    .style("font-size", "11px")
+    .style("stroke", "none")
+    .style("fill", "#666")
+    .text("DFT of Input Signal (Magnitude)");
 
   }
 
 
 function update()
 {
-  if (signalLength != FFT_SIZE)
+  if (signalLength != FFT_SIZE2 || schedule_update)
   {
-    signalLength = FFT_SIZE;
-    d3.select('#zeropadding').selectAll("*").remove();
+    schedule_update = false;
+    signalLength = FFT_SIZE2;
+    d3.select('#dftresolution').selectAll("*").remove();
     drawEverything();
   }
 }

@@ -74,7 +74,7 @@
 	 	</table>
   	</div>
 
-	<div class="littleheader"> ZERO PADDING
+	<div class="littleheader"> ZERO-PADDING
 		<div class="subheader" style="font-size: 14px"> INCREASING DFT RESOLUTION </div>
 	</div>
 
@@ -110,18 +110,14 @@
 				<div class="text" style="margin-left: 0px">
 
 				<p>
-				There’s a classic trick you need to be aware of when working with the Discrete Fourier Transform. When you need higher resolution in your output - a more fine grained view of the frequency domain - you can choose to append a string of zeroes to the end of your input signal. This doesn't change the frequency content of the input signal, but merely <i>interpolates</i> or "fills in" the output spectrum. You can convince yourself of this fact by increasing the zero-padding <i>factor</i> using the slider underneath <i>Figure 1</i>.
+				There’s a classic technique you need to be aware of when working with the Discrete Fourier Transform, and it’s called <i>Zero-Padding</i>.<sup>1</sup> As it turns out, it’s possible to interpolate or “fill-in” the output of the DFT by simply appending zeroes to the end of your input signal. Appending zeroes to the end of your signal doesn’t alter the frequency content of your signal in any undue way, it merely interpolates the output spectrum. You can experiment with zero-padding in <i>Figure 1</i>. Drag the slider at the bottom of the figure to the right to append more zeroes to the end of the input signal.
 				</p>
 
-				<p>
-				Often you need to do this sort of zero-padding to ensure that the input you provide to an FFT (Fast Fourier Transform) routine has a length which is equal to a power of two. Rest assured that you are not altering the frequency content of your signal in any undue way. You must simply ensure that you perform any windowing <i>before</i> zero-padding your signal.
-				</p>
-
-				<br/><br/>
+				<br/>
 				<table>
 						<tr class="figureCaption">
 							<td width="100%">
-							<b>Figure 1.</b>&nbsp; Zero Padding the Input Interpolates the Output
+							<b>Figure 1.</b>&nbsp; Zero Padding the Input Interpolates the Output Spectrum
 							</td>
 						</tr>
 						<tr>
@@ -132,6 +128,82 @@
 								<div class="controls" style="margin-top: 5px">
 										<label for=size>Zero Padding</label><br/>
 										<input type=range min=1 max=5 value=1 id=size step=1 oninput="updateSize(value);"
+										onMouseDown="" onMouseUp="" style="width: 150px"><br/>
+								</div>
+  							</td>
+						</tr>
+  				</table>
+  				<br/>
+				
+				<p>
+				You might be surprised to see little mountains and valleys appear in the DFT output as you begin to zero-pad the signal. We'll devote the entire <a href="dft_leakage.html">next section</a> to understanding this phenomenon. For now, let's move onto a subtle point about zero-padding which can confuse and confound. 
+				</p>
+
+  			</td>
+			<td class="figureExplanation" style="">
+				<b>1.</b>
+				You’ll often need to perform this sort of zero-padding to ensure that the input you provide to a FFT (Fast Fourier Transform) routine has a length which is equal to a power of two.
+			</td>
+		</tr>
+	</table><br/>
+
+	<div class="littleheader"> ZERO PADDING AND DFT RESOLUTION
+		<div class="subheader" style="font-size: 14px"> IT'S NOT ALCHEMY </div>
+	</div>
+
+	<script>
+		var FFT_SIZE2 = 8;
+		function updateSize2(value) {
+			if (value == 1)
+			{
+				FFT_SIZE2 = 8;
+			}
+			else if (value == 2)
+			{
+				FFT_SIZE2 = 16;
+			}
+			else if (value == 3)
+			{
+				FFT_SIZE2 = 32;
+			}
+			else if (value == 4)
+			{
+				FFT_SIZE2 = 64;
+			}
+			else if (value == 5)
+			{
+				FFT_SIZE2 = 128;
+			}
+		}
+	</script>
+
+  	<table class="figureTable">
+		<tr>
+			<td style="vertical-align: top;">
+				<div class="text" style="margin-left: 0px">
+
+				<p>
+				It’s really important to understand that zero-padding does <i>not</i> actually increase the output resolution of the Discrete Fourier Transform. Zero-padding does not <i>add</i> any useful information to our signal. Let’s recall the example from the <a  href="dft_frequency.html">previous section</a> where we attempted to distinguish between two sinusoidal components which were close in frequency. We were able to accomplish this feat by simply increasing the number of input samples which were fed into the DFT. You might be tempted to think that we can do the same thing using zero-padding. After all, zero-padding <i>does</i> increase the number of input samples, which in turn increases the number of bins in our DFT output.
+				</p>
+				<p>
+				<i>Figure 2</i> allows you to apply zero-padding to eight samples of our input signal from the last section. You’ll notice that the zero-padding process does not actually increase the resolution of our DFT output. It doesn’t help us pinpoint, identify, or distinguish between the two sinusoids hidden within the signal. In some sense, this shouldn’t be too terribly surprising. Always remember that you’re not actually adding any additional information to the signal by appending zeroes at the end.
+				</p>
+
+				<br/><br/>
+				<table>
+						<tr class="figureCaption">
+							<td width="100%">
+							<b>Figure 2.</b>&nbsp; Zero Padding Does Improve DFT Resolution!
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<svg id="dftresolution" class="svgWithText" width="740" height="400" style="margin-left: 0px; margin-right: 0px; padding-top: 0px; padding-left: 20px;"></svg>
+								<script type="text/javascript" src="js/dft_resolution2.js"></script>
+
+								<div class="controls" style="margin-top: 5px">
+										<label for=size>Zero Padding</label><br/>
+										<input type=range min=1 max=5 value=1 id=size step=1 oninput="updateSize2(value);"
 										onMouseDown="" onMouseUp="" style="width: 150px"><br/>
 								</div>
   							</td>
