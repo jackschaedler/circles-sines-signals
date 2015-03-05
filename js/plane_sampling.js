@@ -1,6 +1,6 @@
 var PLANE_2 = (function() {
 var lineData = [
-  {x: 0, y: 0}
+  {x: 0, y: 291}    // Elevation AMSL at ORY
 , {x: 10, y: 6000}
 , {x: 20, y: 15000}
 , {x: 30, y: 20000}
@@ -13,7 +13,7 @@ var lineData = [
 , {x: 90, y: 12000}
 , {x: 100, y: 3500}
 , {x: 110, y: 1200}
-, {x: 120, y: 0}
+, {x: 120, y: 122}  // Elevation AMSL at TXL
 ];
 
 var canvasWidth = 700;
