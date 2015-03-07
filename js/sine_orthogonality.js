@@ -1,6 +1,6 @@
 var SIN_COS_ORTHOGONALITY = (function() {
 
-var canvasWidth = 230;
+var canvasWidth = 300;
 var canvasHeight = 200;
 var MARGINS =
   {
@@ -218,7 +218,7 @@ corrSigPathSin1.attr("d", corrSigSin1(corrSigData));
 corrSigPathSin2.attr("d", corrSigSin2(corrSigData));
 corrSigPathSin3.attr("d", corrSigSin3(corrSigData));
 
-var corrSigSampleData = d3.range(0, 2 * Math.PI, 2 * Math.PI / 8);
+var corrSigSampleData = d3.range(0, 2 * Math.PI, 2 * Math.PI / 16);
 
 var connectors = vis.selectAll(".connectors")
   .data(corrSigSampleData)
@@ -309,7 +309,7 @@ var samplesSin3 = vis.selectAll(".point3")
 
 ////////////////////////////////////////////////////////////////
 
-var xRangeDotProduct = d3.scale.linear().range([10, 210]);
+var xRangeDotProduct = d3.scale.linear().range([50, 250]);
 xRangeDotProduct.domain([-20, 20]);
 
 var xAxisDotProduct = d3.svg.axis()
@@ -364,7 +364,7 @@ var dotProductCircle = vis.append("svg:circle")
   .attr("r", 3.0);
 
 
-var xRangeDotProductSin = d3.scale.linear().range([260, 460]);
+var xRangeDotProductSin = d3.scale.linear().range([350, 550]);
 xRangeDotProductSin.domain([-20, 20]);
 
 var xAxisDotProductSin = d3.svg.axis()
