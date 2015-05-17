@@ -91,6 +91,22 @@
 					<table>
 							<tr>
 								<td>
+									<script>
+										var TRIG_PHASE = 0.125;
+										var TARGET_TRIG_PHASE = 0.125;
+										var TRIG_PHASE_INTERPOLATOR = d3.interpolateNumber(TRIG_PHASE, TARGET_TRIG_PHASE);
+										var TRIG_PHASE_INTERPOLATION = 1.0;
+										function GET_TRIG_PHASE() {
+											return TRIG_PHASE_INTERPOLATOR(Math.min(TRIG_PHASE_INTERPOLATION, 1.0));
+										}
+										function updatePhase(phase) {
+											TRIG_PHASE = GET_TRIG_PHASE();
+											TARGET_TRIG_PHASE = phase / 1000;
+											TRIG_PHASE_INTERPOLATION = 0.0;
+											TRIG_PHASE_INTERPOLATOR = d3.interpolateNumber(TRIG_PHASE, TARGET_TRIG_PHASE);
+										}
+									</script>
+									
 									<div class="figureCaption">
 									<b>Figure 1.</b>&nbsp; The Unit Circle<br/><br/>
 									</div>
@@ -135,21 +151,5 @@
 				</td>
 			</tr>
 		</table>
-
-		<script>
-			var TRIG_PHASE = 0.125;
-			var TARGET_TRIG_PHASE = 0.125;
-			var TRIG_PHASE_INTERPOLATOR = d3.interpolateNumber(TRIG_PHASE, TARGET_TRIG_PHASE);
-			var TRIG_PHASE_INTERPOLATION = 1.0;
-			function GET_TRIG_PHASE() {
-				return TRIG_PHASE_INTERPOLATOR(Math.min(TRIG_PHASE_INTERPOLATION, 1.0));
-			}
-			function updatePhase(phase) {
-				TRIG_PHASE = GET_TRIG_PHASE();
-				TARGET_TRIG_PHASE = phase / 1000;
-				TRIG_PHASE_INTERPOLATION = 0.0;
-				TRIG_PHASE_INTERPOLATOR = d3.interpolateNumber(TRIG_PHASE, TARGET_TRIG_PHASE);
-			}
-		</script>
   	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
 </html>

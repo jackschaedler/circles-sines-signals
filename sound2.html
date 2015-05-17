@@ -97,6 +97,80 @@
 	  				In the visualization below you can hear a two second audio example of each wave shape and see the associated frequency spectrum. The <i>spectrum</i> is a visualization of the <i>frequency</i> content within a given signal. The spectrum tells you where the energy lies within a signal in terms of frequency. Click the Play button associated with each wave shape to see and hear it.
 	  				</p>
 
+				<script>
+					var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+					var gainNode = audioCtx.createGain ? audioCtx.createGain() : audioCtx.createGainNode();
+
+					gainNode.gain.value = 0.01;
+
+					var analyser;
+					var javascriptNode;
+
+					FFT_SIZE = 1024;
+					COLOR = "#333";
+
+					var noiseBufferSize = 2 * audioCtx.sampleRate,
+				    noiseBuffer = audioCtx.createBuffer(1, noiseBufferSize, audioCtx.sampleRate),
+				    output = noiseBuffer.getChannelData(0);
+					for (var i = 0; i < noiseBufferSize; i++) {
+					    output[i] = (Math.random() - 0.5) * 2.5;
+					}
+
+					javascriptNode = audioCtx.createScriptProcessor(FFT_SIZE, 1, 1);
+					javascriptNode.connect(audioCtx.destination);
+					analyser = audioCtx.createAnalyser();
+					analyser.smoothingTimeConstant = 0.7;
+					analyser.minDecibels = -90;
+					analyser.maxDecibels = 0;
+					analyser.fftSize = FFT_SIZE;
+					analyser.connect(javascriptNode);
+					analyser.connect(audioCtx.destination);
+					gainNode.connect(analyser);
+
+					ANALYSER_DATA = [];
+					NEW_DATA_AVAILABLE = false;
+
+					function playWave(type) {
+
+						console.log(type);
+
+						currentTime = audioCtx.currentTime;
+
+						if (type == "custom")
+						{
+							var whiteNoise = audioCtx.createBufferSource();
+							whiteNoise.buffer = noiseBuffer;
+							whiteNoise.loop = true;
+							whiteNoise.connect(gainNode);
+							whiteNoise.start(currentTime);
+							whiteNoise.stop(currentTime + 2);
+						}
+						else
+						{
+							var oscillator = audioCtx.createOscillator();
+							oscillator.connect(gainNode);
+							oscillator.frequency.value = 440;
+							oscillator.type = type;
+							oscillator.start(currentTime);
+							oscillator.stop(currentTime + 2);
+						}
+
+						if (type == 'sine') { COLOR = "steelblue"; }
+						if (type == 'square') { COLOR = "red"; }
+						if (type == 'sawtooth') { COLOR = "green"; }
+						if (type == 'custom') { COLOR = "grey"; }
+					}
+
+					javascriptNode.onaudioprocess = function() {
+					    var array =  new Uint8Array(analyser.frequencyBinCount);
+					    analyser.getByteFrequencyData(array);
+					    ANALYSER_DATA = array;
+					    NEW_DATA_AVAILABLE = true;
+					    //console.log(array.length);
+					    //console.log(max);
+					}
+				</script>
+
 					
 					<svg id="spectrum" class="svgWithText" width="700" height="200" style="padding: 5px"></svg>
 					<script type="text/javascript" src="js/spectrum.js"></script>
@@ -181,80 +255,6 @@
 				</td>
 			</tr>
 		</table><br/><br/><br/>
-
-		<script>
-			var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-			var gainNode = audioCtx.createGain ? audioCtx.createGain() : audioCtx.createGainNode();
-
-			gainNode.gain.value = 0.01;
-
-			var analyser;
-			var javascriptNode;
-
-			FFT_SIZE = 1024;
-			COLOR = "#333";
-
-			var noiseBufferSize = 2 * audioCtx.sampleRate,
-		    noiseBuffer = audioCtx.createBuffer(1, noiseBufferSize, audioCtx.sampleRate),
-		    output = noiseBuffer.getChannelData(0);
-			for (var i = 0; i < noiseBufferSize; i++) {
-			    output[i] = (Math.random() - 0.5) * 2.5;
-			}
-
-			javascriptNode = audioCtx.createScriptProcessor(FFT_SIZE, 1, 1);
-			javascriptNode.connect(audioCtx.destination);
-			analyser = audioCtx.createAnalyser();
-			analyser.smoothingTimeConstant = 0.7;
-			analyser.minDecibels = -90;
-			analyser.maxDecibels = 0;
-			analyser.fftSize = FFT_SIZE;
-			analyser.connect(javascriptNode);
-			analyser.connect(audioCtx.destination);
-			gainNode.connect(analyser);
-
-			ANALYSER_DATA = [];
-			NEW_DATA_AVAILABLE = false;
-
-			function playWave(type) {
-
-				console.log(type);
-
-				currentTime = audioCtx.currentTime;
-
-				if (type == "custom")
-				{
-					var whiteNoise = audioCtx.createBufferSource();
-					whiteNoise.buffer = noiseBuffer;
-					whiteNoise.loop = true;
-					whiteNoise.connect(gainNode);
-					whiteNoise.start(currentTime);
-					whiteNoise.stop(currentTime + 2);
-				}
-				else
-				{
-					var oscillator = audioCtx.createOscillator();
-					oscillator.connect(gainNode);
-					oscillator.frequency.value = 440;
-					oscillator.type = type;
-					oscillator.start(currentTime);
-					oscillator.stop(currentTime + 2);
-				}
-
-				if (type == 'sine') { COLOR = "steelblue"; }
-				if (type == 'square') { COLOR = "red"; }
-				if (type == 'sawtooth') { COLOR = "green"; }
-				if (type == 'custom') { COLOR = "grey"; }
-			}
-
-			javascriptNode.onaudioprocess = function() {
-			    var array =  new Uint8Array(analyser.frequencyBinCount);
-			    analyser.getByteFrequencyData(array);
-			    ANALYSER_DATA = array;
-			    NEW_DATA_AVAILABLE = true;
-			    //console.log(array.length);
-			    //console.log(max);
-			}
-		</script>
 
   	<div class="title" id="footer"></div><script type="text/javascript" src="menu.js"></script></body>
 </html>
