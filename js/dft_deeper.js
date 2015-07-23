@@ -290,26 +290,23 @@ currentBinIndicator
   .attr("x", complexRangesX[binNumber](-4) - 4.5)
 }
 
+function setBin(bin)
+{
+  binNumber = bin % 8;
+  if (binNumber < 0) {
+    binNumber = 7;
+  }
+  updateBasis();
+}
+
 function incrementBin()
 {
- binNumber++;
- if (binNumber == 8)
- {
-  binNumber = 0;
- }
-
- updateBasis();
+  setBin(binNumber + 1)
 }
 
 function decrementBin()
 {
-  binNumber--;
-  if (binNumber == -1)
-  {
-    binNumber = 7;
-  }
-
-  updateBasis();
+  setBin(binNumber - 1)
 }
 
 var signalButton = d3.select('#animatedDftWrapper').insert("button", ":first-child")
@@ -492,6 +489,19 @@ for (i = 0; i < 8; i++)
       .orient('left')
       .tickSubdivide(true)
   );
+
+  vis.append("svg:rect")
+    .attr("x", complexRangesX[i](-4) - 4.5)
+    .attr("y", complexPartsY - 40)
+    .attr("width", complexPartSize )
+    .attr("height", complexPartSize + 65)
+    .style("opacity", 0.0)
+    .on("click", function() {
+      var localBin = i;
+      return function() {
+        setBin(localBin);
+      };
+    }());
 
   vis.append('svg:g')
     .attr('class', 'x axis')
