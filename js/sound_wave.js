@@ -91,10 +91,11 @@ var PHYSICAL_WAVE = (function() {
     .style('opacity', 0.8)
     .text("Low");
 
+  var moleculeCount = 400;
 
-  for (i = 0; i < 400; i++)
+  for (i = 0; i < moleculeCount; i++)
   {
-    var moleculeX = (i / 400) * plotWidth + 25;
+    var moleculeX = (i / moleculeCount) * plotWidth + 25;
     var moleculeY = Math.random() * (plotHeight - 10) + 5;
     var color = 'grey';
 
