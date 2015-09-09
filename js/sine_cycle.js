@@ -55,7 +55,7 @@ vis.append('svg:g')
 
 var path = vis.append('svg:path')
   .attr("stroke-width", 2.0)
-  .attr("stroke", "steelblue")
+  .attr("stroke", "grey")
   .attr("fill", "none")
   .attr("opacity", 1.0)
   .attr("d", signal(data));

@@ -62,9 +62,9 @@
 					</p>
 
 					<script>
-						var WAVE_FREQUENCY = 0.05;
+						var WAVE_FREQUENCY = 0.12;
 						var WAVE_AMPLITUDE = 0.50;
-						var TARGET_WAVE_FREQUENCY = 0.05;
+						var TARGET_WAVE_FREQUENCY = 0.12;
 						var TARGET_WAVE_AMPLITUDE = 0.50;
 						var WAVE_INTERPOLATOR = d3.interpolateNumber(WAVE_FREQUENCY, TARGET_WAVE_FREQUENCY);
 						var WAVE_AMP_INTERPOLATOR = d3.interpolateNumber(WAVE_AMPLITUDE, TARGET_WAVE_AMPLITUDE);
@@ -106,7 +106,7 @@
 										<tr>
 											<td style="text-align: center;" width="50%">
 												<label for=vibSpeedFader style="margin-left: auto; margin-right: auto">Vibration Speed</label><br/>
-												<input type=range min=4 max=10 value=4 id=vibSpeedFader step=1 oninput="updateSpeed(value);">
+												<input type=range min=4 max=20 value=12 id=vibSpeedFader step=1 oninput="updateSpeed(value);">
 											</td>
 
 											<td style="text-align: center;" width="50%">
@@ -121,8 +121,9 @@
 	  				<br/>
 
 	  				<p>
-					The blue curve underneath the physical simulation plots the amount of compression or pressure between air particles. When the curve is above the horizontal axis, the particles are being squeezed together. When the curve is below, this indicates a region of low-pressure. In more terminologically rigorous circles, the squeezing is referred to as <i>compression</i>, and the spaciousness between particles is referred to as <i>rarefaction</i>.
-					The speed of vibration is known as the <i>frequency</i>. Frequency is measured in <i>cycles per second</i>, also known as <i>Hertz</i>. We measure frequency by counting the number of compression/rarefaction cycles that occur in one second. One full compression/rarefaction cycle looks like the curve shown in <i>Figure 1a</i>.
+					The curve underneath the physical simulation plots the amount of compression or pressure between air particles. When the curve is above the horizontal axis, the particles are being squeezed together. When the curve is below, this indicates a region of low-pressure. In more terminologically rigorous circles, the squeezing is referred to as <i>compression</i>, and the spaciousness between particles is referred to as <i>rarefaction</i>. Note that particles in the rarefied sections of the wave are drawn a bit lighter to allow for better visualization of the wave motion.</p>
+					<p>
+					The speed of vibration is known as the <i>frequency</i>. Frequency is measured in <i>cycles per second</i>, also known as <i>Hertz</i>. We measure the frequency of the wave by counting the number of compression/rarefaction cycles that occur in one second. One full compression/rarefaction cycle looks like the curve shown in <i>Figure 1a</i>.
 					</p>
 
 					<table width="750">
@@ -141,10 +142,23 @@
 							</tr>
 	  				</table>
 
+	  				<p>
+	  				Returning to <i>Figure 1</i>, we should note that as the frequency of the wave increases, its <i>wavelength</i> decreases. A wave’s <i>length</i> is defined as the distance between adjacent peaks or valleys in the waveform, and this distance is always inversely proportional to the frequency of the wave. It’s also worth noting that the speed at which sound waves travel is constant, even if the intensity or frequency of the wave happens to vary. You can convince yourself of this fact by noting how long it takes a single peak or valley of the waveform to travel from the left side to the right side of <i>Figure 1</i>.<sup>1</sup>
+	  				</p>
+
 	  			</td>
 				<td class="figureExplanation" style="">
-					<!-- <b>1.</b>
-						There's nothing special about discrete signals. Write down an arbitrary list of numbers and you have a discrete signal. Most of the time however, discrete signals are the product of sampling some other signal. <br/><br/> -->
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+					<br/>
+					<b>1.</b>
+						The speed at which sound waves travel depends upon the material through which they are being transmitted. At sea level, sound travels through air at a speed of 340 m/s. Sound waves travel much more quickly through a denser material like water, propagating at nearly 1500 m/s.<br/><br/>
 				</td>
 			</tr>
 		</table>
@@ -160,7 +174,7 @@
 					<div class="text" style="margin-left: 0px">
 
 					<p>
-					Smoothly oscillating objects like the object shown in <i>Figure 1</i> produce pressure waves which our auditory system interprets as <i>pure</i> tones. We refer to low frequency tones as bass, and high frequency tones as treble. People with exceptional hearing can hear tones from about 20 hertz to 20,000 hertz. As you get older, you lose your ability to hear tones at the high and low ends of this range. Play around with <i>Figure 2</i> to acquaint yourself with the sound of a sine wave.<sup>1</sup> You can click and drag on the visualization to change the frequency of the generated tone. You wont hear anything until you click the Play Sound button.
+					Smoothly oscillating objects like the object shown in <i>Figure 1</i> produce pressure waves which our auditory system interprets as <i>pure</i> tones. We refer to low frequency tones as bass, and high frequency tones as treble. People with exceptional hearing can hear tones from about 20 hertz to 20,000 hertz. As you get older, you lose your ability to hear tones at the high and low ends of this range. Play around with <i>Figure 2</i> to acquaint yourself with the sound of a sine wave.<sup>2</sup> You can click and drag on the visualization to change the frequency of the generated tone. You wont hear anything until you click the Play Sound button.
 					</p>
 
 					<br/>
@@ -190,7 +204,7 @@
 	  			</td>
 				<td class="figureExplanation" style="">
 					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-					<b>1.</b>
+					<b>2.</b>
 						You’ll probably need headphones to hear tones below 150Hz.
 
 						<br/><br/>You'll also need a browser which supports web-audio. If you're not hearing any sound, please file an issue on the <a href="http://www.github.com/jackschaedler/circles-sines-signals">github site.</a><br/><br/>

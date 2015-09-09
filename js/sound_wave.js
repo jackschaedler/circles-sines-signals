@@ -40,7 +40,7 @@ var PHYSICAL_WAVE = (function() {
 
   var pressurePath = vis.append('svg:path')
     .attr("stroke-width", 2.0)
-    .attr("stroke", "steelblue")
+    .attr("stroke", "grey")
     .attr("fill", "none")
     .style("opacity", 1.0);
 
@@ -97,18 +97,14 @@ var PHYSICAL_WAVE = (function() {
   {
     var moleculeX = (i / moleculeCount) * plotWidth + 25;
     var moleculeY = Math.random() * (plotHeight - 10) + 5;
-    var color = 'grey';
 
     molecules.push(
       vis.append('svg:circle')
       .attr('cx', moleculeX)
       .attr('cy', moleculeY)
-      .attr('r', 2.0)
-      .attr('stroke', 'none')
-      .attr('fill', color)
-      //.attr('opacity', Math.random() + 0.75)
-      )
-    ;
+      .attr('r', 1.5)
+      .attr('stroke', 'grey')
+      .attr('fill', 'grey'));
 
     orig_x.push(moleculeX);
     pressureX.push(moleculeX);
@@ -119,24 +115,28 @@ var PHYSICAL_WAVE = (function() {
 
   function updateMolecules() {
     var phaseShift = 0;
-    var amp = GET_WAVE_AMPLITUDE() * 14 + 1;
+    var amp = GET_WAVE_AMPLITUDE() * 14;
+    var freq = GET_WAVE_FREQUENCY() * 100;
+    var phaseShiftInc = freq / 200;
 
     for (i = 0; i < molecules.length; i++)
     {
-      molecules[i]
-        .attr('cx', orig_x[i] + xRangePhys(Math.sin(moleculeTime + phaseShift)) * amp);
-      phaseShift -= 0.1;
-      pressureY[i-12] = Math.sin(moleculeTime + phaseShift) * 3 * amp + 150;
+      var angle = freq + moleculeTime + phaseShift;
+      var sinAngle = Math.sin(angle);
+      var sinAngleDelayed = Math.sin(angle-1.5);
+
+      molecules[i].attr('cx', orig_x[i] + xRangePhys(sinAngle * amp));
+      molecules[i].style('opacity', Math.max(1.0 - (sinAngleDelayed * GET_WAVE_AMPLITUDE()), 0.6));
+      pressureY[i] = sinAngleDelayed * 3 * amp + 150;
+      phaseShift -= phaseShiftInc;
     }
 
-    pressurePath
-      .attr('d', sinePressure(d3.range(0, 385, 2)));
-
-    rect.attr("x", xRangePhys(Math.sin(moleculeTime)) * amp - 20);
+    pressurePath.attr('d', sinePressure(d3.range(0, 385, 2)));
+    rect.attr("x", xRangePhys(Math.sin(freq + moleculeTime)) * amp - 20);
     WAVE_INTERPOLATION += 0.1;
     WAVE_AMP_INTERPOLATION += 0.1;
 
-    moleculeTime += GET_WAVE_FREQUENCY();
+    moleculeTime += GET_WAVE_FREQUENCY() / 2.0;
   }
 
   d3.timer(updateMolecules, 100);
