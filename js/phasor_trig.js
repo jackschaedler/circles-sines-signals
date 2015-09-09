@@ -176,7 +176,7 @@ vis.append("text")
   .attr("font-size", 11)
   .attr("x",  xRange(Math.cos(Math.PI / 2)))
   .attr("y", yRange(Math.sin(Math.PI / 2)) - 3)
-  .text("𝛑/2");
+  .text("π/2");
 
 
 vis.append("text")
@@ -184,21 +184,21 @@ vis.append("text")
   .attr("font-size", 11)
   .attr("x",  xRange(Math.cos(Math.PI)) - 5)
   .attr("y", yRange(Math.sin(Math.PI)) + 3)
-  .text("𝛑");
+  .text("π");
 
 vis.append("text")
   .attr("text-anchor", "middle")
   .attr("font-size", 11)
   .attr("x",  xRange(Math.cos(3 * Math.PI / 2)))
   .attr("y", yRange(Math.sin(3 * Math.PI / 2)) + 14)
-  .text("3𝛑/2");
+  .text("3π/2");
 
 vis.append("text")
   .attr("text-anchor", "begin")
   .attr("font-size", 11)
   .attr("x",  xRange(Math.cos(0)) + 3)
   .attr("y", yRange(Math.sin(0)) + 3)
-  .text("2𝛑");
+  .text("2π");
 
 var phase = Math.PI / 4;
 
