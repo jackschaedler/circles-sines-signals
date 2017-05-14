@@ -113,8 +113,8 @@ var circle = vis.append('svg:circle')
 //   .style("-webkit-user-select", "none")
 //   .text("φ = ");
 
-var pointX = 0.5;
-var pointY = 0.5;
+var pointX = Math.sqrt(2) / 2;
+var pointY = Math.sqrt(2) / 2;
 
 var point = vis.append('svg:circle')
   .attr('cx', xRange(pointX))
