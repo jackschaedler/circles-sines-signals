@@ -125,14 +125,14 @@ var PHYSICAL_WAVE = (function() {
       var sinAngle = Math.sin(angle);
       var sinAngleDelayed = Math.sin(angle-1.5);
 
-      molecules[i].attr('cx', orig_x[i] + xRangePhys(sinAngle * amp));
-      molecules[i].style('opacity', Math.max(1.0 - (sinAngleDelayed * GET_WAVE_AMPLITUDE()), 0.6));
+      molecules[i].style('transform', `translateX(${xRangePhys(sinAngle * amp)}px)`)
+      // molecules[i].style('opacity', Math.max(1.0 - (sinAngleDelayed * GET_WAVE_AMPLITUDE()), 0.6));
       pressureY[i] = sinAngleDelayed * 3 * amp + 150;
       phaseShift -= phaseShiftInc;
     }
 
     pressurePath.attr('d', sinePressure(d3.range(0, 385, 2)));
-    rect.attr("x", xRangePhys(Math.sin(freq + moleculeTime)) * amp - 20);
+    rect.style('transform', `translateX(${xRangePhys(Math.sin(freq + moleculeTime)) * amp - 20}px)`);
     WAVE_INTERPOLATION += 0.1;
     WAVE_AMP_INTERPOLATION += 0.1;
 
