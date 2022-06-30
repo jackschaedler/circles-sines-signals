@@ -246,8 +246,11 @@ function onVectorChangeButton()
 {
   activeVectorIsB = !activeVectorIsB;
   vectorButton.text("Mouse Moves " + (activeVectorIsB ? "B" : "A"));
+  vectorSubheading.text("Click and drag to change the endpoint of the "
+                        + (activeVectorIsB ? "pink" : "blue") + " vector"); 
 }
 
+var vectorSubheading = d3.select("#figure1").select("sub");
 
 var vectorButton = d3.select('#wrapper').insert("button", ":first-child")
   .style("position", "absolute")
